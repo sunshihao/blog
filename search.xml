@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[开始blog之旅]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2F2333%2F</url>
+    <content type="text"><![CDATA[find命令原理：从指定的起始目录开始，递归地搜索其各个子目录，查找满足寻找条件的文件，并可以对其进行相关的操作。 格式：find [查找目录] [参数] [匹配模型] 多参数格式：find [查找目录] [参数] [匹配模型] [参数] [匹配模型] 例如： 1、find . -name “*.sh” 查找在当前目录（及子目录）下找以sh结尾的文件。 2、find . -perm 755 查找在当前目录（及子目录）下找属性为755的文件。 3、find -user root 查找在当前目录（及子目录）下找属主为root的文件。 4、find /var -mtime -5 查找在/var下找更改时间在5天以内的文件。 5、find /var -mtime +3 查找在/var下找更改时间在3天以前的文件。 6、find /etc -type l 查找在/etc下查找文件类型为|的链接文件。 7、find . -size +1000000c 查找在当前目录（及子目录）下查找文件大小大于1M的文件，1M是1000000个字节。 8、find . -perm 700 |xargs chmod 777 查找出当前目录（及子目录）下所有权限为700的文件，并把其权限重设为777。 9、find . -type f |xargs ls -l 查找出文件并查看其详细信息。]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[开始blog之旅]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2F25555%2F</url>
+    <content type="text"><![CDATA[find命令原理：从指定的起始目录开始，递归地搜索其各个子目录，查找满足寻找条件的文件，并可以对其进行相关的操作。 格式：find [查找目录] [参数] [匹配模型] 多参数格式：find [查找目录] [参数] [匹配模型] [参数] [匹配模型] 例如： 1、find . -name “*.sh” 查找在当前目录（及子目录）下找以sh结尾的文件。 2、find . -perm 755 查找在当前目录（及子目录）下找属性为755的文件。 3、find -user root 查找在当前目录（及子目录）下找属主为root的文件。 4、find /var -mtime -5 查找在/var下找更改时间在5天以内的文件。 5、find /var -mtime +3 查找在/var下找更改时间在3天以前的文件。 6、find /etc -type l 查找在/etc下查找文件类型为|的链接文件。 7、find . -size +1000000c 查找在当前目录（及子目录）下查找文件大小大于1M的文件，1M是1000000个字节。 8、find . -perm 700 |xargs chmod 777 查找出当前目录（及子目录）下所有权限为700的文件，并把其权限重设为777。 9、find . -type f |xargs ls -l 查找出文件并查看其详细信息。]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[开始blog之旅]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2Fshell%20find%2F</url>
+    <content type="text"><![CDATA[find命令原理：从指定的起始目录开始，递归地搜索其各个子目录，查找满足寻找条件的文件，并可以对其进行相关的操作。 格式：find [查找目录] [参数] [匹配模型] 多参数格式：find [查找目录] [参数] [匹配模型] [参数] [匹配模型] 例如： 1、find . -name “*.sh” 查找在当前目录（及子目录）下找以sh结尾的文件。 2、find . -perm 755 查找在当前目录（及子目录）下找属性为755的文件。 3、find -user root 查找在当前目录（及子目录）下找属主为root的文件。 4、find /var -mtime -5 查找在/var下找更改时间在5天以内的文件。 5、find /var -mtime +3 查找在/var下找更改时间在3天以前的文件。 6、find /etc -type l 查找在/etc下查找文件类型为|的链接文件。 7、find . -size +1000000c 查找在当前目录（及子目录）下查找文件大小大于1M的文件，1M是1000000个字节。 8、find . -perm 700 |xargs chmod 777 查找出当前目录（及子目录）下所有权限为700的文件，并把其权限重设为777。 9、find . -type f |xargs ls -l 查找出文件并查看其详细信息。]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[开始blog之旅]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2Fshell%2F</url>
+    <content type="text"><![CDATA[find命令原理：从指定的起始目录开始，递归地搜索其各个子目录，查找满足寻找条件的文件，并可以对其进行相关的操作。 格式：find [查找目录] [参数] [匹配模型] 多参数格式：find [查找目录] [参数] [匹配模型] [参数] [匹配模型] 例如： 1、find . -name “*.sh” 查找在当前目录（及子目录）下找以sh结尾的文件。 2、find . -perm 755 查找在当前目录（及子目录）下找属性为755的文件。 3、find -user root 查找在当前目录（及子目录）下找属主为root的文件。 4、find /var -mtime -5 查找在/var下找更改时间在5天以内的文件。 5、find /var -mtime +3 查找在/var下找更改时间在3天以前的文件。 6、find /etc -type l 查找在/etc下查找文件类型为|的链接文件。 7、find . -size +1000000c 查找在当前目录（及子目录）下查找文件大小大于1M的文件，1M是1000000个字节。 8、find . -perm 700 |xargs chmod 777 查找出当前目录（及子目录）下所有权限为700的文件，并把其权限重设为777。 9、find . -type f |xargs ls -l 查找出文件并查看其详细信息。]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[ubuntu防火墙开启及端口开启]]></title>
+    <url>%2Fblog%2F2018%2F05%2F18%2Fubuntu%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[环境系统： ubuntu 工具：xshell 1.测试远程主机的端口是否开启（windows命令行下执行） telnet 192.168.1.103 80远程访问主机的80端口，测试主机的80端口是否开启 2.查看本地的端口开启情况(ubuntu下执行) sudo ufw status 3.打开80端口(ubuntu下执行) sudo ufw allow 80 4.防火墙开启(ubuntu下执行) sudo ufw enable 5.防火墙重启(ubuntu下执行) sudo ufw reload 6.防火墙关闭(ubuntu下执行) sudo ufw disable]]></content>
+  </entry>
+</search>
