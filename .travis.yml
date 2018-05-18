@@ -1,0 +1,46 @@
+# 运行环境，Travis 会自动提供这个环境
+language: node_js
+node_js: stable
+
+cache:
+    apt: true
+    directories:
+        - node_modules # 缓存不经常更改的内容
+        
+before_install:
+    - export TZ='Asia/Shanghai' # 更改时区       
+
+# S: Build Lifecycle
+# 安装依赖包
+install:
+  - npm install
+
+# 生成博客静态资源
+script:
+  - hexo clean  #清除
+  - hexo g
+
+# 将静态资源推送到 master 分支上
+after_script:
+  # 找到静态资源,由于自己路径的变化，所以在这个地方是我自己的写法，标注出来 20180517 by ssh
+  - cd ./public
+  - git init
+  # user.name 和 user.email 让 travis 能登录你的 github
+  - git config user.name "sunshihao"
+  - git config user.email "sunshihao945@outlook.com"
+  - git add .
+  - git commit -m "docs:update articles"
+  # GH_TOKEN 为你的 github 允许 travis 访问生成的凭证 gitTravis就是Travis中的token名字
+  # GH_REF 告诉 travis 往哪个仓库推送代码，具体值下面配置
+  - git push --force --quiet "https://${gitTravis}@${GH_REF}" master:master
+# E: Build LifeCycle
+
+branches:
+  only:
+    # 设置监控分支，当 develop 分支代码变化时，执行这个程序
+    - develop
+env:
+  global:
+    # 定义往哪个仓库推送代码，注意事项见下面 update by ssh 180517
+    # https://github.com/sunshihao/blog.git 就是master
+    - GH_REF: github.com/sunshihao/blog.git
