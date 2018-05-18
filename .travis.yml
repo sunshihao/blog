@@ -31,7 +31,7 @@ after_script:
   - git add .
   - git commit -m "docs:update articles"
   # GH_TOKEN 为你的 github 允许 travis 访问生成的凭证 gitTravis就是Travis中的token名字
-  # GH_REF 告诉 travis 往哪个仓库推送代码，具体值下面配置
+  # GH_REF 告诉 travis 往哪个仓库推送代码，具体值下面配置  这里前一个master是分支，后一个master是你上面生成的文件存放分支，（如果你指定develop就会覆盖develop分支的内容）
   - git push --force --quiet "https://${gitTravis}@${GH_REF}" master:master
 # E: Build LifeCycle
 
