@@ -68,7 +68,16 @@ featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 # friends
-friends:  # 友链
+friends:  [
+	{
+		title: "your friend title",
+		href: "your fiend path"
+	},
+	{
+		title: "your friend title 2",
+		href: "your friend path 2"
+	}
+] 
 
 # Directory
 source_dir: source
@@ -146,7 +155,7 @@ clip-avatar: "?imageView2/2/w/300/h/300/interlace/1/q/90"
 clip-home-post-bg: "?imageView2/1/w/800/h/300/interlace/1/q/70"
 
 # post default images
-post-default-img: #博文默认的图片
+post-default-img: "./source/image/body.jpg"
 post-default-img-mobile: #移动端显示的图片
 
 # search api , set your custom key

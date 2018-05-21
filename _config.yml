@@ -8,14 +8,13 @@ subtitle: -- by ssh
 description: 私人blog网站
 keywords: 
 author: ShihaoSun
-language: 
+language: zh-CN.yml
 timezone:
 # 默认加载本地字体，否则加载google字体导致加载慢
 use_font_lato: flase
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-# 注意这个地址的变化 
 url: https://github.com/sunshihao/blog.git
 root: /blog
 permalink: :year/:month/:day/:title/
@@ -79,7 +78,23 @@ pagination_dir: page
 #theme: landscape
 theme: Anisina
 
+#url:https://sunshihao.github.io
+#root:
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+live2d:
+  enable: true
+  scriptFrom: local
+  model:
+    use: live2d-widget-model-wanko
+  display:
+    position: left
+    width: 120
+    height: 160
+  mobile:
+    show: false

@@ -197,7 +197,10 @@ layout: layout
                     </ul>
                 </div>
                 <% } %>
-            
+                <div>
+                    <span>字数: <%= wordcount(page.content) %></span>
+                    <span class="post-count"> 阅读时长: <%= min2read(page.content) %> 分钟</span>
+                </div>
             </div>
         </div>
 
