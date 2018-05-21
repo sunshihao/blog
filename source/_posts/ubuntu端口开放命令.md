@@ -1,5 +1,7 @@
 ---
 title: ubuntu防火墙开启及端口开启
+date: 2018-05-15 17:33:57
+tags: Linux
 ---
 环境系统： ubuntu
 
