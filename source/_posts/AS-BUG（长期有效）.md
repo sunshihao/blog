@@ -14,3 +14,12 @@ tags: AS Android
 
 以上是我百度到的一种解决办法，其实就是重新下载一遍grade，但是一般引起这种的问题的原因一般都是由于grade的下载缓慢的原因，而且只能在grade的版本少的时候能直接删除，否则还是应该对应下载。
 
+> BUG 2
+
+![BUG](bug2.png)
+
+![BUG](bug3.png)
+
+解决办法:
+在gradle.properties里面，把org.gradle.java.home 去掉。
+
