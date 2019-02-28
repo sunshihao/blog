@@ -14,7 +14,6 @@ http://www.w3school.com.cn
 flex-direction:
 
 |row 默认值，分割列，使得内部整体呈一行模式
-![1cd607b6bfca55526edecae9782f6dbc.png](en-resource://database/10630:1)
 
 |row-reverse 横向取反
 
