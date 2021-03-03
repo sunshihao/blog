@@ -11,9 +11,10 @@ before_install:
     - export TZ='Asia/Shanghai' # 更改时区       
 
 # S: Build Lifecycle
-# 安装依赖包
+
+# 安装依赖包 
 install:
-  - cnpm install
+  - npm install
 
 # 生成博客静态资源
 script:
