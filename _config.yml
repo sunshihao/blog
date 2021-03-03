@@ -4,10 +4,10 @@
 
 # Site
 title: 仰望星空
-subtitle: -- by ssh
-description: 私人blog网站
+subtitle: -- by sssh
+description: 博客网站
 keywords: 
-author: ShihaoSun
+author: shihao.sun
 language: zh-CN.yml
 timezone:
 # 默认加载本地字体，否则加载google字体导致加载慢
@@ -75,8 +75,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: landscape
-theme: Anisina
+#theme: landscape flex-block Anisina
+theme: blogTheme
 
 #url:https://sunshihao.github.io
 #root:

@@ -1,0 +1,3 @@
+[submodule "themes/blogTheme"]
+	path = themes/blogTheme
+	url = ../flex-block.git
