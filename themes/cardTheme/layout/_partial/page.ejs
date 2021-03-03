@@ -1,0 +1,46 @@
+<!-- 自定义页面 -->
+
+<div class="body-container">
+  <%# 输出自定义页面文章内容 %>
+  <% if (page.content) { %>
+  <article class="content-container article-container">
+    <div class="article-content">
+      <div class="article-entry"><%- page.content %></div>
+    </div>
+  </article>
+  <% } %>
+
+  <%# 输出自定义友链内容 %>
+  <% if (page.type === "links") { %>
+    <article class="content-container next">
+      <div class="article-content">
+        <div class="article-entry">
+          <% site.data.links.forEach(function(link) { %>
+            <figure class="bookmark-card">
+              <a class="bookmark-container" target="_blank" title="<%= link.name %>" href="<%= link.link %>">
+                <div class="bookmark-content">
+                  <div class="bookmark-name"><%= link.name %></div>
+                  <div class="bookmark-link"><%= link.link %></div>
+                </div>
+                <% if (link.cover) { %>
+                  <div class="bookmark-cover">
+                    <img src="<%= link.cover %>" alt="<%= link.name %>" />
+                  </div>
+                <% } %>
+              </a>
+            </figure>
+          <% }) %>
+        </div>
+      </div>
+    </article>
+  <% } %>
+
+  <%# 输出自定义留言板内容 %>
+  <% if (page.type === "messages") { %>
+    <article class="content-container next">
+      <div class="article-content">
+        <%- partial('../_widget/comment', { post: page }) %>
+      </div>
+    </article>
+  <% } %>
+</div>

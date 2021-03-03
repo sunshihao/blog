@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <% if (config.description) { %>
+    <meta name="description" content="<%= config.description %>">
+  <% } %>
+
+  <% if (config.keywords) { %>
+    <meta name="keywords" content="<%= config.keywords %>">
+  <% } %>
+
+  <% if (config.author) { %>
+    <meta name="author" content="<%= config.author %>">
+  <% } %>
+
+  <% if (config.copyright) { %>
+    <meta name="copyright" content="<%= config.copyright %>">
+  <% } %>
+
+  <%
+  var title = page.title;
+
+  if (is_archive()){
+    title = __('archive_a');
+  } else if (is_category()){
+    title = __('category') + ': ' + page.category;
+  } else if (is_tag()){
+    title = __('tag') + ': ' + page.tag;
+  }
+  %>
+
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+
+  <% if (theme.rss){ %>
+    <link rel="alternate" href="<%= url_for(theme.rss) %>" title="<%= config.title %>" type="application/atom+xml">
+  <% } %>
+
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="<%- theme.favicon %>">
+  <% } %>
+
+  <% if (config.highlight.enable){ %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.3/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/<%= config.highlight.theme || 'monokai' %>.css">
+  <% } %>
+
+  <%- css('css/style') %>
+</head>
+<body>
+  <div class="root-container">
+    <%- partial('_partial/nav', null, {cache: !config.relative_link}) %>
+
+    <%- partial('_partial/header') %>
+
+    <%- body %>
+
+    <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <%- partial('_svg/back-to-top') %> 
+  </div>
+
+  <%# 加载站点脚本 %>
+  <%- partial('_partial/footer-script') %>
+  <%# 加载自定义脚本代码 %>
+  <%- partial('_partial/footer-other') %>
+</body>
+</html>
