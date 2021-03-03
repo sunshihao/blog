@@ -13,7 +13,7 @@ before_install:
 # S: Build Lifecycle
 # 安装依赖包
 install:
-  - npm install
+  - cnpm install
 
 # 生成博客静态资源
 script:
