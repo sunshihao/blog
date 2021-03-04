@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>AS BUG（长期有效）</title>
+    <url>/blog/2018/05/21/AS-BUG%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9C%89%E6%95%88%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="AS-bug（长期有效）"><a href="#AS-bug（长期有效）" class="headerlink" title="AS bug（长期有效）"></a>AS bug（长期有效）</h1><blockquote>
+<p>BUG 1</p>
+</blockquote>
+<p><img src="bug1.png" alt="BUG"></p>
+<p>今天在网上下载了别人的一个AS代码，在导入过程中出现了上图的这个错误，看到network我的反应就是可能与网络有关。后来百度翻译一下大概意思就是gradle依赖缓存配置可能损坏（这可能与网络状态有关）。相信大家知道怎么做了。直接在C盘用户文件夹下删掉.gradle文件夹即可。当然大家不用担心，删掉后再次打开as他会重新生成的。</p>
+<p>以上是我百度到的一种解决办法，其实就是重新下载一遍grade，但是一般引起这种的问题的原因一般都是由于grade的下载缓慢的原因，而且只能在grade的版本少的时候能直接删除，否则还是应该对应下载。</p>
+<blockquote>
+<p>BUG 2</p>
+</blockquote>
+<p><img src="bug2.png" alt="BUG"></p>
+<p><img src="bug3.png" alt="BUG"></p>
+<p>解决办法:<br>在gradle.properties里面，把org.gradle.java.home 去掉。</p>
+]]></content>
+      <tags>
+        <tag>AS Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN 累积（长期有效）</title>
+    <url>/blog/2019/02/28/CSS%E7%B4%AF%E7%A7%AF/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>RN react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN 累积（长期有效）</title>
+    <url>/blog/2019/02/28/HTML%E7%A7%AF%E7%B4%AF/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>RN react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS 累积（长期有效）</title>
+    <url>/blog/2019/02/28/JS%E7%B4%AF%E7%A7%AF/</url>
+    <content><![CDATA[<p>参考网站:<br><a href="http://www.runoob.com" target="_blank" rel="noopener">http://www.runoob.com</a><br><a href="http://www.w3school.com.cn" target="_blank" rel="noopener">http://www.w3school.com.cn</a></p>
+<blockquote>
+<p>RN中使用的CSS</p>
+</blockquote>
+<p>（涉及弹性布局）<br>flex-direction:</p>
+<p>|row 默认值，分割列，使得内部整体呈一行模式</p>
+<p>|row-reverse 横向取反</p>
+<p>|column 分割行，呈一列显示</p>
+<p>|column-reverse 纵向取反</p>
+<p>|initial 设置该属性为它的默认值</p>
+<p>|inherit 从父元素继承该属性</p>
+<blockquote>
+<p>justifyContent: ‘flex-start’,</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flex-start</td>
+<td>默认值。项目位于容器的开头</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td></td>
+</tr>
+<tr>
+<td>center</td>
+<td></td>
+</tr>
+<tr>
+<td>space-between</td>
+<td></td>
+</tr>
+<tr>
+<td>space-around</td>
+<td></td>
+</tr>
+<tr>
+<td>initial</td>
+<td></td>
+</tr>
+<tr>
+<td>inherit</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>background-color</p>
+</blockquote>
+<p>为各个标签设置背景颜色<span>:注意此标签用法</span></p>
+]]></content>
+      <tags>
+        <tag>js html</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN BUG（长期有效）</title>
+    <url>/blog/2018/05/22/RN-BUG%EF%BC%88%E9%95%BF%E6%9C%9F%E6%9C%89%E6%95%88%EF%BC%89/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>RN</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RN 累积（长期有效）</title>
+    <url>/blog/2019/02/28/RN%E7%B4%AF%E7%A7%AF/</url>
+    <content><![CDATA[<h1 id="RN-累积（长期有效）"><a href="#RN-累积（长期有效）" class="headerlink" title="RN 累积（长期有效）"></a>RN 累积（长期有效）</h1><p>我使用了以上的方式感觉不好用</p>
+]]></content>
+      <tags>
+        <tag>RN react</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell指令--find</title>
+    <url>/blog/2018/05/14/shell%20find/</url>
+    <content><![CDATA[<p>find命令原理：从指定的起始目录开始，递归地搜索其各个子目录，查找满足寻找条件的文件，并可以对其进行相关的操作。</p>
+<p>格式：find [查找目录] [参数] [匹配模型]  </p>
+<p>多参数格式：find [查找目录] [参数] [匹配模型] [参数] [匹配模型]  </p>
+<p>例如：</p>
+<p>1、find . -name “*.sh”           </p>
+<pre><code>查找在当前目录（及子目录）下找以sh结尾的文件。
+</code></pre><p>2、find . -perm 755               </p>
+<pre><code>查找在当前目录（及子目录）下找属性为755的文件。
+</code></pre><p>3、find -user root                  </p>
+<pre><code>查找在当前目录（及子目录）下找属主为root的文件。
+</code></pre><p>4、find /var -mtime -5           </p>
+<pre><code>查找在/var下找更改时间在5天以内的文件。
+</code></pre><p>5、find /var -mtime +3          </p>
+<pre><code>查找在/var下找更改时间在3天以前的文件。
+</code></pre><p>6、find /etc -type l                </p>
+<pre><code>查找在/etc下查找文件类型为|的链接文件。
+</code></pre><p>7、find . -size +1000000c    </p>
+<pre><code>查找在当前目录（及子目录）下查找文件大小大于1M的文件，1M是1000000个字节。
+</code></pre><p>8、find . -perm 700 |xargs chmod 777         </p>
+<pre><code>查找出当前目录（及子目录）下所有权限为700的文件，并把其权限重设为777。
+</code></pre><p>9、find . -type f |xargs ls -l                         </p>
+<pre><code>查找出文件并查看其详细信息。
+</code></pre>]]></content>
+      <tags>
+        <tag>Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ubuntu防火墙开启及端口开启</title>
+    <url>/blog/2018/05/15/ubuntu%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<p>环境系统： ubuntu</p>
+<p>工具：xshell</p>
+<p>1.测试远程主机的端口是否开启（windows命令行下执行）</p>
+<p>telnet 192.168.1.103 80<br>远程访问主机的80端口，测试主机的80端口是否开启</p>
+<p>2.查看本地的端口开启情况(ubuntu下执行)</p>
+<p>sudo ufw status</p>
+<p>3.打开80端口(ubuntu下执行)</p>
+<p>sudo ufw allow 80</p>
+<p>4.防火墙开启(ubuntu下执行)</p>
+<p>sudo ufw enable<br>　　<br>5.防火墙重启(ubuntu下执行)</p>
+<p>sudo ufw reload</p>
+<p>6.防火墙关闭(ubuntu下执行)</p>
+<p>sudo ufw disable
+　　</p>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vuex</title>
+    <url>/blog/1970/01/01/vuex%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p>由hl项目总结vuex的用法:<br>目录结构如下图所示:<br><img src="images/目录.png" alt="BUG"></p>
+<p>参考vuex官网: <a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">https://vuex.vuejs.org/zh/</a></p>
+<blockquote>
+<p>1.辅助函数的使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">import &#123; mapGetters, mapState, mapMutations, mapActions &#125; from &apos;vuex&apos;;</span><br></pre></td></tr></table></figure>
+<p>在vue的页面中引用辅助函数</p>
+<p>mapState,mapGetters在computed中引用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">	...mapState(&apos;newMaterial&apos;, [&apos;outboundAppLevel4List&apos;])</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>mapMutations,mapActions在methods中引用<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">	...mapActions(&apos;newMaterial&apos;, [&apos;queryLevel4List&apos;,&apos;querysmSectiontList&apos;]),</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <tags>
+        <tag>vuex vue</tag>
+      </tags>
+  </entry>
+</search>
