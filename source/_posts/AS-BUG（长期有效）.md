@@ -3,8 +3,7 @@ title: AS BUG（长期有效）
 date: 2018-05-21 17:33:57
 tags: AS Android
 ---
-
-# AS bug（长期有效）
+# AS bug（XXXX）
 
 > BUG 1
 
@@ -22,4 +21,3 @@ tags: AS Android
 
 解决办法:
 在gradle.properties里面，把org.gradle.java.home 去掉。
-
