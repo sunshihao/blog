@@ -2,7 +2,7 @@
 language: node_js
 # node_js: stable
 node_js: 
-   - "18.18.2"
+   - "10.16.0"
 
 cache:
     apt: true
@@ -16,7 +16,7 @@ before_install:
 
 # 安装依赖包 
 install:
-  - yarn
+  - npm install
 
 # 生成博客静态资源
 script:
