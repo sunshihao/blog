@@ -20,6 +20,11 @@ bun dev
 
 本项目使用 [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) 来自动优化和加载 Inter，这是一种自定义的 Google 字体。
 
+## 特性
+
+- 背景使用了 https://bg.ibelick.com/
+-
+
 ## 了解更多
 
 要深入了解 Next.js，可以查看以下资源：

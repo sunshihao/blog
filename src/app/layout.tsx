@@ -1,5 +1,7 @@
 import ThemeProviders from '@/components/theme-providers';
-import siteMetadata from '@/data/siteMetadata';
+
+import { GlobalBg } from '@/components/GlobalBg';
+import siteMetadata from '@/config/site';
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -7,8 +9,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Next.js 模板！',
-	description: 'Next.js 基础启动模板'
+	title: siteMetadata.title,
+	description: siteMetadata.description
 };
 
 export default function RootLayout({
@@ -25,6 +27,7 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
+					<GlobalBg />
 					{children}
 				</ThemeProviders>
 			</body>
