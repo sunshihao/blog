@@ -1,6 +1,5 @@
-import ThemeProviders from '@/components/theme-providers';
-
 import { GlobalBg } from '@/components/GlobalBg';
+import ThemeProviders from '@/components/theme-providers';
 import siteMetadata from '@/config/site';
 import { type Metadata } from 'next';
 import { Inter } from 'next/font/google';

@@ -1,15 +1,14 @@
 'use client';
 
+import siteMetadata from '@/config/site';
 import { cn } from '@/lib/utils';
 import { Popover, type PopoverProps, Transition } from '@headlessui/react';
-
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-import { navigationItems } from '~/config/nav';
-
+const navigationItems = siteMetadata.navItems;
 function NavItem({
 	href,
 	children

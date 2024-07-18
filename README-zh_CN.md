@@ -23,6 +23,7 @@ bun dev
 ## 特性
 
 - 背景使用了 https://bg.ibelick.com/
+- 使用 [`react email`](https://react.email/docs/introduction) 支持内容在邮箱中展示
 -
 
 ## 了解更多
