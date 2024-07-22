@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link, { type LinkProps } from 'next/link';
 import { PropsWithChildren } from 'react';
-type ComponentProps<P = {}> = PropsWithChildren<
+type ComponentProps<P = object> = PropsWithChildren<
 	{
 		className?: string;
 	} & P

@@ -5,8 +5,8 @@ export default function DynamicIconRender({
 	...props
 }: Readonly<{
 	iconKey: string;
-  style?: React.CSSProperties;
-  className?: string;
+	style?: React.CSSProperties;
+	className?: string;
 }>) {
 	const IconComponent = Icons[iconKey as keyof typeof Icons];
 	return <IconComponent {...props} />;
