@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
-const navigationItems = siteMetadata.navItems;
+const navigationItems = siteMetadata.navigationItems;
 
 function NavItem({
 	href,
