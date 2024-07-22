@@ -1,6 +1,13 @@
 'use client';
 
 import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuList,
+	NavigationMenuTrigger
+} from '@/components/ui/navigation-menu';
+import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger
@@ -14,34 +21,75 @@ import React from 'react';
 
 const navigationItems = siteMetadata.navigationItems;
 
+const DropdownNavItem = ({
+	children,
+	href
+}: {
+	children: React.ReactNode;
+	href: string;
+}) => (
+	<NavigationMenu delayDuration={100}>
+		<NavigationMenuList>
+			<NavigationMenuItem>
+				<NavigationMenuTrigger className="bg-transparent px-0 py-0 h-auto">
+					{children}
+				</NavigationMenuTrigger>
+				<NavigationMenuContent>
+					{siteMetadata.moreItems[href] &&
+						siteMetadata.moreItems[href]?.map((item) => (
+							<Link
+								key={item.href}
+								className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
+								href={item.href}
+							>
+								{item.text}
+							</Link>
+						))}
+				</NavigationMenuContent>
+			</NavigationMenuItem>
+		</NavigationMenuList>
+		{/* <NavigationMenuViewport className="left-[-10px]" /> */}
+	</NavigationMenu>
+);
+
 function NavItem({
 	href,
-	children
+	children,
+	menu
 }: {
 	href: string;
 	children: React.ReactNode;
+	menu: boolean | undefined;
 }) {
 	const isActive = usePathname() === href;
-
+	const ActiveBox = () => (
+		<motion.span
+			className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
+			layoutId="active-nav-item"
+		/>
+	);
 	return (
-		<li>
-			<Link
-				href={href}
-				className={cn(
-					'relative block whitespace-nowrap px-3 py-2 transition',
-					isActive
-						? 'text-lime-600 dark:text-lime-400'
-						: 'hover:text-lime-600 dark:hover:text-lime-400'
-				)}
-			>
-				{children}
-				{isActive && (
-					<motion.span
-						className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
-						layoutId="active-nav-item"
-					/>
-				)}
-			</Link>
+		<li
+			className={cn(
+				'relative block whitespace-nowrap px-3 py-2 transition',
+				isActive
+					? 'text-lime-600 dark:text-lime-400'
+					: 'hover:text-lime-600 dark:hover:text-lime-400'
+			)}
+		>
+			{menu ? (
+				<DropdownNavItem href={href}>
+					<>
+						{children}
+						{isActive && <ActiveBox />}
+					</>
+				</DropdownNavItem>
+			) : (
+				<Link href={href}>
+					{children}
+					{isActive && <ActiveBox />}
+				</Link>
+			)}
 		</li>
 	);
 }
@@ -84,8 +132,8 @@ function Desktop({
 			/>
 
 			<ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
-				{navigationItems.map(({ href, text }) => (
-					<NavItem key={href} href={href}>
+				{navigationItems.map(({ href, text, menu }) => (
+					<NavItem key={href} href={href} menu={menu}>
 						{text}
 					</NavItem>
 				))}

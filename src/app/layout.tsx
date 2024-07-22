@@ -1,11 +1,9 @@
-import Footer from '@/components/Footer';
-import { GlobalBg } from '@/components/GlobalBg';
-import { Header } from '@/components/Header';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
-import { type Metadata } from 'next';
+import { sansFont } from '@/lib/font';
+import { Viewport, type Metadata } from 'next';
+import { ThemeProvider } from 'next-themes';
 import { Inter } from 'next/font/google';
-import { Suspense } from 'react';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -39,23 +37,29 @@ export const metadata: Metadata = {
 		}
 	}
 };
-
+export const viewport: Viewport = {
+	themeColor: siteMetadata.themeColors
+};
 export default function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang={siteMetadata.locale} suppressHydrationWarning>
+		<html
+			className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
+			lang={siteMetadata.locale}
+			suppressHydrationWarning
+		>
 			<body className={inter.className}>
-				<GlobalBg />
-				<div className="relative text-zinc-800 dark:text-zinc-200">
-					<Header />
-					<main>{children}</main>
-					<Suspense>
-						<Footer />
-					</Suspense>
-				</div>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);

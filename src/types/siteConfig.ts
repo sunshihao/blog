@@ -11,6 +11,7 @@ export type navigationItem = {
 	text: string;
 	href: string;
 	icon?: string;
+	menu?: boolean;
 };
 export type ThemeColor = {
 	media: string;

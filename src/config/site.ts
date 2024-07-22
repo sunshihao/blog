@@ -24,7 +24,7 @@ const baseSiteConfig: SiteConfig = {
 		'学习笔记',
 		'程序员'
 	],
-	authors: 'luckySnail',
+	authors: 'LuckySnail',
 	email: 'snailrun160@gmail.com',
 	authorsCN: '幸运的蜗牛',
 	authorsUrl: 'https://github.com/chaseFunny',
@@ -103,7 +103,7 @@ const baseSiteConfig: SiteConfig = {
 		{ href: '/guestbook', text: '留言墙' },
 		// { href: '/ama', text: 'AMA 咨询' },
 		{ href: '/about', text: '关于我' },
-		{ href: '/more', text: '更多' }
+		{ href: '/more', text: '更多', menu: true }
 	],
 	moreItems: {
 		'/more': [
