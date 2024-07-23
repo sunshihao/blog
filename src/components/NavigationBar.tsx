@@ -61,10 +61,19 @@ function NavItem({
 	children: React.ReactNode;
 	menu: boolean | undefined;
 }) {
-	const isActive = usePathname() === href;
+	const moreHrefList = ['/icon'];
+	const formatHref = (href: string) => {
+		if (moreHrefList.includes(href)) {
+			return `/more`;
+		}
+		return href;
+	};
+	console.log(usePathname(), href, formatHref(href));
+
+	const isActive = formatHref(usePathname()) === href;
 	const ActiveBox = () => (
 		<motion.span
-			className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
+			className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-violet-600/0 via-violet-600/70 to-violet-500/0 dark:from-violet-400/0 dark:via-violet-400/40 dark:to-violet-400/0"
 			layoutId="active-nav-item"
 		/>
 	);
@@ -73,8 +82,8 @@ function NavItem({
 			className={cn(
 				'relative block whitespace-nowrap px-3 py-2 transition',
 				isActive
-					? 'text-lime-600 dark:text-lime-400'
-					: 'hover:text-lime-600 dark:hover:text-lime-400'
+					? 'text-violet-500 dark:text-violet-400'
+					: 'hover:text-violet-500 dark:hover:text-violet-400'
 			)}
 		>
 			{menu ? (

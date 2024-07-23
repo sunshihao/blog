@@ -20,7 +20,7 @@ import React from 'react';
 import { Avatar } from './Avatar';
 import { Container } from './Container';
 import { NavigationBar } from './NavigationBar';
-import { ThemeChanger } from './ThemeChanger';
+import { ThemeToggle } from './ThemeToggle';
 export function Header() {
 	const isHomePage = usePathname() === '/';
 
@@ -268,7 +268,7 @@ export function Header() {
 							>
 								{/* <UserInfo /> */}
 								<div className="pointer-events-auto">
-									<ThemeChanger />
+									<ThemeToggle />
 								</div>
 							</motion.div>
 							{/* 
