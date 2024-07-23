@@ -22,6 +22,7 @@ export type socialItem = {
 	href: string;
 	isPicture?: boolean; // 是否是图片
 	hide?: boolean;
+	icon: string;
 };
 export type moreItem = Record<string, navigationItem[]>;
 export type SiteConfig = {

@@ -93,37 +93,18 @@ export function Headline() {
 					delay: 0.25
 				}}
 			>
-				<SocialLink
-					href={siteMetadata.url + 'twitter'}
-					aria-label="我的推特"
-					platform="twitter"
-				/>
-				<SocialLink
-					href={siteMetadata.url + 'youtube'}
-					aria-label="我的 YouTube"
-					platform="youtube"
-				/>
-				<SocialLink
-					href={siteMetadata.url + 'bilibili'}
-					aria-label="我的 Bilibili"
-					platform="bilibili"
-				/>
-				<SocialLink
-					href={siteMetadata.url + 'github'}
-					aria-label="我的 GitHub"
-					platform="github"
-				/>
-				<SocialLink
-					href={siteMetadata.url + 'tg'}
-					aria-label="我的 Telegram"
-					platform="telegram"
-				/>
-				<SocialLink href="/feed.xml" platform="rss" aria-label="RSS 订阅" />
-				<SocialLink
-					href={siteMetadata.url}
-					aria-label="我的邮箱"
-					platform="mail"
-				/>
+				{siteMetadata.social.map((item) =>
+					item.hide ? null : (
+						<SocialLink
+							isPicture={item.isPicture}
+							key={item.href}
+							href={item.href}
+							icon={item.icon}
+							aria-label={item.text}
+							platform={item.text}
+						/>
+					)
+				)}
 			</motion.div>
 		</div>
 	);
