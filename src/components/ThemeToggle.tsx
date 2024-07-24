@@ -67,7 +67,7 @@ export function ThemeToggle() {
 					transition={spring}
 				>
 					{theme === 'dark' ? (
-						<Moon className="h-5 w-5 ml-1 text-violet-400" />
+						<Moon className="h-5 w-5 ml-[2px] text-violet-400" />
 					) : (
 						<Sun className="h-5 w-5 text-violet-500" />
 					)}
