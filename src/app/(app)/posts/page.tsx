@@ -3,7 +3,13 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 console.log(allPosts, 'allPosts');
 
-function PostCard(post) {
+interface PostItem {
+	title: string;
+	date: string;
+	url: string;
+}
+
+function PostCard(post: PostItem) {
 	return (
 		<div className="mb-8">
 			<h2 className="mb-1 text-xl">

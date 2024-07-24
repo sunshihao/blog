@@ -2,19 +2,21 @@ import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import { notFound } from 'next/navigation';
-
+interface TypeParams {
+	id: string;
+}
 export async function generateStaticParams() {
 	return allPosts.map((post) => ({
 		id: post._raw.flattenedPath
 	}));
 }
-export const generateMetadata = ({ params }) => {
+export const generateMetadata = ({ params }: { params: TypeParams }) => {
 	const post = allPosts.find((post) => post._raw.flattenedPath === params.id);
 	if (!post) throw new Error(`Post not found for id: ${params.id}`);
 	return { title: post.title };
 };
 
-const Page = ({ params }) => {
+const Page = ({ params }: { params: TypeParams }) => {
 	const post = allPosts.find((post) => post._raw.flattenedPath === params.id);
 	if (!post) notFound();
 	const MDXContent = useMDXComponent(post.body.code);
