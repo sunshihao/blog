@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer';
+import { Footer } from '@/components/Footer';
 import { GlobalBg } from '@/components/GlobalBg';
 import { Header } from '@/components/Header';
 import { Suspense } from 'react';

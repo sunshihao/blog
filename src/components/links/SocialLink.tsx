@@ -57,7 +57,7 @@ const PictureDialog = ({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent className="sm:max-w-[425px] px-10 py-10">
 				<div className="relative  w-34 h-auto">
 					<Image
 						src={picMap[href] as StaticImageData}
