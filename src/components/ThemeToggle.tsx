@@ -1,41 +1,5 @@
 'use client';
 
-// import { Button } from '@/components/ui/button';
-// import {
-// 	DropdownMenu,
-// 	DropdownMenuContent,
-// 	DropdownMenuItem,
-// 	DropdownMenuTrigger
-// } from '@/components/ui/dropdown-menu';
-// import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
-// import { useTheme } from 'next-themes';
-
-// export function ThemeChanger() {
-// 	const { setTheme } = useTheme();
-
-// 	return (
-// 		<DropdownMenu>
-// 			<DropdownMenuTrigger asChild>
-// 				<Button variant="outline" size="icon">
-// 					<SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-// 					<MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-// 					<span className="sr-only">切换主题</span>
-// 				</Button>
-// 			</DropdownMenuTrigger>
-// 			<DropdownMenuContent align="end">
-// 				<DropdownMenuItem onClick={() => setTheme('light')}>
-// 					明亮
-// 				</DropdownMenuItem>
-// 				<DropdownMenuItem onClick={() => setTheme('dark')}>
-// 					暗黑
-// 				</DropdownMenuItem>
-// 				<DropdownMenuItem onClick={() => setTheme('system')}>
-// 					系统
-// 				</DropdownMenuItem>
-// 			</DropdownMenuContent>
-// 		</DropdownMenu>
-// 	);
-// }
 import { Switch } from '@/components/ui/switch';
 import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
@@ -45,7 +9,20 @@ import { useEffect, useState } from 'react';
 export function ThemeToggle() {
 	const [mounted, setMounted] = useState(false);
 	const { theme, setTheme } = useTheme();
+	useEffect(() => {
+		const link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.href =
+			theme === 'dark'
+				? '/style/prism-gruvbox-light.css'
+				: '/style/prism-coldark-dark.css';
+		document.head.appendChild(link);
 
+		// 清理函数，在组件卸载或主题变化时移除之前的 CSS
+		return () => {
+			document.head.removeChild(link);
+		};
+	}, [theme]);
 	useEffect(() => {
 		setMounted(true);
 	}, []);

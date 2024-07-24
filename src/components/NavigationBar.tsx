@@ -68,7 +68,6 @@ function NavItem({
 		}
 		return href;
 	};
-	console.log(usePathname(), href, formatHref(href));
 
 	const isActive = formatHref(usePathname()) === href;
 	const ActiveBox = () => (
