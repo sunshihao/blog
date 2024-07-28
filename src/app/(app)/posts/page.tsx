@@ -1,3 +1,4 @@
+import { Container } from '@/components/Container';
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Link from 'next/link';
@@ -15,7 +16,7 @@ function PostCard(post: PostItem) {
 			<h2 className="mb-1 text-xl">
 				<Link
 					href={post.url}
-					className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+					className="text-violet-500 hover:text-violet-700 dark:text-violet-400"
 				>
 					{post.title}
 				</Link>
@@ -29,11 +30,11 @@ function PostCard(post: PostItem) {
 
 export default function Home() {
 	return (
-		<div className="mx-auto max-w-xl py-8">
+		<Container className="min-h-[50vh] mt-16">
 			<h1 className="mb-8 text-center text-2xl font-black">我的 blog</h1>
 			{allPosts.map((post, idx) => (
 				<PostCard key={idx} {...post} />
 			))}
-		</div>
+		</Container>
 	);
 }

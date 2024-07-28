@@ -1,13 +1,15 @@
 'use client';
 
-import Image from 'next/image';
+import { ExternalLinkIcon } from '@/assets';
+import GithubIcon from '@/assets/favicon/github.png';
+import Image, { type StaticImageData } from 'next/image';
 import Link, { type LinkProps } from 'next/link';
 import React from 'react';
-
-import { ExternalLinkIcon } from '@/assets';
 import { cn } from '~/src/lib/utils';
 
-const hostsThatNeedInvertedFavicons = ['github.com'];
+const hostsThatNeedInvertedFavicons: Record<string, StaticImageData> = {
+	'github.com': GithubIcon
+};
 
 type RichLinkProps = LinkProps &
 	React.ComponentPropsWithoutRef<'a'> & {
@@ -18,10 +20,7 @@ type RichLinkProps = LinkProps &
 export const RichLink = React.forwardRef<HTMLAnchorElement, RichLinkProps>(
 	({ children, href, favicon = true, className, ...props }, ref) => {
 		const hrefHost = new URL(href).host;
-		const faviconUrl = React.useMemo(
-			() => (href.startsWith('http') ? `/api/favicon?url=${hrefHost}` : null),
-			[href, hrefHost]
-		);
+		const faviconUrl = hostsThatNeedInvertedFavicons[hrefHost];
 
 		// if it's a relative link, use a fallback Link
 		if (!href.startsWith('http')) {
@@ -48,7 +47,8 @@ export const RichLink = React.forwardRef<HTMLAnchorElement, RichLinkProps>(
 					<span
 						className={cn(
 							'mr-px inline-flex translate-y-0.5',
-							hostsThatNeedInvertedFavicons.includes(hrefHost) && 'dark:invert'
+							Object.keys(hostsThatNeedInvertedFavicons).includes(hrefHost) &&
+								'dark:invert'
 						)}
 					>
 						<Image

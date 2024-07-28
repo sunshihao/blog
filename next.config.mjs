@@ -4,7 +4,10 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com']
+		domains: [
+			'blog-1304565468.cos.ap-shanghai.myqcloud.com',
+			'p3-juejin.byteimg.com'
+		]
 	}
 };
 
