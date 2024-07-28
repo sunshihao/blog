@@ -8,6 +8,11 @@ interface PostItem {
 	title: string;
 	date: string;
 	url: string;
+	slug: string;
+	tags: string[];
+	description: string;
+	author: string;
+	cover: string;
 }
 
 function PostCard(post: PostItem) {
@@ -15,7 +20,7 @@ function PostCard(post: PostItem) {
 		<div className="mb-8">
 			<h2 className="mb-1 text-xl">
 				<Link
-					href={post.url}
+					href={`/posts/${post.slug}`}
 					className="text-violet-500 hover:text-violet-700 dark:text-violet-400"
 				>
 					{post.title}

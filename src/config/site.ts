@@ -112,7 +112,7 @@ const baseSiteConfig: SiteConfig = {
 		{ href: '/', text: '首页' },
 		{ href: '/posts', text: '博客' },
 		{ href: '/projects', text: '项目' },
-		{ href: '/guestbook', text: '留言墙' },
+		// { href: '/guestbook', text: '留言墙' },
 		// { href: '/ama', text: 'AMA 咨询' },
 		{ href: '/about', text: '关于我' },
 		{ href: '/more', text: '更多', menu: true }

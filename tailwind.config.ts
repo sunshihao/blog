@@ -61,45 +61,45 @@ const config = {
 			},
 			DEFAULT: {
 				css: {
-					'--tw-prose-body': theme('colors.zinc.600'),
-					'--tw-prose-headings': theme('colors.zinc.900'),
-					'--tw-prose-links': theme('colors.teal.500'),
-					'--tw-prose-links-hover': theme('colors.teal.600'),
-					'--tw-prose-underline': theme('colors.teal.500 / 0.2'),
-					'--tw-prose-underline-hover': theme('colors.teal.500'),
-					'--tw-prose-bold': theme('colors.zinc.900'),
-					'--tw-prose-counters': theme('colors.zinc.900'),
-					'--tw-prose-bullets': theme('colors.zinc.900'),
-					'--tw-prose-hr': theme('colors.zinc.100'),
-					'--tw-prose-quote-borders': theme('colors.yellow.300'),
-					'--tw-prose-captions': theme('colors.zinc.400'),
-					'--tw-prose-code': theme('colors.zinc.700'),
-					'--tw-prose-code-bg': theme('colors.zinc.300 / 0.2'),
-					'--tw-prose-pre-code': theme('colors.zinc.100'),
-					'--tw-prose-pre-bg': theme('colors.zinc.900'),
-					'--tw-prose-pre-border': theme('colors.zinc.200'),
-					'--tw-prose-th-borders': theme('colors.zinc.200'),
-					'--tw-prose-td-borders': theme('colors.zinc.100'),
+					// '--tw-prose-body': theme('colors.zinc.600'),
+					// '--tw-prose-headings': theme('colors.zinc.900'),
+					'--tw-prose-links': theme('colors.purple.500'),
+					'--tw-prose-links-hover': theme('colors.purple.600'),
+					'--tw-prose-underline': theme('colors.purple.500 / 0.2'),
+					'--tw-prose-underline-hover': theme('colors.purple.500'),
+					// '--tw-prose-bold': theme('colors.zinc.900'),
+					// '--tw-prose-counters': theme('colors.zinc.900'),
+					// '--tw-prose-bullets': theme('colors.zinc.900'),
+					// '--tw-prose-hr': theme('colors.zinc.100'),
+					// '--tw-prose-quote-borders': theme('colors.yellow.300'),
+					// '--tw-prose-captions': theme('colors.zinc.400'),
+					// '--tw-prose-code': theme('colors.zinc.700'),
+					// '--tw-prose-code-bg': theme('colors.zinc.300 / 0.2'),
+					// '--tw-prose-pre-code': theme('colors.zinc.100'),
+					// '--tw-prose-pre-bg': theme('colors.zinc.900'),
+					// '--tw-prose-pre-border': theme('colors.zinc.200'),
+					// '--tw-prose-th-borders': theme('colors.zinc.200'),
+					// '--tw-prose-td-borders': theme('colors.zinc.100'),
 
-					'--tw-prose-invert-body': theme('colors.zinc.400'),
-					'--tw-prose-invert-headings': theme('colors.zinc.200'),
-					'--tw-prose-invert-links': theme('colors.teal.400'),
-					'--tw-prose-invert-links-hover': theme('colors.teal.400'),
-					'--tw-prose-invert-underline': theme('colors.teal.400 / 0.3'),
-					'--tw-prose-invert-underline-hover': theme('colors.teal.400'),
-					'--tw-prose-invert-bold': theme('colors.zinc.200'),
-					'--tw-prose-invert-counters': theme('colors.zinc.200'),
-					'--tw-prose-invert-bullets': theme('colors.zinc.200'),
-					'--tw-prose-invert-hr': theme('colors.zinc.700 / 0.4'),
-					'--tw-prose-invert-quote-borders': theme('colors.yellow.600'),
-					'--tw-prose-invert-captions': theme('colors.zinc.500'),
-					'--tw-prose-invert-code': theme('colors.zinc.300'),
-					'--tw-prose-invert-code-bg': theme('colors.zinc.200 / 0.05'),
-					'--tw-prose-invert-pre-code': theme('colors.zinc.100'),
-					'--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 0.4)',
-					'--tw-prose-invert-pre-border': theme('colors.zinc.200 / 0.1'),
-					'--tw-prose-invert-th-borders': theme('colors.zinc.700'),
-					'--tw-prose-invert-td-borders': theme('colors.zinc.800'),
+					// '--tw-prose-invert-body': theme('colors.zinc.400'),
+					// '--tw-prose-invert-headings': theme('colors.zinc.200'),
+					'--tw-prose-invert-links': theme('colors.purple.400'),
+					'--tw-prose-invert-links-hover': theme('colors.purple.400'),
+					'--tw-prose-invert-underline': theme('colors.purple.400 / 0.3'),
+					'--tw-prose-invert-underline-hover': theme('colors.purple.400'),
+					// '--tw-prose-invert-bold': theme('colors.zinc.200'),
+					// '--tw-prose-invert-counters': theme('colors.zinc.200'),
+					// '--tw-prose-invert-bullets': theme('colors.zinc.200'),
+					// '--tw-prose-invert-hr': theme('colors.zinc.700 / 0.4'),
+					// '--tw-prose-invert-quote-borders': theme('colors.yellow.600'),
+					// '--tw-prose-invert-captions': theme('colors.zinc.500'),
+					// '--tw-prose-invert-code': theme('colors.zinc.300'),
+					// '--tw-prose-invert-code-bg': theme('colors.zinc.200 / 0.05'),
+					// '--tw-prose-invert-pre-code': theme('colors.zinc.100'),
+					// '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 0.4)',
+					// '--tw-prose-invert-pre-border': theme('colors.zinc.200 / 0.1'),
+					// '--tw-prose-invert-th-borders': theme('colors.zinc.700'),
+					// '--tw-prose-invert-td-borders': theme('colors.zinc.800'),
 
 					// Base
 					color: 'var(--tw-prose-body)',
@@ -109,10 +109,16 @@ const config = {
 						marginBottom: theme('spacing.10')
 					},
 					p: {
-						marginTop: theme('spacing.7'),
-						marginBottom: theme('spacing.7')
+						marginTop: theme('spacing.4'),
+						marginBottom: theme('spacing.4')
 					},
-
+					h1: {
+						fontSize: theme('fontSize.2xl')[0],
+						fontWeight: '700',
+						marginTop: theme('spacing.4'),
+						marginBottom: theme('spacing.4'),
+						letterSpacing: theme('letterSpacing.tight')
+					},
 					// Headings
 					'h2, h3': {
 						color: 'var(--tw-prose-headings)',
@@ -121,13 +127,13 @@ const config = {
 					h2: {
 						fontSize: theme('fontSize.xl')[0],
 						lineHeight: theme('lineHeight.7'),
-						marginTop: theme('spacing.20'),
+						marginTop: theme('spacing.4'),
 						marginBottom: theme('spacing.4')
 					},
 					h3: {
 						fontSize: theme('fontSize.base')[0],
 						lineHeight: theme('lineHeight.7'),
-						marginTop: theme('spacing.16'),
+						marginTop: theme('spacing.2'),
 						marginBottom: theme('spacing.4')
 					},
 					':is(h2, h3) + *': {
@@ -158,7 +164,7 @@ const config = {
 						fontSize: theme('fontSize.sm')[0],
 						fontWeight: theme('fontWeight.semibold'),
 						backgroundColor: 'var(--tw-prose-code-bg)',
-						borderRadius: theme('borderRadius.lg'),
+						borderRadius: theme('borderRadius.sm'),
 						paddingLeft: theme('spacing.1'),
 						paddingRight: theme('spacing.1')
 					},
@@ -196,11 +202,11 @@ const config = {
 						listStyleType: 'decimal'
 					},
 					'ul, ol': {
-						paddingLeft: theme('spacing.6')
+						paddingLeft: theme('spacing.4')
 					},
 					li: {
-						marginTop: theme('spacing.6'),
-						marginBottom: theme('spacing.6'),
+						marginTop: theme('spacing.4'),
+						marginBottom: theme('spacing.4'),
 						paddingLeft: theme('spacing[3.5]')
 					},
 					'li::marker': {
@@ -228,7 +234,7 @@ const config = {
 						fontSize: theme('fontSize.sm')[0],
 						fontWeight: theme('fontWeight.medium'),
 						backgroundColor: 'var(--tw-prose-pre-bg)',
-						borderRadius: theme('borderRadius.3xl'),
+						borderRadius: theme('borderRadius.sm'),
 						borderTopLeftRadius: 0,
 						borderTopRightRadius: 0,
 						padding: theme('spacing.6'),
@@ -240,14 +246,14 @@ const config = {
 						fontSize: 'inherit',
 						fontWeight: 'inherit',
 						backgroundColor: 'transparent',
-						borderRadius: 0,
+						borderRadius: '4px',
 						padding: 0
 					},
 
 					// Horizontal rules
 					hr: {
-						marginTop: theme('spacing.20'),
-						marginBottom: theme('spacing.20'),
+						marginTop: theme('spacing.10'),
+						marginBottom: theme('spacing.10'),
 						borderTopWidth: '1px',
 						borderColor: 'var(--tw-prose-hr)',
 						'@screen lg': {
