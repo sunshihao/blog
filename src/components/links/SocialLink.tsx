@@ -14,14 +14,22 @@ import {
 	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui/tooltip';
+import { copyTextToClipboard } from '@/lib';
 import { makeBlurDataURL } from '@/lib/images';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image, { StaticImageData } from 'next/image';
 import Link, { type LinkProps } from 'next/link';
-import React from 'react';
+import React, { FC } from 'react';
 import siteMetadata from '~/src/config/site';
 
 type IconName = keyof typeof iconList;
+
+type TypeSocialLinkProps = {
+	platform?: Platform | string;
+	icon?: string;
+	isPicture?: boolean;
+} & LinkProps &
+	React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const IconComponents: Record<
 	IconName,
@@ -76,19 +84,35 @@ const PictureDialog = ({
 		</Dialog>
 	);
 };
-
+const LinkHrefWrapper: FC<TypeSocialLinkProps> = ({
+	platform,
+	href,
+	children,
+	...props
+}) => {
+	const textList = ['邮箱'];
+	const isText = textList.includes(platform ?? '');
+	return isText ? (
+		<span onClick={() => copyTextToClipboard(href)}>{children}</span>
+	) : (
+		<Link
+			href={href}
+			target="_blank"
+			prefetch={false}
+			aria-label={platform}
+			{...props}
+		>
+			{children}
+		</Link>
+	);
+};
 export function SocialLink({
 	platform,
 	href,
 	isPicture,
 	icon,
 	...props
-}: {
-	platform?: Platform | string;
-	icon: string;
-	isPicture?: boolean;
-} & LinkProps &
-	React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+}: TypeSocialLinkProps) {
 	const Icon = IconComponents[icon as IconName];
 
 	return (
@@ -102,17 +126,11 @@ export function SocialLink({
 							)}
 						</PictureDialog>
 					) : (
-						<Link
-							href={href}
-							target="_blank"
-							prefetch={false}
-							aria-label={platform}
-							{...props}
-						>
+						<LinkHrefWrapper platform={platform} href={href} {...props}>
 							{icon && (
 								<Icon className="text-2xl text-zinc-400 transition group-hover:text-zinc-700 dark:text-zinc-400 dark:group-hover:text-zinc-200" />
 							)}
-						</Link>
+						</LinkHrefWrapper>
 					)}
 				</TooltipTrigger>
 				<AnimatePresence>

@@ -5,10 +5,11 @@ import { motion } from 'framer-motion';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import { Toaster } from './ui/sonner';
 
 export function ThemeToggle() {
 	const [mounted, setMounted] = useState(false);
-	const { theme, setTheme } = useTheme();
+	const { theme, setTheme }: AnyIfEmpty = useTheme();
 	useEffect(() => {
 		const link = document.createElement('link');
 		link.rel = 'stylesheet';
@@ -50,6 +51,7 @@ export function ThemeToggle() {
 					)}
 				</motion.div>
 			</Switch>
+			<Toaster theme={theme ?? 'light'} richColors />
 		</div>
 	);
 }

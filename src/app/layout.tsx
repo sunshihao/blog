@@ -52,6 +52,7 @@ export default function RootLayout({
 			suppressHydrationWarning
 		>
 			<body className={inter.className}>
+				{/* @ts-ignore */}
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
