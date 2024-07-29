@@ -1,7 +1,6 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
@@ -86,8 +85,8 @@ export default makeSource({
 						className: ['anchor']
 					}
 				}
-			],
-			[rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }]
+			]
+			// [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }]
 		]
 	}
 });
