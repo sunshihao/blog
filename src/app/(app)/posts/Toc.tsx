@@ -42,7 +42,8 @@ export default function Toc() {
 			listItemClass: 'toc-list-item',
 			collapseDepth: 6,
 			scrollSmooth: true,
-			scrollSmoothDuration: 420
+			scrollSmoothDuration: 420,
+			scrollSmoothOffset: -10
 		});
 
 		const handleScroll = () => {

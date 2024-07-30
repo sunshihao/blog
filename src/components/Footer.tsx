@@ -47,7 +47,7 @@ export function Footer() {
 							<p className="text-sm text-zinc-500/80 dark:text-zinc-400/80">
 								&copy; {new Date().getFullYear()} {siteMetadata.authorsCN}
 								&nbsp;网站已开源：
-								<PeekabooLink href="https://github.com/chaseFunny/luckySnail">
+								<PeekabooLink href="https://github.com/coderPerseus/blog">
 									luckySnail
 								</PeekabooLink>
 							</p>

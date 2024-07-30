@@ -34,52 +34,54 @@ const Page = ({ params }: { params: TypeParams }) => {
 	const post = allPosts.find((post) => post.slug === params.id);
 	if (!post) notFound();
 	const MDXContent = useMDXComponent(post.body.code);
-	// console.log(post.headings, 'post');
+	console.log(post.readingTime, 'post');
 
 	return (
-		<Container className="mt-16 lg:mt-16">
-			<div className="w-full md:flex md:justify-between xl:relative gap-1">
-				<aside className="hidden w-[160px] shrink-0 lg:block">
-					<div className="sticky top-2 pt-16">
-						<Toc post={post} />
-					</div>
-				</aside>
-				<div className="max-w-2xl md:flex-1 md:shrink-0">
-					<Link
-						href="/posts"
-						className={cn(
-							'group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0',
-							variantStyles.secondary
-						)}
-						aria-label="返回博客页面"
-					>
-						<UTurnLeftIcon className="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400" />
-					</Link>
+		<Container.Outer className="mt-16 lg:mt-16">
+			<Container.Inner className="!px-0">
+				<div className="w-full md:flex md:justify-between xl:relative gap-1">
+					<aside className="hidden w-[160px] shrink-0 lg:block">
+						<div className="sticky top-2 pt-16">
+							<Toc />
+						</div>
+					</aside>
+					<div className="max-w-4xl md:flex-1 md:shrink-0  md:pl-4">
+						<Link
+							href="/posts"
+							className={cn(
+								'group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0',
+								variantStyles.secondary
+							)}
+							aria-label="返回博客页面"
+						>
+							<UTurnLeftIcon className="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400" />
+						</Link>
 
-					<article data-postid={post._id} className="rich-text-viewer prose">
-						<div className="mb-8 text-center">
-							<h1 className="text-3xl font-bold">{post.title}</h1>
-							<div className="flex justify-center  h-5 items-center space-x-4 text-sm">
-								<time
-									dateTime={post.date}
-									className="mb-1 text-xs text-gray-600"
-								>
-									{dayjs(post.date).format('YYYY-MM-DD')}
-								</time>
-								<Separator orientation="vertical" />
-								<span className="mb-1 text-xs text-gray-600">
-									{post.readingTime?.text}
-								</span>
+						<article data-postid={post._id} className="rich-text-viewer prose">
+							<div className="mb-8 text-center">
+								<h1 className="text-3xl font-bold">{post.title}</h1>
+								<div className="flex justify-center  h-5 items-center space-x-4 text-sm">
+									<time
+										dateTime={post.date}
+										className="mb-1 text-xs text-gray-600"
+									>
+										{dayjs(post.date).format('YYYY-MM-DD')}
+									</time>
+									<Separator orientation="vertical" />
+									<span className="mb-1 text-xs text-gray-600">
+										阅读时长： {Math.ceil(post.readingTime?.minutes)} 分钟
+									</span>
+								</div>
 							</div>
-						</div>
 
-						<div className="js-toc-content">
-							<MDXContent />
-						</div>
-					</article>
+							<div className="js-toc-content">
+								<MDXContent />
+							</div>
+						</article>
+					</div>
 				</div>
-			</div>
-		</Container>
+			</Container.Inner>
+		</Container.Outer>
 	);
 };
 
