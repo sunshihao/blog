@@ -14,7 +14,7 @@ date: 2024-05-01
 
 现在就让我们开始吧！顺便看看你有没有中招。
 
-## 项目准备
+### 项目准备
 
 使用官方脚手架，创建一个 Next.js 项目：
 
@@ -26,7 +26,7 @@ npx create-next-app@latest
 
 ![image-20240720164014149](https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/image-20240720164014149.png)
 
-## 错误 1：服务端组件调用路由处理程序
+#### 错误 1：服务端组件调用路由处理程序
 
 新建 `app/mistake1/page.js`，代码如下：
 
@@ -82,7 +82,7 @@ export default async function Page() {
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4d17b11342a546f2a6361fddbcfe64ca~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2290&h=904&s=184043&e=png&b=ffffff)
 
-## 错误 2：路由处理程序的静态处理
+### 错误 2：路由处理程序的静态处理
 
 新建 `app/api/time/route.js`，代码如下：
 
@@ -395,7 +395,7 @@ export default function Page({ params, searchParams }) {
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/06bdda65025f49cb8676f90f6d04265b~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=2338&h=1802&s=501302&e=png&b=fefefe)
 
-## 错误 6：使用 Context Providers
+### 错误 6：使用 Context Providers
 
 在 Next.js 中怎么是用 Context 呢？因为使用 Context 需要先声明为客户端组件，如果你一不小心，可能会让整个页面都转为客户端组件，进而失去服务端渲染的优势。
 
@@ -552,7 +552,7 @@ export default function ClientComponent({ children }) {
 
 这是因为通过 props 的形式，组件还是在服务端渲染，只是将服务端渲染的结果传给客户端组件而已。
 
-## 错误 9：数据更新后没有重新验证
+#### 错误 9：数据更新后没有重新验证
 
 新建 `app/mistake9/page.js`，代码如下：
 
@@ -608,7 +608,7 @@ export async function createToDo(formData) {
 
 ![react-5.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a85a9f513f14448186e1ab1f5860a6e7~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1310&h=449&s=147353&e=gif&f=25&b=fcfcfc)
 
-## 错误 10：在 try/catch 中 redirect
+##### 错误 10：在 try/catch 中 redirect
 
 以错误 9 的代码为例，假设我们修改 `actions.js` 的代码为：
 
@@ -671,7 +671,7 @@ export async function createToDo(formData) {
 
 ![react-6.gif](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4bfb3203e33a43fe8d12cd19eb7b723c~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1310&h=449&s=167080&e=gif&f=22&b=fcfbfc)
 
-## 总结
+###### 总结
 
 本篇我们总结了 Next.js 常犯的 10 个错误，提前预习这些错误，防止大家遇到这些问题的时候被卡住。
 

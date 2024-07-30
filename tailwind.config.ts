@@ -50,56 +50,20 @@ const config = {
 					'--tw-prose-hr': 'var(--tw-prose-invert-hr)',
 					'--tw-prose-quote-borders': 'var(--tw-prose-invert-quote-borders)',
 					'--tw-prose-captions': 'var(--tw-prose-invert-captions)',
-					'--tw-prose-code': 'var(--tw-prose-invert-code)',
-					'--tw-prose-code-bg': 'var(--tw-prose-invert-code-bg)',
-					'--tw-prose-pre-code': 'var(--tw-prose-invert-pre-code)',
-					'--tw-prose-pre-bg': 'var(--tw-prose-invert-pre-bg)',
-					'--tw-prose-pre-border': 'var(--tw-prose-invert-pre-border)',
 					'--tw-prose-th-borders': 'var(--tw-prose-invert-th-borders)',
 					'--tw-prose-td-borders': 'var(--tw-prose-invert-td-borders)'
 				}
 			},
 			DEFAULT: {
 				css: {
-					// '--tw-prose-body': theme('colors.zinc.600'),
-					// '--tw-prose-headings': theme('colors.zinc.900'),
 					'--tw-prose-links': theme('colors.purple.500'),
 					'--tw-prose-links-hover': theme('colors.purple.600'),
 					'--tw-prose-underline': theme('colors.purple.500 / 0.2'),
 					'--tw-prose-underline-hover': theme('colors.purple.500'),
-					// '--tw-prose-bold': theme('colors.zinc.900'),
-					// '--tw-prose-counters': theme('colors.zinc.900'),
-					// '--tw-prose-bullets': theme('colors.zinc.900'),
-					// '--tw-prose-hr': theme('colors.zinc.100'),
-					// '--tw-prose-quote-borders': theme('colors.yellow.300'),
-					// '--tw-prose-captions': theme('colors.zinc.400'),
-					// '--tw-prose-code': theme('colors.zinc.700'),
-					// '--tw-prose-code-bg': theme('colors.zinc.300 / 0.2'),
-					// '--tw-prose-pre-code': theme('colors.zinc.100'),
-					// '--tw-prose-pre-bg': theme('colors.zinc.900'),
-					// '--tw-prose-pre-border': theme('colors.zinc.200'),
-					// '--tw-prose-th-borders': theme('colors.zinc.200'),
-					// '--tw-prose-td-borders': theme('colors.zinc.100'),
-
-					// '--tw-prose-invert-body': theme('colors.zinc.400'),
-					// '--tw-prose-invert-headings': theme('colors.zinc.200'),
 					'--tw-prose-invert-links': theme('colors.purple.400'),
 					'--tw-prose-invert-links-hover': theme('colors.purple.400'),
 					'--tw-prose-invert-underline': theme('colors.purple.400 / 0.3'),
 					'--tw-prose-invert-underline-hover': theme('colors.purple.400'),
-					// '--tw-prose-invert-bold': theme('colors.zinc.200'),
-					// '--tw-prose-invert-counters': theme('colors.zinc.200'),
-					// '--tw-prose-invert-bullets': theme('colors.zinc.200'),
-					// '--tw-prose-invert-hr': theme('colors.zinc.700 / 0.4'),
-					// '--tw-prose-invert-quote-borders': theme('colors.yellow.600'),
-					// '--tw-prose-invert-captions': theme('colors.zinc.500'),
-					// '--tw-prose-invert-code': theme('colors.zinc.300'),
-					// '--tw-prose-invert-code-bg': theme('colors.zinc.200 / 0.05'),
-					// '--tw-prose-invert-pre-code': theme('colors.zinc.100'),
-					// '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 0.4)',
-					// '--tw-prose-invert-pre-border': theme('colors.zinc.200 / 0.1'),
-					// '--tw-prose-invert-th-borders': theme('colors.zinc.700'),
-					// '--tw-prose-invert-td-borders': theme('colors.zinc.800'),
 
 					// Base
 					color: 'var(--tw-prose-body)',
@@ -157,16 +121,6 @@ const config = {
 					strong: {
 						color: 'var(--tw-prose-bold)',
 						fontWeight: theme('fontWeight.semibold')
-					},
-					code: {
-						display: 'inline-block',
-						color: 'var(--tw-prose-code)',
-						fontSize: theme('fontSize.sm')[0],
-						fontWeight: theme('fontWeight.semibold'),
-						backgroundColor: 'var(--tw-prose-code-bg)',
-						borderRadius: theme('borderRadius.sm'),
-						paddingLeft: theme('spacing.1'),
-						paddingRight: theme('spacing.1')
 					},
 					'a code': {
 						color: 'inherit'
@@ -229,26 +183,6 @@ const config = {
 					},
 
 					// Code blocks
-					pre: {
-						color: 'var(--tw-prose-pre-code)',
-						fontSize: theme('fontSize.sm')[0],
-						fontWeight: theme('fontWeight.medium'),
-						backgroundColor: 'var(--tw-prose-pre-bg)',
-						borderRadius: theme('borderRadius.sm'),
-						borderTopLeftRadius: 0,
-						borderTopRightRadius: 0,
-						padding: theme('spacing.6'),
-						overflowX: 'auto'
-					},
-					'pre code': {
-						display: 'inline',
-						color: 'inherit',
-						fontSize: 'inherit',
-						fontWeight: 'inherit',
-						backgroundColor: 'transparent',
-						borderRadius: '4px',
-						padding: 0
-					},
 
 					// Horizontal rules
 					hr: {

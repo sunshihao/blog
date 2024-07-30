@@ -37,16 +37,16 @@ const Page = ({ params }: { params: TypeParams }) => {
 	// console.log(post.headings, 'post');
 
 	return (
-		<Container className="mt-16 lg:mt-32">
-			<div className="w-full md:flex md:justify-between xl:relative">
+		<Container className="mt-16 lg:mt-16">
+			<div className="w-full md:flex md:justify-between xl:relative gap-1">
 				<aside className="hidden w-[160px] shrink-0 lg:block">
-					<div className="sticky top-2 pt-20">
-						<Toc />
+					<div className="sticky top-2 pt-16">
+						<Toc post={post} />
 					</div>
 				</aside>
 				<div className="max-w-2xl md:flex-1 md:shrink-0">
 					<Link
-						href="/blog"
+						href="/posts"
 						className={cn(
 							'group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0',
 							variantStyles.secondary
