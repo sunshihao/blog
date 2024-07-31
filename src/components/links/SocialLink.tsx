@@ -93,7 +93,12 @@ const LinkHrefWrapper: FC<TypeSocialLinkProps> = ({
 	const textList = ['邮箱'];
 	const isText = textList.includes(platform ?? '');
 	return isText ? (
-		<span onClick={() => copyTextToClipboard(href)}>{children}</span>
+		<span
+			onTouchEnd={() => copyTextToClipboard(href)}
+			onClick={() => copyTextToClipboard(href)}
+		>
+			{children}
+		</span>
 	) : (
 		<Link
 			href={href}

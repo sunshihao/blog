@@ -45,7 +45,7 @@ const Page = ({ params }: { params: TypeParams }) => {
 							<Toc />
 						</div>
 					</aside>
-					<div className="max-w-4xl md:flex-1 md:shrink-0  md:pl-4">
+					<div className="max-w-4xl md:flex-1 md:shrink-0 ">
 						<Link
 							href="/posts"
 							className={cn(
@@ -57,7 +57,10 @@ const Page = ({ params }: { params: TypeParams }) => {
 							<UTurnLeftIcon className="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400" />
 						</Link>
 
-						<article data-postid={post._id} className="rich-text-viewer prose">
+						<article
+							data-postid={post._id}
+							className="rich-text-viewer prose px-4"
+						>
 							<div className="mb-8 text-center">
 								<h1 className="text-3xl font-bold">{post.title}</h1>
 								<div className="flex justify-center  h-5 items-center space-x-4 text-sm">
