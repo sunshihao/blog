@@ -1,6 +1,8 @@
 import { withContentlayer } from 'next-contentlayer';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	// 静态导出
+	output: 'export',
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {

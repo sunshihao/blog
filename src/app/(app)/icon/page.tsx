@@ -6,6 +6,7 @@ export default function IconPage() {
 		<Container>
 			<div className="flex flex-wrap gap-4">
 				{Object.keys(iconList).map((key) => {
+					// @ts-ignore
 					const Icon = iconList[key];
 					return (
 						<div key={key} className=" mt-20 flex flex-col items-center">

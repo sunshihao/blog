@@ -7,7 +7,8 @@
 		"pre-commit": "lint-staged",
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
+		"start": "next start -p 3003",
+		"start:static": "serve -s out",
 		"lint": "eslint --ext .ts,.js,.jsx,.tsx --fix . ",
 		"lint-staged": "lint-staged"
 	},
@@ -42,6 +43,7 @@
 		"rehype-slug": "^6.0.0",
 		"remark-gfm": "3.0.1",
 		"server-only": "^0.0.1",
+		"sharp": "^0.33.4",
 		"sonner": "^1.5.0",
 		"tailwind-merge": "^2.4.0",
 		"tailwindcss-animate": "^1.0.7",

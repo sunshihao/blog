@@ -1,10 +1,11 @@
 'use client';
 import { ThemeProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
-import { type FC, memo } from 'react';
+import { memo, type FC } from 'react';
 
 const ThemeProviders: FC<ThemeProviderProps> = ({ children, ...props }) => {
 	return (
+		// @ts-ignore
 		<ThemeProvider
 			{...props}
 			attribute="class"
