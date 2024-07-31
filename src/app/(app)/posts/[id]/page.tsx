@@ -1,10 +1,12 @@
 import { UTurnLeftIcon } from '@/assets';
 import { Container } from '@/components/Container';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { useMDXComponent } from 'next-contentlayer/hooks';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Toc from '../Toc';
@@ -31,13 +33,26 @@ export const generateMetadata = ({ params }: { params: TypeParams }) => {
 };
 
 const Page = ({ params }: { params: TypeParams }) => {
-	const post = allPosts.find((post) => post.slug === params.id);
+	let postIndex = 0;
+	const post = allPosts.find((post) => {
+		postIndex++;
+		return post.slug === params.id;
+	});
 	if (!post) notFound();
 	const MDXContent = useMDXComponent(post.body.code);
 	console.log(post.readingTime, 'post');
-
+	// 找到上一个和下一个帖子
+	const prevPost = allPosts[postIndex - 2];
+	const nextPost = allPosts[postIndex];
+	const computeTitle = (p) => {
+		if (p.title.length > 20) {
+			return p.title.slice(0, 20) + '...';
+		} else {
+			return p.title;
+		}
+	};
 	return (
-		<Container.Outer className="mt-16 lg:mt-16">
+		<Container.Outer className="mt-10 lg:mt-16">
 			<Container.Inner className="!px-0">
 				<div className="w-full md:flex md:justify-between xl:relative gap-1">
 					<aside className="hidden w-[160px] shrink-0 lg:block">
@@ -56,12 +71,25 @@ const Page = ({ params }: { params: TypeParams }) => {
 						>
 							<UTurnLeftIcon className="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400" />
 						</Link>
-
 						<article
 							data-postid={post._id}
 							className="rich-text-viewer prose px-4"
 						>
 							<div className="mb-8 text-center">
+								{post.cover && (
+									<AspectRatio
+										ratio={16 / 9}
+										className="bg-muted absolute left-0 top-0 rounded-md overflow-hidden"
+									>
+										<Image
+											src={post.cover}
+											alt={post.title}
+											fill
+											unoptimized
+											className="object-cover"
+										/>
+									</AspectRatio>
+								)}
 								<h1 className="text-3xl font-bold">{post.title}</h1>
 								<div className="flex justify-center  h-5 items-center space-x-4 text-sm">
 									<time
@@ -81,6 +109,40 @@ const Page = ({ params }: { params: TypeParams }) => {
 								<MDXContent />
 							</div>
 						</article>
+						{/* 上一个，下一个功能 */}
+						<div className="flex px-4 justify-between mt-8">
+							{/* 上一个 */}
+							{prevPost ? (
+								<Link
+									href={`/posts/${prevPost.slug}`}
+									className={cn(
+										'inline-flex items-center justify-center rounded-md  px-4 py-2 text-sm  font-medium text-violet-500  dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2'
+									)}
+								>
+									{computeTitle(prevPost)}
+								</Link>
+							) : (
+								<span className="leading-10 text-zinc-500 dark:text-zinc-200">
+									已经是第一个了
+								</span>
+							)}
+
+							{/* 下一个 */}
+							{nextPost ? (
+								<Link
+									href={`/posts/${nextPost.slug}`}
+									className={cn(
+										'inline-flex items-center justify-center rounded-md  px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200  dark:hover:bg-violet-500  focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2'
+									)}
+								>
+									{computeTitle(nextPost)}
+								</Link>
+							) : (
+								<span className="leading-10 text-zinc-500 dark:text-zinc-200">
+									没有下一个啦
+								</span>
+							)}
+						</div>
 					</div>
 				</div>
 			</Container.Inner>
