@@ -82,7 +82,7 @@ export function Headline() {
 				<Balancer>{siteMetadata.description}</Balancer>
 			</motion.p>
 			<motion.div
-				className="mt-6 flex gap-6"
+				className="mt-6 flex gap-6 flex-wrap"
 				initial={{ opacity: 0, y: 10 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{
