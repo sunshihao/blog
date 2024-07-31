@@ -74,12 +74,13 @@ function PostCard({
 	);
 }
 
-export default function Posts({
-	searchParams
-}: {
-	searchParams: { s: string };
-}) {
-	const showCover = Boolean(Number(searchParams.s));
+export default function Posts() {
+	// 	{
+	// 	searchParams
+	// }: {
+	// 	searchParams: { s: string };
+	// 	}
+	// const showCover = searchParams ? Boolean(Number(searchParams?.s)) : false;
 	return (
 		<Container className="min-h-[50vh] mt-16">
 			<header className="max-w-2xl mb-4">
@@ -94,11 +95,9 @@ export default function Posts({
 					，偶尔也会记录 <b>其他内容</b>
 				</p>
 			</header>
-			<div
-				className={cn('grid grid-cols-1 gap-4', showCover ? 'grid-cols-2' : '')}
-			>
+			<div className={cn('grid grid-cols-1 gap-4', false ? 'grid-cols-2' : '')}>
 				{allPosts.map((post, idx) => (
-					<PostCard showCover={showCover} key={idx} post={post} />
+					<PostCard showCover={false} key={idx} post={post} />
 				))}
 			</div>
 		</Container>
