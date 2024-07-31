@@ -7,9 +7,8 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import CoverSwitch from './CoverSwitch';
-console.log(allPosts, 'allPosts');
 
-interface PostItem {
+export interface PostItem {
 	title: string;
 	date: string;
 	url: string;
@@ -17,12 +16,12 @@ interface PostItem {
 	tags: string[];
 	description: string;
 	author: string;
-	cover: string;
+	cover?: string;
 } // components/Tag.js
 
 function Tag({ children }: { children: React.ReactNode }) {
 	return (
-		<span className="inline-flex items-center px-2   rounded-full text-xs  bg-gray-300 text-gray-800">
+		<span className="inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800">
 			{children}
 		</span>
 	);
@@ -49,7 +48,7 @@ function PostCard({
 					className="bg-muted absolute left-0 top-0 rounded-md overflow-hidden"
 				>
 					<Image
-						src={post.cover}
+						src={post.cover ?? ''}
 						alt={post.title}
 						fill
 						className=" object-cover "
@@ -57,7 +56,7 @@ function PostCard({
 				</AspectRatio>
 			)}
 			<div className="px-4 py-4 rounded-sm  cursor-pointer">
-				<h2 className="mb-1 text-xl">
+				<h2 className="mb-1 text-xl font-medium">
 					<span>{post.title}</span>
 				</h2>
 				<div className="flex mt-2 justify-start  h-4 items-center space-x-4 text-sm">
@@ -81,6 +80,12 @@ export default function Posts() {
 	// 	searchParams: { s: string };
 	// 	}
 	// const showCover = searchParams ? Boolean(Number(searchParams?.s)) : false;
+	const sortedPosts = allPosts
+		.sort((a, b) => {
+			// 按照日期降序排序
+			return new Date(b.date).getTime() - new Date(a.date).getTime();
+		})
+		.slice(0, allPosts.length - 1);
 	return (
 		<Container className="min-h-[50vh] mt-16">
 			<header className="max-w-2xl mb-4">
@@ -96,7 +101,7 @@ export default function Posts() {
 				</p>
 			</header>
 			<div className={cn('grid grid-cols-1 gap-4', false ? 'grid-cols-2' : '')}>
-				{allPosts.map((post, idx) => (
+				{sortedPosts.map((post, idx) => (
 					<PostCard showCover={false} key={idx} post={post} />
 				))}
 			</div>

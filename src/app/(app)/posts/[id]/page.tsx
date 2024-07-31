@@ -1,9 +1,9 @@
-import { UTurnLeftIcon } from '@/assets';
+import { HourglassIcon, TagIcon, UTurnLeftIcon } from '@/assets';
 import { Container } from '@/components/Container';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-import { allPosts } from 'contentlayer/generated';
+import { Post, allPosts } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
@@ -29,7 +29,11 @@ export async function generateStaticParams() {
 export const generateMetadata = ({ params }: { params: TypeParams }) => {
 	const post = allPosts.find((post) => post.slug === params.id);
 	if (!post) throw new Error(`Post not found for id: ${params.id}`);
-	return { title: post.title, description: post.description };
+	return {
+		title: post.title,
+		description: post.description,
+		keywords: post.tags?.join(',')
+	};
 };
 
 const Page = ({ params }: { params: TypeParams }) => {
@@ -44,7 +48,7 @@ const Page = ({ params }: { params: TypeParams }) => {
 	// 找到上一个和下一个帖子
 	const prevPost = allPosts[postIndex - 2];
 	const nextPost = allPosts[postIndex];
-	const computeTitle = (p) => {
+	const computeTitle = (p: Post) => {
 		if (p.title.length > 20) {
 			return p.title.slice(0, 20) + '...';
 		} else {
@@ -91,7 +95,7 @@ const Page = ({ params }: { params: TypeParams }) => {
 									</AspectRatio>
 								)}
 								<h1 className="text-3xl font-bold">{post.title}</h1>
-								<div className="flex justify-center  h-5 items-center space-x-4 text-sm">
+								<div className="flex justify-center rounded-md  h-5 items-center space-x-4 text-sm">
 									<time
 										dateTime={post.date}
 										className="mb-1 text-xs text-gray-600"
@@ -99,9 +103,17 @@ const Page = ({ params }: { params: TypeParams }) => {
 										{dayjs(post.date).format('YYYY-MM-DD')}
 									</time>
 									<Separator orientation="vertical" />
-									<span className="mb-1 text-xs text-gray-600">
-										阅读时长： {Math.ceil(post.readingTime?.minutes)} 分钟
+									<span className="mb-1 text-xs text-gray-600 flex items-center">
+										<HourglassIcon className="mr-2" />{' '}
+										{Math.ceil(post.readingTime?.minutes)} 分钟
 									</span>
+								</div>
+								{/* 描述渲染 */}
+								<div className="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4">
+									<TagIcon className="absolute left-4 top-4" />
+									<p className="text-gray-700 dark:text-gray-300">
+										{post.description}
+									</p>
 								</div>
 							</div>
 

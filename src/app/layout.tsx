@@ -3,7 +3,6 @@ import { constructSiteUrl } from '@/lib';
 import { sansFont } from '@/lib/font';
 import { Viewport, type Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { ViewTransitions } from 'next-view-transitions';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 		default: siteMetadata.authorsCN
 	},
 	description: siteMetadata.description,
-	keywords: siteMetadata.keywords.join(','),
+	keywords: '%s,' + siteMetadata.keywords.join(','),
 	manifest: '/site.webmanifest',
 	robots: {
 		index: true,
@@ -47,25 +46,25 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ViewTransitions>
-			<html
-				className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
-				lang={siteMetadata.locale}
-				suppressHydrationWarning
-			>
-				<body className={inter.className}>
-					{/* @ts-ignore */}
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						{children}
-					</ThemeProvider>
-				</body>
-			</html>
-		</ViewTransitions>
+		// <ViewTransitions>
+		<html
+			className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
+			lang={siteMetadata.locale}
+			suppressHydrationWarning
+		>
+			<body className={inter.className}>
+				{/* @ts-ignore */}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
+			</body>
+		</html>
+		// </ViewTransitions>
 	);
 }
 
