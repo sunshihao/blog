@@ -1,6 +1,8 @@
 'use client';
 
+import NotFound from '@/assets/unDraw/404.svg';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function NotFoundPage() {
@@ -12,12 +14,21 @@ export default function NotFoundPage() {
 
 			<div className="pointer-events-none absolute inset-0 flex h-full w-full flex-col items-center justify-center">
 				<motion.h1
-					className="pointer-events-none select-none text-[35vmin] font-bold text-white mix-blend-overlay"
+					className="mb-10 flex flex-col justify-center items-center pointer-events-none select-none text-3xl font-bold text-black dark:text-white "
 					initial={{ opacity: 0, y: 30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.3, delay: 0.3 }}
 				>
-					404
+					<Image
+						src={NotFound}
+						alt="404 | luckySnail"
+						unoptimized
+						width={320}
+						className="mb-12"
+					/>
+					<span className="text-violet-500 dark:text-violet-300">
+						来到了未知的位置
+					</span>
 				</motion.h1>
 				<Link
 					href="/"

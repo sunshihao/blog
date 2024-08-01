@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import CoverSwitch from './CoverSwitch';
+import { Tag } from './TagItem';
 
 export interface PostItem {
 	title: string;
@@ -18,14 +19,6 @@ export interface PostItem {
 	author: string;
 	cover?: string;
 } // components/Tag.js
-
-function Tag({ children }: { children: React.ReactNode }) {
-	return (
-		<span className="inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800">
-			{children}
-		</span>
-	);
-}
 
 function PostCard({
 	post,
@@ -55,11 +48,11 @@ function PostCard({
 					/>
 				</AspectRatio>
 			)}
-			<div className="px-4 py-4 rounded-sm  cursor-pointer">
+			<div className="px-4 py-4 rounded-sm border-b-[1px] border-violet-200 sm:border-none  cursor-pointer">
 				<h2 className="mb-1 text-xl font-medium">
 					<span>{post.title}</span>
 				</h2>
-				<div className="flex mt-2 justify-start  h-4 items-center space-x-4 text-sm">
+				<div className="hidden sm:flex  flex-wrap mt-2 justify-start  items-center space-x-4 text-sm">
 					<time dateTime={post.date} className=" block text-xs text-gray-600">
 						{dayjs(post.date).format('YYYY-MM-DD')}
 					</time>

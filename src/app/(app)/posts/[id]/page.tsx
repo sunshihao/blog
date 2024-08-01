@@ -9,6 +9,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Tag } from '../TagItem';
 import Toc from '../Toc';
 
 const variantStyles = {
@@ -42,12 +43,18 @@ const Page = ({ params }: { params: TypeParams }) => {
 		postIndex++;
 		return post.slug === params.id;
 	});
+	const sortedPosts = allPosts
+		.sort((a, b) => {
+			// 按照日期降序排序
+			return new Date(b.date).getTime() - new Date(a.date).getTime();
+		})
+		.slice(0, allPosts.length - 1);
 	if (!post) notFound();
 	const MDXContent = useMDXComponent(post.body.code);
 	console.log(post.readingTime, 'post');
 	// 找到上一个和下一个帖子
-	const prevPost = allPosts[postIndex - 2];
-	const nextPost = allPosts[postIndex];
+	const prevPost = sortedPosts[postIndex - 2];
+	const nextPost = sortedPosts[postIndex];
 	const computeTitle = (p: Post) => {
 		if (p.title.length > 20) {
 			return p.title.slice(0, 20) + '...';
@@ -108,6 +115,11 @@ const Page = ({ params }: { params: TypeParams }) => {
 										{Math.ceil(post.readingTime?.minutes)} 分钟
 									</span>
 								</div>
+								<div className="flex w-full justify-center gap-2 mt-2">
+									{post.tags.map((tag) => (
+										<Tag key={tag}>{tag}</Tag>
+									))}
+								</div>
 								{/* 描述渲染 */}
 								<div className="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4">
 									<TagIcon className="absolute left-4 top-4" />
@@ -155,6 +167,7 @@ const Page = ({ params }: { params: TypeParams }) => {
 								</span>
 							)}
 						</div>
+						{/* 文章还会出现的地址 */}
 					</div>
 				</div>
 			</Container.Inner>
