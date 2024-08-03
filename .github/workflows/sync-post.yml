@@ -37,14 +37,14 @@ jobs:
           pwd
 
       - name: Install 🔧
-        run: yarn install
+        run: pnpm i
 
       # - name: Build ⛏️
-      #   run: yarn build
+      #   run: pnpm run build
 
       - name: Update blog files ⛏️
         run: |
-          yarn sync-post
+          pnpm run sync-post
           git add .
           git commit -m 'chore(ci): blog sync'
           git push
