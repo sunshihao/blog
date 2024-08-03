@@ -41,9 +41,13 @@ jobs:
         run: |
           echo '当前目录：'
           pwd
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.6.0 # 或者您想要使用的 pnpm 版本
 
       - name: Install 🔧
-        run: npm i pnpm -g && pnpm i
+        run: pnpm install
 
       # - name: Build ⛏️
       #   run: pnpm run build
