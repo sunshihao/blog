@@ -57,14 +57,8 @@ bun dev
 name: Sync Post: 定义工作流程的名称。
 on: 定义触发工作流程的事件。
 issues: 当 GitHub 仓库中发生以下事件时，触发工作流程：
-opened: 新建 issue。
-closed: 关闭 issue。
-renamed: 重命名 issue。
-labeled: 为 issue 添加标签。
-unlabeled: 从 issue 中移除标签。
-reopened: 重新打开 issue。
-committed: 修改 issue 的代码。
-1
+edited: 当 issue 标题或者内容被修改时触发。这个官方的文档没有写
+
 env: 定义工作流程的环境变量。
 GH_TOKEN: GitHub 个人访问令牌，用于访问 GitHub API。
 GH_USER: GitHub 用户名。
@@ -82,10 +76,16 @@ Update blog files ⛏️: 执行 yarn sync-post 命令同步博客文章到仓�
 
 该工作流程通过监听 GitHub 仓库中的 issue 事件来触发博客文章同步操作。当 issue 被创建、关闭、重命名、添加或移除标签、重新打开或代码被修改时，工作流程会自动执行 yarn sync-post 命令同步博客文章到仓库，并提交更改。
 
-其他说明:
+## TODO
 
-该工作流程使用了 GitHub Secrets 来存储敏感信息，例如 GitHub 个人访问令牌和用户名。
-yarn sync-post 是一个自定义的命令，需要根据项目的具体情况进行配置。
-该工作流程可以使用其他事件触发器，例如 schedule，可以定期执行博客文章同步操作。
+- [ ] 登录
+- [ ] 评论
+- [ ] 留言板
+- [ ] 搜索
+- [ ] 友链
+- sitemap.xml
+- rss
 
-## github 写帖子注意事项，不要纯数字标题
+## 注意事项
+
+- github 写帖子，不要纯数字标题
