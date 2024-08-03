@@ -9,6 +9,7 @@ on:
     types:
       - opened
       - closed
+      - edited
       - renamed
       - labeled
       - unlabeled
