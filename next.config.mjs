@@ -6,10 +6,15 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: [
-			'blog-1304565468.cos.ap-shanghai.myqcloud.com',
-			'p3-juejin.byteimg.com'
-		]
+		domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
+	},
+	webpack: (config, { isServer }) => {
+		// if (isServer) {
+		// 	require('./scripts/generate-sitemap'); // eslint-disable-line
+		// 	require('./scripts/generate-rss'); // eslint-disable-line
+		// }
+
+		return config;
 	}
 };
 

@@ -12,7 +12,7 @@ export const Post = defineDocumentType(() => ({
 
 	fields: {
 		title: { type: 'string', required: true },
-		description: { type: 'string', required: true },
+		description: { type: 'string', required: false },
 		tags: { type: 'list', of: { type: 'string' }, required: true },
 		slug: { type: 'string', required: true },
 		author: { type: 'string', required: true },
@@ -32,7 +32,9 @@ export const Post = defineDocumentType(() => ({
 }));
 
 export default makeSource({
-	contentDirPath: 'posts',
+	// contentDirPath: 'posts',
+	contentDirPath: '.',
+	contentDirInclude: ['posts', 'data/blog'],
 	documentTypes: [Post],
 	mdx: {
 		remarkPlugins: [remarkGfm],

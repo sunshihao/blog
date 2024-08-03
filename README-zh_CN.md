@@ -47,3 +47,45 @@ bun dev
 
 1. https://devv.ai/search?threadId=drssm68cp1j4
 2. https://www.npmjs.com/package/@commitlint/config-conventional
+
+## 工作流
+
+这段代码定义了一个名为“Sync Post”的 GitHub Actions 工作流程，用于自动同步博客文章到代码仓库。
+
+代码解析:
+
+name: Sync Post: 定义工作流程的名称。
+on: 定义触发工作流程的事件。
+issues: 当 GitHub 仓库中发生以下事件时，触发工作流程：
+opened: 新建 issue。
+closed: 关闭 issue。
+renamed: 重命名 issue。
+labeled: 为 issue 添加标签。
+unlabeled: 从 issue 中移除标签。
+reopened: 重新打开 issue。
+committed: 修改 issue 的代码。
+1
+env: 定义工作流程的环境变量。
+GH_TOKEN: GitHub 个人访问令牌，用于访问 GitHub API。
+GH_USER: GitHub 用户名。
+GH_PROJECT_NAME: 博客项目名称。
+jobs: 定义工作流程中的任务。
+Publish: 定义一个名为 “Publish” 的任务，用于发布博客文章。
+runs-on: 指定任务运行的环境，此处为 ubuntu-latest。
+steps: 定义任务中的步骤。
+Checkout 🛎️: 使用 actions/checkout@v2 动作将仓库代码检出到工作目录。
+Git config 🔧: 配置 Git 用户信息，以便后续提交代码。
+Display runtime info ✨: 打印当前工作目录，用于调试。
+Install 🔧: 使用 yarn 安装项目的依赖包。
+Update blog files ⛏️: 执行 yarn sync-post 命令同步博客文章到仓库，然后使用 Git 添加更改、提交更改并推送到远程仓库。
+总结:
+
+该工作流程通过监听 GitHub 仓库中的 issue 事件来触发博客文章同步操作。当 issue 被创建、关闭、重命名、添加或移除标签、重新打开或代码被修改时，工作流程会自动执行 yarn sync-post 命令同步博客文章到仓库，并提交更改。
+
+其他说明:
+
+该工作流程使用了 GitHub Secrets 来存储敏感信息，例如 GitHub 个人访问令牌和用户名。
+yarn sync-post 是一个自定义的命令，需要根据项目的具体情况进行配置。
+该工作流程可以使用其他事件触发器，例如 schedule，可以定期执行博客文章同步操作。
+
+## github 写帖子注意事项，不要纯数字标题
