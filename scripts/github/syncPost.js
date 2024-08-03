@@ -42,7 +42,7 @@ tags: ${JSON.stringify(labels.map((item) => item.name))}
 ${closeImgTag(body.replace(/<br \/>/g, '\n'))}
 
 ---
-本人自动发布于：[${html_url}](${html_url})
+此文自动发布于：<a href="${html_url}" target="_blank">github issues</a>
 `;
 }
 
@@ -59,13 +59,6 @@ function main() {
 				try {
 					const fileName = `post-${item.number}`;
 					const content = generateMdx(item, fileName);
-					/* const tempFileName = item.title?.trim().replace(/\//g, '&').replace(/、/g, '-').replace(/ - /g, '-').replace(/\s/g, '-')
-        const result = pinyin(tempFileName, {
-          style: 0,
-        })
-        const fileName = _.flatten(result).join('') */
-					// 文件名换成issue number
-
 					fs.writeFileSync(`${filePath}/${fileName}.mdx`, content);
 					console.log(`${filePath}/${fileName}.mdx`, 'success');
 					successCount++;

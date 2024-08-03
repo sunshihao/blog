@@ -121,12 +121,14 @@ const Page = ({ params }: { params: TypeParams }) => {
 									))}
 								</div>
 								{/* 描述渲染 */}
-								<div className="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4">
-									<TagIcon className="absolute left-4 top-4" />
-									<p className="text-gray-700 dark:text-gray-300">
-										{post.description}
-									</p>
-								</div>
+								{post.description && (
+									<div className="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4">
+										<TagIcon className="absolute left-4 top-4" />
+										<p className="text-gray-700 dark:text-gray-300">
+											{post.description}
+										</p>
+									</div>
+								)}
 							</div>
 
 							<div className="js-toc-content">

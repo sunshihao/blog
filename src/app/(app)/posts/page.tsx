@@ -52,11 +52,11 @@ function PostCard({
 				<h2 className="mb-1 text-xl font-medium">
 					<span>{post.title}</span>
 				</h2>
-				<div className="hidden sm:flex  flex-wrap mt-2 justify-start  items-center space-x-4 text-sm">
+				<div className="hidden sm:flex flex-wrap mt-2 justify-start  items-center space-x-4 text-sm">
 					<time dateTime={post.date} className=" block text-xs text-gray-600">
 						{dayjs(post.date).format('YYYY-MM-DD')}
 					</time>
-					<Separator orientation="vertical" />
+					<Separator orientation="vertical" className="h-5" />
 					{post.tags.map((tag) => (
 						<Tag key={tag}>{tag}</Tag>
 					))}
