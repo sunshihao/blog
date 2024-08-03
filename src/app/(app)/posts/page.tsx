@@ -2,7 +2,7 @@ import { Container } from '@/components/Container';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-import { allPosts } from 'contentlayer/generated';
+import { allPosts, type Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,13 +20,7 @@ export interface PostItem {
 	cover?: string;
 } // components/Tag.js
 
-function PostCard({
-	post,
-	showCover
-}: {
-	post: PostItem;
-	showCover?: boolean;
-}) {
+function PostCard({ post, showCover }: { post: Post; showCover?: boolean }) {
 	return (
 		<Link
 			href={`/posts/${post.slug}`}

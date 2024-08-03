@@ -3,7 +3,7 @@ import { Container } from '@/components/Container';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-import { Post, allPosts } from 'contentlayer/generated';
+import { allPosts, type Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { useMDXComponent } from 'next-contentlayer/hooks';
 import Image from 'next/image';
