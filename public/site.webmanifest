@@ -1,6 +1,8 @@
 {
-	"name": "",
-	"short_name": "",
+	"name": "luckySnail",
+	"short_name": "luckySnail",
+	"description": "基于 github issues 的 个人 blog",
+	"start_url": "/",
 	"icons": [
 		{
 			"src": "/logo.png",

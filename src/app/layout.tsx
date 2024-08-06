@@ -17,17 +17,6 @@ export const metadata: Metadata = {
 	description: siteMetadata.description,
 	keywords: '%s,' + siteMetadata.keywords.join(','),
 	manifest: '/site.webmanifest',
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
-			index: true,
-			follow: true,
-			'max-video-preview': -1,
-			'max-image-preview': 'large',
-			'max-snippet': -1
-		}
-	},
 	openGraph: siteMetadata.openGraph,
 	twitter: siteMetadata.twitter,
 	alternates: {
