@@ -1,3 +1,5 @@
+import BaiDuAnalytics from '@/components/BaiDuAnalytics';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
 import { sansFont } from '@/lib/font';
@@ -42,6 +44,8 @@ export default function RootLayout({
 			suppressHydrationWarning
 		>
 			<body className={inter.className}>
+				<GoogleAnalytics />
+				<BaiDuAnalytics />
 				{/* @ts-ignore */}
 				<ThemeProvider
 					attribute="class"
