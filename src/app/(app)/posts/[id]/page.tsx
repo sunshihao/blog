@@ -1,5 +1,6 @@
 import { HourglassIcon, TagIcon, UTurnLeftIcon } from '@/assets';
 import { Container } from '@/components/Container';
+import MDXComponents from '@/components/MDXComponents';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
@@ -132,7 +133,8 @@ const Page = ({ params }: { params: TypeParams }) => {
 							</div>
 
 							<div className="js-toc-content">
-								<MDXContent />
+								{/* @ts-ignore */}
+								<MDXContent components={MDXComponents} />
 							</div>
 						</article>
 						{/* 上一个，下一个功能 */}

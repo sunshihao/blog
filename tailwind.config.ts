@@ -106,6 +106,7 @@ const config = {
 
 					// Inline elements
 					a: {
+						wordBreak: 'break-word',
 						color: 'var(--tw-prose-links)',
 						fontWeight: theme('fontWeight.semibold'),
 						textDecoration: 'underline',

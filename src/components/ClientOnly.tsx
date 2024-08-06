@@ -9,7 +9,7 @@ export function ClientOnly({ children }: { children: React.ReactNode }) {
 		setIsMounted(true);
 	}, []);
 
-	if (!isMounted) return null;
+	if (!isMounted) return <></>;
 
 	return children;
 }

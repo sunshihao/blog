@@ -45,6 +45,7 @@
 		"node-cron": "^3.0.3",
 		"react": "^18",
 		"react-dom": "^18",
+		"react-medium-image-zoom": "^5.2.8",
 		"react-wrap-balancer": "^1.1.1",
 		"reading-time": "^1.5.0",
 		"rehype-autolink-headings": "^7.1.0",

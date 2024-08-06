@@ -40,8 +40,10 @@ export function ThemeToggle() {
 				className="w-16 h-8 px-1"
 			>
 				<motion.div
-					// className=" rounded-full shadow-lg"
-					layout
+					initial={{ x: -20, opacity: 0 }}
+					animate={{ x: 0, opacity: 1 }}
+					exit={{ x: 20, opacity: 0 }}
+					// layout
 					transition={spring}
 				>
 					{theme === 'dark' ? (
@@ -58,6 +60,6 @@ export function ThemeToggle() {
 
 const spring = {
 	type: 'spring',
-	stiffness: 800,
-	damping: 60
+	stiffness: 900,
+	damping: 80
 };
