@@ -6,7 +6,9 @@ const matter = require('gray-matter');
 
 async function generate() {
 	const feed = new RSS({
-		title: 'Lucky Snail',
+		title: '幸运的蜗牛',
+		description:
+			'我是幸运的蜗牛，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运',
 		site_url: 'https://luckysnail.cn',
 		feed_url: 'https://luckysnail.cn/feed.xml'
 	});
@@ -31,15 +33,13 @@ async function generate() {
 	const flattenedPosts = allPosts.flat();
 	console.log(flattenedPosts, 'flattenedPosts');
 	await Promise.all(
-		flattenedPosts.map(async (name) => {
-			const content = await fs.readFile(
-				path.join(__dirname, '..', 'data', 'blog', name)
-			);
+		flattenedPosts.map(async ({ file, folder }) => {
+			const content = await fs.readFile(path.join(folder, file));
 			const frontmatter = matter(content);
 
 			feed.item({
 				title: frontmatter.data.title,
-				url: 'https://luckysnail.cn/posts/' + name.replace(/\.mdx?/, ''),
+				url: 'https://luckysnail.cn/posts/' + file.replace(/\.mdx?/, ''),
 				date: frontmatter.data.publishedAt,
 				description: frontmatter.data.summary
 			});
@@ -49,4 +49,5 @@ async function generate() {
 	await fs.writeFile('./public/feed.xml', feed.xml({ indent: true }));
 }
 
-generate();
+// generate();
+module.exports = generate;
