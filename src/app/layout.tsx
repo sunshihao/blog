@@ -26,6 +26,9 @@ export const metadata: Metadata = {
 		types: {
 			'application/rss+xml': [{ url: 'rss', title: 'RSS 订阅' }]
 		}
+	},
+	other: {
+		'baidu-site-verification': 'codeva-7AmpPWgzQY'
 	}
 };
 export const viewport: Viewport = {
