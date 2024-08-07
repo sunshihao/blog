@@ -79,13 +79,14 @@ Update blog files ⛏️: 执行 yarn sync-post 命令同步博客文章到仓�
 ## TODO
 
 - [x] sitemap.xml
-- [ ] rss
+- [x] rss
 - [ ] 友链
 - [ ] 登录
 - [ ] 评论
 - [ ] 留言板
 - [ ] 搜索
-- [ ] 头像转圈圈，仿掘金
+- [x] 头像转圈圈，仿掘金
+- [ ] 收藏夹
 
 ## 注意事项
 

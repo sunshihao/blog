@@ -200,7 +200,7 @@ export function Header() {
 										</motion.div>
 
 										<motion.div
-											className="block h-16 w-16 origin-left"
+											className="block h-16 w-16 origin-left "
 											style={{
 												transform: avatarTransform
 											}}
@@ -208,7 +208,7 @@ export function Header() {
 											<Avatar.Image
 												large
 												alt={isShowingAltAvatar}
-												className="block h-full w-full"
+												className="block h-full w-full hover:animate-spin"
 											/>
 										</motion.div>
 									</motion.div>
