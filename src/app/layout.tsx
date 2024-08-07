@@ -28,7 +28,8 @@ export const metadata: Metadata = {
 		}
 	},
 	other: {
-		'baidu-site-verification': 'codeva-7AmpPWgzQY'
+		'baidu-site-verification': 'codeva-7AmpPWgzQY',
+		'google-site-verification': 'TTbfOvWmLj0icfk0BQNUZB3crwReji82Q_vRdnZFFAc'
 	}
 };
 export const viewport: Viewport = {
