@@ -77,7 +77,8 @@ const config = {
 						color: theme('colors.red.500'),
 						padding: theme('spacing.1'),
 						borderRadius: theme('borderRadius.sm'),
-						fontWeight: theme('fontWeight.medium')
+						fontWeight: theme('fontWeight.medium'),
+						wordBreak: 'break-all'
 					},
 					'code::before': {
 						content: '""'
@@ -158,12 +159,32 @@ const config = {
 
 					// Quotes
 					blockquote: {
-						paddingLeft: theme('spacing.6'),
-						borderLeftWidth: theme('borderWidth.2'),
-						borderLeftColor: 'var(--tw-prose-quote-borders)',
-						fontStyle: 'italic'
+						borderLeft: '4px solid #8b5cf6', // 紫色边框
+						backgroundColor: '#f5f3ff', // 浅紫色背景
+						padding: '1rem 1.5rem',
+						margin: '1.5rem 0',
+						borderRadius: '0.375rem', // 圆角
+						boxShadow:
+							'0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)', // 轻微阴影
+						fontStyle: 'italic',
+						color: '#4c1d95', // 深紫色文字
+						'& p:first-of-type::before': {
+							content: '"\u201C"', // 左引号
+							fontSize: '2em',
+							lineHeight: '0.1em',
+							marginRight: '0.25em',
+							verticalAlign: '-0.4em',
+							color: '#8b5cf6' // 紫色引号
+						},
+						'& p:last-of-type::after': {
+							content: '"\u201D"', // 右引号
+							fontSize: '2em',
+							lineHeight: '0.1em',
+							marginLeft: '0.25em',
+							verticalAlign: '-0.4em',
+							color: '#8b5cf6' // 紫色引号
+						}
 					},
-
 					// Figures
 					figcaption: {
 						color: 'var(--tw-prose-captions)',
@@ -311,62 +332,10 @@ const config = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				}
-			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
-			},
-			keyframes: {
-				'accordion-down': {
-					from: { height: '0' },
-					to: { height: 'var(--radix-accordion-content-height)' }
-				},
-				'accordion-up': {
-					from: { height: 'var(--radix-accordion-content-height)' },
-					to: { height: '0' }
-				}
-			},
-			extend: {
-				aspectRatio: {
-					'4/3': '4 / 3'
-				}
-			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
-	safelist: [
-		{
-			pattern:
-				/^(bg-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(text-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(border-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
-			variants: ['hover', 'ui-selected']
-		},
-		{
-			pattern:
-				/^(ring-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		},
-		{
-			pattern:
-				/^(stroke-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		},
-		{
-			pattern:
-				/^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/
-		}
-	],
+
 	plugins: [
 		require('tailwindcss-animate'),
 		require('@tailwindcss/forms'),
