@@ -22,7 +22,7 @@ tags: ["blog","教程"]
 
 还有一个原因就是，我平时在逛网站的时候，发现很多大佬都有自己的 blog
 
-本来我是想要直接修改开源的 blog （https://cali.so/），fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的问题，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多我不需要，我就下定决定要做一个自己的 blog
+本来我是想要直接修改开源的` blog （https://cali.so/）` ，fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的问题，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多我不需要，我就下定决定要做一个自己的 blog
 
 ## 需求梳理
 
@@ -73,7 +73,7 @@ tags: ["blog","教程"]
 
 ## 技术栈
 
-我是先做了一个基础干净的 [[Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
+我是先做了一个基础干净的 [Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
 
 - Next.js：react 框架
 - shadcn/ui ：UI 库
@@ -91,7 +91,7 @@ tags: ["blog","教程"]
 
 ## 项目简介
 
-由于没有任何调用接口的需求，我目前就把项目做成了[[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
+由于没有任何调用接口的需求，我目前就把项目做成了[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) 的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
 
 1. Vercel 提供了与 GitHub 的无缝集成，只需将项目链接到 Vercel，每次推送到 GitHub 仓库时，Vercel 都会自动构建和部署最新的代码。自动化流程大大简化了部署过程，确保每次提交的代码都能自动构建发布
 2. Vercel 使用全球内容分发网络（CDN）来加速静态资源的加载。无论用户身处何地，都可以快速访问网站内容，提升用户体验和网站性能
@@ -111,7 +111,7 @@ tags: ["blog","教程"]
 6. 去 package.json 修改一些包的信息为你自己的 
 7. 去 public 和 assests 把一些静态资源替换为你自己的
 
-做完这些，你就得到了一个你自己的 blog ，现在就可以 push 代码，然后登录 vercel 部署你的 blog 了，部署其实非常简单，但是最好在本地先部署并运行看一下，看看是否可以成功。vercel 部署可以参考：https://juejin.cn/post/7143067114025254919。部署好了之后我们应该可以看到类似这样
+做完这些，你就得到了一个你自己的 blog ，现在就可以 push 代码，然后登录 vercel 部署你的 blog 了，部署其实非常简单，但是最好在本地先部署并运行看一下，看看是否可以成功。vercel 部署可以参考：`https://juejin.cn/post/7143067114025254919` 。部署好了之后我们应该可以看到类似这样
 
 ![image-20240808090833701](https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/image-20240808090833701.png)
 
@@ -131,9 +131,9 @@ tags: ["blog","教程"]
 
 ## 感谢
 
-其实自己开发之前我尝试了很多现成的 blog 方案，因为自己从 0 到 1 开发，需要做很多工作。但是发现现成的方案都部署很适合我。在我开发这个 blog 的时候，我参考了很多我觉得不错的 blog。下面是我参考的和看过源码的 blog
+其实自己开发之前我尝试了很多现成的 blog 方案，因为自己从 0 到 1 开发，需要做很多工作。但是发现现成的方案都不是很适合我。在我开发这个 blog 的时候，我参考了很多我觉得不错的 blog。下面是我参考的和看过源码的 blog
 
-- 在设计和 UI 上，我“抄”了很多：https://cali.so/。这是一个开源的 blog（我的也开源啦）
+- 在设计和 UI 上，我“抄”了很多：`https://cali.so/` 。这是一个开源的 blog（我的也开源啦）
 - https://www.giscafer.com/
 - https://innei.in/
 - https://fuxiaochen.com/
