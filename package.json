@@ -1,5 +1,16 @@
 {
 	"name": "lucky-snail-blog",
+	"description": "基于 Next.js + tailwindcss + framer motion + contentlayer + github actions + github issues 的个人博客",
+	"keywords": [
+		"luckySnail",
+		"nextjs",
+		"tailwindcss",
+		"framer motion",
+		"contentlayer",
+		"github actions",
+		"github issues",
+		"blog"
+	],
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
