@@ -72,6 +72,32 @@ const config = {
 						marginTop: theme('spacing.10'),
 						marginBottom: theme('spacing.10')
 					},
+					code: {
+						backgroundColor: theme('colors.gray.100'),
+						color: theme('colors.red.500'),
+						padding: theme('spacing.1'),
+						borderRadius: theme('borderRadius.sm'),
+						fontWeight: theme('fontWeight.medium')
+					},
+					'code::before': {
+						content: '""'
+					},
+					'code::after': {
+						content: '""'
+					},
+					pre: {
+						backgroundColor: theme('colors.gray.900'),
+						color: theme('colors.white'),
+						padding: theme('spacing.4'),
+						borderRadius: theme('borderRadius.md'),
+						overflowX: 'auto'
+					},
+					'pre code': {
+						backgroundColor: 'transparent',
+						padding: 0,
+						color: 'inherit',
+						fontWeight: 'inherit'
+					},
 					p: {
 						marginTop: theme('spacing.4'),
 						marginBottom: theme('spacing.4')
