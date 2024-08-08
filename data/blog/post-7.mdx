@@ -22,7 +22,7 @@ tags: ["blog","教程"]
 
 受到许多技术大佬个人博客的启发，加上我最近在学习Next.js（冴羽的 Next.js 掘金小册），我决定从零开始打造一个属于自己的博客系统。
 
-这次开发之前，我是想要直接修改开源的` blog （https://cali.so/）` ，fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的点，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多是我不需要的，综合考虑就下定决定要做一个自己的 博客
+这次开发之前，我是想要直接修改开源的 blog （`https://cali.so/` ），fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的点，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多是我不需要的，综合考虑就下定决定要做一个自己的 博客
 
 ## 需求梳理
 
@@ -79,7 +79,7 @@ tags: ["blog","教程"]
 
 ## 技术栈
 
-我是先做了一个基础干净的 [[Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
+我是先做了一个基础干净的 [Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
 
 - Next.js：react 框架
 - shadcn/ui ：UI 库
@@ -97,7 +97,7 @@ tags: ["blog","教程"]
 
 ## 项目简介
 
-由于没有任何调用接口的需求，我目前就把项目做成了[[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) 的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
+由于没有任何调用接口的需求，我目前就把项目做成了[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
 
 1. Vercel 提供了与 GitHub 的无缝集成，只需将项目链接到 Vercel，每次推送到 GitHub 仓库时，Vercel 都会自动构建和部署最新的代码。自动化流程大大简化了部署过程，确保每次提交的代码都能自动构建发布
 2. Vercel 使用全球内容分发网络（CDN）来加速静态资源的加载。无论用户身处何地，都可以快速访问网站内容，提升用户体验和网站性能
