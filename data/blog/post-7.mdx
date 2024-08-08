@@ -1,32 +1,38 @@
 ---
-title: 基于Next.js + Github issues 的个人 blog
+title: 如何使用Next.js和GitHub Issues构建个人博客:从零到上线的完整指南
 date: 2024-08-08T01:33:41Z
 slug: post-7
 author: chaseFunny：https://github.com/chaseFunny
 tags: ["blog","教程"]
 ---
 
-# 基于Next.js + Github issues 的个人 blog
+> 本文详细介绍了如何使用Next.js、GitHub Issues和Vercel从零开始构建并部署个人博客。包含技术栈选择、需求分析、开发过程和部署步骤等完整指南。
 
-大家好，我是幸运的蜗牛，不知道大家是否有自己的 blog，或者想要做一个自己的 blog。我觉得有一个自己的 blog 还是很酷的事情，下面看我是如何从 0 到 1 实现我的个人 blog，先给大家看一下 blog 首页效果
+大家好，我是幸运的蜗牛，今天来分享我最近从 0 到 1 开发的 个人blog，
+
+幸运的蜗牛的博客：https://www.luckysnail.cn/
+
+不知道大家是否有自己的 blog，或者想要做一个自己的 blog。我觉得有一个自己的 blog 还是很酷的事情，下面看我是如何从 0 到 1 实现个人 blog，先给大家看一下 blog 首页效果图
 
 ![image-20240808012907019](https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/image-20240808012907019.png)
 
 ## 背景
 
-我也经常在 CSDN，掘金，微信公众号等一些自媒体平台发布文章，这些其实也可以算是个人 blog ，而且自带流量，对乐意分享的人来说，是非常有好的，但是在这些平台分享的时候，我就更想做一个自己的平台，来发布我写的文章，
+虽然我经常在CSDN、掘金和微信公众号等平台发布文章，其实这些平台编辑体验很好 ，而且自带流量，对乐意分享的人来说，是非常有好的，但我一直希望能够拥有一个完全属于自己的博客平台。之前我尝试过使用Hexo、Docusaurus 和基于其他项目（`https://giscafer.com/`） Next.js 博客方案，但都不能完全满足我的需求。
 
-我其实已经使用很多技术做个人 blog 了，例如：hexo，docusaurus，next.js （基于`https://giscafer.com/` ）；
+受到许多技术大佬个人博客的启发，加上我最近在学习Next.js（冴羽的 Next.js 掘金小册），我决定从零开始打造一个属于自己的博客系统。
 
-但是都不是我想要的，我更希望自己从 0 到 1 做一个个人 blog 网站。刚好我在看冴羽的 Next.js 小册，想着实践一下学习的知识，我就决定开发自己的 blog
-
-还有一个原因就是，我平时在逛网站的时候，发现很多大佬都有自己的 blog
-
-本来我是想要直接修改开源的` blog （https://cali.so/）` ，fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的问题，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多我不需要，我就下定决定要做一个自己的 blog
+这次开发之前，我是想要直接修改开源的` blog （https://cali.so/）` ，fork 这个项目来进行二创，我也是这样做的，我都改了很多东西了，但是一个非常难受的点，就是它使用的都是国外的服务，尤其是 sanity ，我本地连接会经常连不上，非常影响开发体验，而且它的源码，很多是我不需要的，综合考虑就下定决定要做一个自己的 博客
 
 ## 需求梳理
 
-确定要自己开发了，就需要梳理一下我需要做一个什么样子的 blog 。blog 核心就是文章。那么**就需要解决文章如何增删改查**。由于我对 MySQL 不熟，而且我也不希望在 Next.js 中自己开发后端，于是就想着 使用 Github issues 来存储帖子数据，使用 github actions 来监听 issues 变化，把 issues 转为文章，然后把项目部署在 vercel ，vercel 可以自动监听代码仓库是否变化进行重新部署。
+确定要自己开发了，就需要梳理一下我需要做一个什么样子的 blog 。blog 核心就是文章。那么**就需要解决文章如何增删改查**。由于我对 MySQL 不熟，而且我也不希望在 Next.js 中开发后端，我选择了使用 GitHub Issues 来存储文章数据。整个工作流程如下：
+
+1. 使用 GitHub Issues 管理文章
+2. 通过 GitHub Actions 监听 Issues 变化
+3. 将 Issues 转换为文章内容
+4. 部署项目到 Vercel
+5. Vercel 自动监测代码仓库变化并重新部署
 
 有了核心功能思路，就可以开始需求排期，
 
@@ -59,7 +65,7 @@ tags: ["blog","教程"]
 
 - [x] 添加 github actions ，实现 提交 issues ，转为帖子
 
-- [x] 添加百度验证，谷歌验证，百度分析，谷歌分析
+- [x] 添加百度和谷歌的验证、分析功能
 
 - [x] 支持 RSS ，Robots，sitemap.xml
 
@@ -73,7 +79,7 @@ tags: ["blog","教程"]
 
 ## 技术栈
 
-我是先做了一个基础干净的 [Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
+我是先做了一个基础干净的 [[Next.js 启动项目](https://github.com/axin-s-Template/Nextjs-Boilerplate)](https://github.com/axin-s-Template/Nextjs-Boilerplate)，下面来看看我这个项目使用了哪些技术吧！
 
 - Next.js：react 框架
 - shadcn/ui ：UI 库
@@ -91,7 +97,7 @@ tags: ["blog","教程"]
 
 ## 项目简介
 
-由于没有任何调用接口的需求，我目前就把项目做成了[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) 的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
+由于没有任何调用接口的需求，我目前就把项目做成了[[静态导出](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)](https://nextjs.org/docs/app/building-your-application/deploying/static-exports) 的，也就是说我们其实构建后的是一个静态网站。然后我目前是在 vercel 部署我的 blog，它有很多好处：
 
 1. Vercel 提供了与 GitHub 的无缝集成，只需将项目链接到 Vercel，每次推送到 GitHub 仓库时，Vercel 都会自动构建和部署最新的代码。自动化流程大大简化了部署过程，确保每次提交的代码都能自动构建发布
 2. Vercel 使用全球内容分发网络（CDN）来加速静态资源的加载。无论用户身处何地，都可以快速访问网站内容，提升用户体验和网站性能
@@ -131,9 +137,9 @@ tags: ["blog","教程"]
 
 ## 感谢
 
-其实自己开发之前我尝试了很多现成的 blog 方案，因为自己从 0 到 1 开发，需要做很多工作。但是发现现成的方案都不是很适合我。在我开发这个 blog 的时候，我参考了很多我觉得不错的 blog。下面是我参考的和看过源码的 blog
+通过这个项目，我不仅实现了自己的博客系统，还深入学习了 Next.js、GitHub Actions 和 Vercel 部署等技术。希望这篇文章能够帮助到想要搭建个人博客的朋友们。在我开发这个 blog 的时候，我参考了很多我觉得不错的 blog。下面是我参考的和看过源码的 blog
 
-- 在设计和 UI 上，我“抄”了很多：`https://cali.so/` 。这是一个开源的 blog（我的也开源啦）
+- 在设计和 UI 上，很多都是参考了：`https://cali.so/` 。这是一个开源的 blog（我的也开源啦）
 - https://www.giscafer.com/
 - https://innei.in/
 - https://fuxiaochen.com/
