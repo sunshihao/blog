@@ -1,4 +1,4 @@
-这是一个使用 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 引导创建的 [Next.js](https://nextjs.org/) 项目。
+这是一个使用 [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) 引导创建的 [Next.js](https://nextjs.org/) 项目。项目更多信息：https://blog-luckysnails-projects.vercel.app/posts/post-7
 
 ## 开始使用
 
