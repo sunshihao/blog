@@ -63,7 +63,7 @@ export function Footer() {
 					<Link
 						target="_blank"
 						href="https://beian.miit.gov.cn/"
-						className="absolute w-full bottom-6 left-1/2 -translate-x-1/2 flex justify-center items-center"
+						className="absolute text-blue-600 w-full bottom-6 left-1/2 -translate-x-1/2 flex justify-center items-center"
 					>
 						<Image
 							unoptimized
@@ -71,7 +71,7 @@ export function Footer() {
 							width={18}
 							height={18}
 							alt="备案"
-							className="mr-1 text-blue-600"
+							className="mr-1 "
 						/>
 						浙ICP备2021039023号-3
 					</Link>
