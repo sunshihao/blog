@@ -35,16 +35,16 @@ const DropdownNavItem = ({
 					{children}
 				</NavigationMenuTrigger>
 				<NavigationMenuContent>
-					{siteMetadata.moreItems[href] &&
-						siteMetadata.moreItems[href]?.map((item) => (
-							<Link
-								key={item.href}
-								className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
-								href={item.href}
-							>
-								{item.text}
-							</Link>
-						))}
+					{siteMetadata.moreItems[href]?.map((item) => (
+						<Link
+							prefetch
+							key={item.href}
+							className="group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 data-[focus]:bg-white/10"
+							href={item.href}
+						>
+							{item.text}
+						</Link>
+					))}
 				</NavigationMenuContent>
 			</NavigationMenuItem>
 		</NavigationMenuList>
@@ -93,7 +93,11 @@ function NavItem({
 					</>
 				</DropdownNavItem>
 			) : (
-				<Link href={href}>
+				<Link
+					href={href}
+					prefetch
+					target={href === '/feed.xml' ? '_blank' : '_self'}
+				>
 					{children}
 					{isActive && <ActiveBox />}
 				</Link>
