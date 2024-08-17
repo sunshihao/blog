@@ -11,7 +11,7 @@ const baseSiteConfig: SiteConfig = {
 		'我是幸运的蜗牛，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运',
 	url: url.href, //'https://luckysnail.cn/',
 	// 网站预览图
-	ogImage: '',
+	ogImage: url.origin + '/og.png',
 	// https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadatabase
 	metadataBase: '/',
 	keywords: [

@@ -1,5 +1,6 @@
 import { PeekabooLink } from '@/components/links/PeekabooLink';
 import siteMetadata from '@/config/site';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Container } from './Container';
@@ -59,6 +60,21 @@ export function Footer() {
 							欢迎 👏🏻 你的访问
 						</div>
 					</Container.Inner>
+					<Link
+						target="_blank"
+						href="https://beian.miit.gov.cn/"
+						className="absolute text-blue-600 w-full bottom-6 left-1/2 -translate-x-1/2 flex justify-center items-center"
+					>
+						<Image
+							unoptimized
+							src={'/police.png'}
+							width={18}
+							height={18}
+							alt="备案"
+							className="mr-1 "
+						/>
+						浙ICP备2021039023号-3
+					</Link>
 				</div>
 			</Container.Outer>
 		</footer>

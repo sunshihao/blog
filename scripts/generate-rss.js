@@ -31,7 +31,6 @@ async function generate() {
 
 	// 扁平化文件列表
 	const flattenedPosts = allPosts.flat();
-	console.log(flattenedPosts, 'flattenedPosts');
 	await Promise.all(
 		flattenedPosts.map(async ({ file, folder }) => {
 			const content = await fs.readFile(path.join(folder, file));
