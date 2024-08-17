@@ -35,10 +35,11 @@ function PostCard({ post, showCover }: { post: Post; showCover?: boolean }) {
 					className="bg-muted absolute left-0 top-0 rounded-md overflow-hidden"
 				>
 					<Image
+						unoptimized
 						src={post.cover ?? ''}
 						alt={post.title}
 						fill
-						className=" object-cover "
+						className=" object-cover"
 					/>
 				</AspectRatio>
 			)}

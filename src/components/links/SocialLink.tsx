@@ -70,7 +70,7 @@ const PictureDialog = ({
 					<Image
 						src={picMap[href] as StaticImageData}
 						alt={platform ?? siteMetadata.authorsCN}
-						className="≈"
+						unoptimized
 						placeholder="blur"
 						blurDataURL={makeBlurDataURL(16, 16)}
 						style={{
