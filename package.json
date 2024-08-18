@@ -23,7 +23,8 @@
 		"lint": "eslint --ext .ts,.js,.jsx,.tsx --fix . ",
 		"lint-staged": "lint-staged",
 		"sync-post": "node ./scripts/sync-post.js",
-		"generate-rss": "node ./scripts/generate-rss.js"
+		"generate-rss": "node ./scripts/generate-rss.js",
+		"serve": "serve -s out"
 	},
 	"dependencies": {
 		"@radix-ui/react-aspect-ratio": "^1.1.0",
