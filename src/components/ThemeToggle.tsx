@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 import { ThemeSwitcher } from 'theme-toggle-animation';
 import { Toaster } from './ui/sonner';
-const DURATION = 300;
+const DURATION = 500;
 // 创建 ThemeSwitcher 实例
 const themeSwitcher = new ThemeSwitcher({
 	customHtmlStyles: true,
@@ -14,6 +14,7 @@ const themeSwitcher = new ThemeSwitcher({
 	duration: DURATION
 });
 export function ThemeToggle() {
+	const eventRef = useRef<AnyIfEmpty>(null);
 	const [mounted, setMounted] = useState(false);
 	const { theme, setTheme }: AnyIfEmpty = useTheme();
 	const toggleRef = useRef<AnyIfEmpty>(null);
@@ -55,19 +56,19 @@ export function ThemeToggle() {
 	if (!mounted) {
 		return null;
 	}
-	const handleThemeChange = (event: React.MouseEvent & AnyIfEmpty) => {
+	const handleThemeChange = () => {
 		const newTheme = theme === 'dark' ? 'light' : 'dark';
-		themeSwitcher.toggleTheme(event);
+		themeSwitcher.toggleTheme(eventRef.current);
 		setTimeout(() => {
 			setTheme(newTheme);
-		}, DURATION);
+		});
 	};
 	return (
 		<div className="flex items-center space-x-2">
 			<Switch
 				ref={toggleRef}
 				id="theme-toggle"
-				// onClick={handleThemeChange}
+				onClick={(event) => (eventRef.current = event)}
 				checked={theme === 'dark'}
 				onCheckedChange={handleThemeChange}
 				className="w-16 h-8 px-1"
