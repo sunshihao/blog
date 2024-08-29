@@ -165,7 +165,7 @@ function MobileNavItem({
 }>) {
 	return (
 		<li onClick={onClose}>
-			<Link href={href} className="block py-2">
+			<Link href={href} prefetch={true} className="block py-2">
 				{children}
 			</Link>
 		</li>
