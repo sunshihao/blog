@@ -58,7 +58,12 @@
 		--chart-5: 340 75% 55%;
 	}
 }
-
+/* 切换主题动画 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 @layer base {
 	* {
 		@apply border-border;

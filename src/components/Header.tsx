@@ -20,7 +20,12 @@ import React from 'react';
 import { Avatar } from './Avatar';
 import { Container } from './Container';
 import { NavigationBar } from './NavigationBar';
-import { ThemeToggle } from './ThemeToggle';
+// import { ThemeToggle } from './ThemeToggle';
+import dynamic from 'next/dynamic';
+
+const ThemeToggle = dynamic(() => import('./ThemeToggle'), {
+	ssr: false
+});
 export function Header() {
 	const isHomePage = usePathname() === '/';
 
