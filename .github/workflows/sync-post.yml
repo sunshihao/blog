@@ -57,4 +57,9 @@ jobs:
           pnpm run sync-post
           git add .
           git commit -m 'chore(ci): blog sync'
-          git push
+
+      - name: Pull latest changes from remote
+        run: git pull --rebase origin main
+
+      - name: Push changes to remote
+        run: git push
