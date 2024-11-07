@@ -3,6 +3,7 @@ import { Container } from '@/components/Container';
 import MDXComponents from '@/components/MDXComponents';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Separator } from '@/components/ui/separator';
+import siteMetadata from '@/config/site';
 import { cn } from '@/lib/utils';
 import { allPosts, type Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
@@ -31,9 +32,20 @@ export async function generateStaticParams() {
 export const generateMetadata = ({ params }: { params: TypeParams }) => {
 	const post = allPosts.find((post) => post.slug === params.id);
 	if (!post) throw new Error(`Post not found for id: ${params.id}`);
+	const title = post.title;
+	const description =
+		post.description ?? post.title + ' - ' + siteMetadata.authors;
 	return {
-		title: post.title,
-		description: post.description,
+		title,
+		description,
+		openGraph: {
+			title,
+			description
+		},
+		titter: {
+			title,
+			description
+		},
 		keywords: post.tags?.join(',')
 	};
 };

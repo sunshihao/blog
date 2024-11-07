@@ -19,7 +19,7 @@ const title = '我的项目';
 const description =
 	'我在工作和自己学习过程中开发的一些项目，主要是前端领域，包括的技术有：' +
 	technologyList.join(',') +
-	'等等。';
+	'等现代技术栈实践。这里汇集了企业级应用、响应式网站和创新性Web解决方案。了解我的技术实力与项目经验。';
 export const metadata = {
 	title,
 	description,

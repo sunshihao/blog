@@ -6,7 +6,21 @@ import { notFound } from 'next/navigation';
 export const generateMetadata = () => {
 	const post = allPosts.find((post) => post.slug === 'about');
 	if (!post) throw new Error(`Post not found for `);
-	return { title: post.title, description: post.description };
+	const title = post.title;
+	const description = post.description;
+	return {
+		title,
+		description,
+		openGraph: {
+			title,
+			description
+		},
+		twitter: {
+			title,
+			description,
+			card: 'summary_large_image'
+		}
+	};
 };
 
 const AboutPage = () => {
