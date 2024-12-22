@@ -2,12 +2,29 @@ import codeCopyIcon from '@/assets/products/codecopy.png';
 import resumeIcon from '@/assets/products/resume.png';
 import React from 'react';
 import luckySnailBlogIcon from '~/public/logo.png';
+import npmIcon from '~/public/npmIcon.webp';
 import { ProjectCard } from './ProjectCard';
 
 export function Projects(): React.ReactElement {
 	const projects: ProjectItem[] = [
 		{
-			id: '1',
+			id: '4',
+			url: 'https://ascii.luckysnail.cn/',
+			icon: luckySnailBlogIcon,
+			name: 'ASCII 字符生成器',
+			description: '把图片和视频转为 ASCII 形式',
+			tags: ['个人']
+		},
+		{
+			id: '4',
+			url: 'https://www.npmjs.com/package/bytemd-plugin-image-lazy',
+			icon: npmIcon,
+			name: 'bytemd 的图片懒加载插件',
+			description: '支持原生懒加载和 intersection observer 懒加载',
+			tags: ['个人']
+		},
+		{
+			id: '3',
 			url: 'https://www.luckySnail.cn',
 			icon: luckySnailBlogIcon,
 			name: 'luckySnail 的个人博客',
@@ -24,7 +41,7 @@ export function Projects(): React.ReactElement {
 			tags: ['公司']
 		},
 		{
-			id: '3',
+			id: '1',
 			url: 'https://www.codecopy.cn',
 			icon: codeCopyIcon,
 			name: '代码小抄',
