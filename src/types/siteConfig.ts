@@ -40,7 +40,6 @@ export type SiteConfig = {
 	navigationItems: navigationItem[];
 	moreItems: moreItem;
 	footerItems: navigationItem[];
-	footerProducts: ProductLink[];
 	metadataBase: URL | string;
 	themeColors?: string | ThemeColor[];
 	defaultNextTheme?: string;

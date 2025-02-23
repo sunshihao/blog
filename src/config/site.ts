@@ -131,21 +131,6 @@ export const baseSiteConfig: SiteConfig = {
 		]
 	},
 	footerItems: [{ href: '/', text: '首页' }],
-	footerProducts: [
-		{ url: 'https://weijunext.com/', name: 'J实验室' },
-		{ url: 'https://smartexcel.cc/', name: 'Smart Excel' },
-		{
-			url: 'https://landingpage.weijunext.com/',
-			name: 'Landing Page Boilerplate'
-		},
-		{ url: 'https://nextjs.weijunext.com/', name: 'Next.js Practice' },
-		{ url: 'https://starter.weijunext.com/', name: 'Next.js Starter' },
-		{ url: 'https://githubbio.com', name: 'Github Bio Generator' },
-		{
-			url: 'https://github.com/weijunext/indie-hacker-tools',
-			name: 'Indie Hacker Tools'
-		}
-	],
 	locale: 'zh-CN',
 	siteHostList: ['luckysnail.cn', 'lucky-snail.vercel.app']
 };
