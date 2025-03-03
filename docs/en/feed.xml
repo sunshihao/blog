@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="/en/feed.xml" rel="self" type="application/atom+xml" /><link href="/en/" rel="alternate" type="text/html" /><updated>2025-03-03T15:16:09+08:00</updated><id>/feed.xml</id><title type="html">William Sun’s Blog</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry xml:lang="en"><title type="html">Welcome to Jekyll!</title><link href="/en/jekyll/update/2025/02/12/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2025-02-12T11:36:31+08:00</published><updated>2025-02-12T11:36:31+08:00</updated><id>/jekyll/update/2025/02/12/welcome-to-jekyll</id><content type="html" xml:base="/jekyll/update/2025/02/12/welcome-to-jekyll.html"><![CDATA[<p><a href="/en/jekyll/update/2025/02/12/welcome-to-jekyll.html">en</a></p>
+
+<p><a href=" /jekyll/update/2025/02/12/welcome-to-jekyll.html">zh</a></p>
+
+<div>123</div>
+
+<p>en</p>
+
+<p><a href=" /jekyll/update/2025/02/12/welcome-to-jekyll.html">zh</a></p>
+
+<div>456</div>
+<div>
+
+    
+en
+    
+
+    
+        
+<a href=" /jekyll/update/2025/02/12/welcome-to-jekyll.html">zh</a>
+        
+    
+
+</div>
+<p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+<p>Jekyll requires blog post files to be named according to the following format:</p>
+
+<p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+
+<p>Where <code class="language-plaintext highlighter-rouge">YEAR</code> is a four-digit number, <code class="language-plaintext highlighter-rouge">MONTH</code> and <code class="language-plaintext highlighter-rouge">DAY</code> are both two-digit numbers, and <code class="language-plaintext highlighter-rouge">MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+<p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[en zh]]></summary></entry><entry xml:lang="en"><title type="html">前端工程CSS初始化全局设置</title><link href="/en/css/2023/10/20/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8BCSS%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE.html" rel="alternate" type="text/html" title="前端工程CSS初始化全局设置" /><published>2023-10-20T00:00:00+08:00</published><updated>2023-10-20T00:00:00+08:00</updated><id>/css/2023/10/20/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8BCSS%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE</id><content type="html" xml:base="/css/2023/10/20/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8BCSS%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE.html"><![CDATA[<div>
+
+    
+en
+    
+
+    
+        
+<a href=" /css/2023/10/20/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8BCSS%E5%88%9D%E5%A7%8B%E5%8C%96%E5%85%A8%E5%B1%80%E8%AE%BE%E7%BD%AE.html">zh</a>
+        
+    
+
+</div>
+<p>分享前端工程初始化设置CSS的样式，俗称CSS Reset，在上古时期由于浏览器之间的差异导致前端工程要设置默认参数来保持样式的一致性，进而演化而来CSS Reset，而现如今的UI均比较成熟，内置了类似的设置，若是和你工程中UI样式冲突的话，请谨慎使用:</p>
+
+<p>通用:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+</code></pre></div></div>
+
+<p>在盒子模型中防止长宽超出。</p>
+
+<p>相较于以往的将所有元素均设置为 box-sizing: border-box; 的做法，这种初始化定义更加友好，若是在一个节点设置了不同的box-sizing，则其子节点均会获得继承。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin: 0;
+}
+ul[class],
+ol[class] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+</code></pre></div></div>
+
+<p>去除一些HTML标签中奇怪的固定长度px，例如body的8px。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+h1, h2, h3, h4,
+button, input, label {
+  line-height: 1.1;
+}
+</code></pre></div></div>
+<p>设置body高度及行高。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+</code></pre></div></div>
+<p>可选: 设置a标签颜色样式同文本，而不是默认颜色。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+</code></pre></div></div>
+
+<p>设置浏览器是否应该在一个本来不能断开的字符串中插入换行符，以防止文本溢出。
+IOS</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+</code></pre></div></div>
+<p>使得iphone不会在横向模式下增加字体的大小。</p>
+
+<p>最终:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body, h1, h2, h3, h4, p,
+figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+// IOS
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+</code></pre></div></div>
+
+<p>新版 CSS Reset (2024)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+</code></pre></div></div>]]></content><author><name></name></author><category term="css" /><summary type="html"><![CDATA[en zh]]></summary></entry></feed>
