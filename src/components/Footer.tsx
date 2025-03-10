@@ -60,21 +60,30 @@ export function Footer() {
 							欢迎 👏🏻 你的访问
 						</div>
 					</Container.Inner>
-					<Link
-						target="_blank"
-						href="https://beian.miit.gov.cn/"
-						className="absolute text-blue-600 w-full bottom-6 left-1/2 -translate-x-1/2 flex justify-center items-center"
-					>
-						<Image
-							unoptimized
-							src={'/police.png'}
-							width={18}
-							height={18}
-							alt="备案"
-							className="mr-1 "
-						/>
-						浙ICP备2021039023号-3
-					</Link>
+					<div className="flex justify-center">
+						<Link
+							target="_blank"
+							href="https://beian.miit.gov.cn/"
+							className="text-blue-600 flex justify-center items-center"
+						>
+							<Image
+								unoptimized
+								src={'/police.png'}
+								width={18}
+								height={18}
+								alt="备案"
+								className="mr-1 "
+							/>
+							辽公网安备21021202000334号
+						</Link>
+						<Link
+							target="_blank"
+							href="https://beian.miit.gov.cn/"
+							className="text-blue-600 p-6 flex justify-center items-center"
+						>
+							辽ICP备2021012379号-1
+						</Link>
+					</div>
 				</div>
 			</Container.Outer>
 		</footer>
