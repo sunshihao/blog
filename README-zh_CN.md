@@ -10,7 +10,7 @@ npm run dev
 yarn dev
 # 或者
 pnpm dev
-# 或者触发
+# 或者
 bun dev
 ```
 
