@@ -24,18 +24,18 @@ export const baseSiteConfig: SiteConfig = {
 			text: 'github',
 			icon: 'GitHubIcon'
 		},
-		{
-			href: 'wx',
-			text: '微信',
-			isPicture: true,
-			icon: 'WxIcon'
-		},
-		{
-			href: 'wxPublic',
-			text: '微信公众号',
-			isPicture: true,
-			icon: 'WxMediaIcon'
-		},
+		// {
+		// 	href: 'wx',
+		// 	text: '微信',
+		// 	isPicture: true,
+		// 	icon: 'WxIcon'
+		// },
+		// {
+		// 	href: 'wxPublic',
+		// 	text: '微信公众号',
+		// 	isPicture: true,
+		// 	icon: 'WxMediaIcon'
+		// },
 		{
 			href: '4sh945@gmail.com',
 			text: '邮箱',
@@ -51,7 +51,7 @@ export const baseSiteConfig: SiteConfig = {
 		{ media: '(prefers-color-scheme: dark)', color: '#000212' },
 		{ media: '(prefers-color-scheme: light)', color: '#fafafa' }
 	],
-	defaultNextTheme: 'system', // next-theme option: system | dark | light
+	defaultNextTheme: 'dark', // next-theme option: system | dark | light
 	icons: {
 		icon: '/favicon.ico',
 		shortcut: '/logo.png',
@@ -74,7 +74,7 @@ export const baseSiteConfig: SiteConfig = {
 			}
 		]
 	},
-	footerItems: [{ href: '/', text: '首页' }],
+	footerItems: [{ href: '/blog', text: '首页' }],
 	locale: 'zh-CN',
 	siteHostList: ['luckysnail.cn', 'lucky-snail.vercel.app']
 };
