@@ -26,10 +26,10 @@ const client = z.object({
 const processEnv = {
 	NODE_ENV: process.env.NODE_ENV,
 	VERCEL_ENV: process.env.VERCEL_ENV,
-	NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
-	NEXT_PUBLIC_SITE_EMAIL_FROM: process.env.NEXT_PUBLIC_SITE_EMAIL_FROM,
-	SITE_NOTIFICATION_EMAIL_TO: process.env.SITE_NOTIFICATION_EMAIL_TO,
-	LINK_PREVIEW_API_BASE_URL: process.env.LINK_PREVIEW_API_BASE_URL
+	NEXT_PUBLIC_SITE_URL: 'https://dhc.ink',
+	NEXT_PUBLIC_SITE_EMAIL_FROM: 'http://sunshihao945@outlook.com',
+	SITE_NOTIFICATION_EMAIL_TO: 'http://sunshihao945@outlook.com',
+	LINK_PREVIEW_API_BASE_URL: 'https://dhc.ink'
 };
 
 // Don't touch the part below
