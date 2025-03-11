@@ -7,10 +7,10 @@ const nextConfig = {
 	basePath: '/blog',
 	reactStrictMode: true,
 	swcMinify: true,
-	images: {
-		domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
-	},
-	webpack: (config, { isServer }) => {
+	// images: {
+	// 	domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
+	// },
+	webpack: (config) => {
 		// if (isServer) {
 		// 	require('./scripts/generate-sitemap'); // eslint-disable-line
 		// 	require('./scripts/generate-rss'); // eslint-disable-line
