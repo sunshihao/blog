@@ -4,6 +4,7 @@ import generate from './scripts/generate-rss.js';
 const nextConfig = {
 	// 静态导出
 	output: 'export',
+	basePath: '/blog',
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
