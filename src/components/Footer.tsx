@@ -49,7 +49,7 @@ export function Footer() {
 								&copy; {new Date().getFullYear()} {siteMetadata.authorsCN}
 								&nbsp;网站已开源：
 								<PeekabooLink href="https://github.com/coderPerseus/blog">
-									luckySnail
+									{siteMetadata.authorsCN}
 								</PeekabooLink>
 							</p>
 							<Links />
@@ -60,7 +60,7 @@ export function Footer() {
 							欢迎 👏🏻 你的访问
 						</div>
 					</Container.Inner>
-					<div className="flex justify-center">
+					<div className="flex justify-center p-6 flex-col sm:flex-row">
 						<Link
 							target="_blank"
 							href="https://beian.miit.gov.cn/"
@@ -79,7 +79,7 @@ export function Footer() {
 						<Link
 							target="_blank"
 							href="https://beian.miit.gov.cn/"
-							className="text-blue-600 p-6 flex justify-center items-center"
+							className="text-blue-600 pl-6 flex justify-center items-center"
 						>
 							辽ICP备2021012379号-1
 						</Link>

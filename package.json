@@ -1,8 +1,7 @@
 {
-	"name": "lucky-snail-blog",
+	"name": "William Sun blog",
 	"description": "基于 Next.js + tailwindcss + framer motion + contentlayer + github actions + github issues 的个人博客",
 	"keywords": [
-		"luckySnail",
 		"nextjs",
 		"tailwindcss",
 		"framer motion",
@@ -11,7 +10,7 @@
 		"github issues",
 		"blog"
 	],
-	"version": "0.1.0",
+	"version": "0.0.1",
 	"private": true,
 	"scripts": {
 		"prepare": "husky install",
