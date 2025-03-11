@@ -3,7 +3,7 @@
 import '@/style/tocbot.css';
 import { Variants, motion, useScroll } from 'framer-motion';
 import { useEffect } from 'react';
-import tocbot from 'tocbot';
+import { destroy, init } from 'tocbot';
 
 const listVariants: Variants = {
 	hidden: { opacity: 0 },
@@ -32,7 +32,7 @@ export default function Toc() {
 	const { scrollY } = useScroll();
 
 	useEffect(() => {
-		tocbot.init({
+		init({
 			tocSelector: '.js-toc',
 			contentSelector: '.js-toc-content',
 			headingSelector: 'h1, h2, h3, h4, h5, h6',
@@ -58,7 +58,7 @@ export default function Toc() {
 		window.addEventListener('scroll', handleScroll);
 
 		return () => {
-			tocbot.destroy();
+			destroy();
 			window.removeEventListener('scroll', handleScroll);
 		};
 	}, [scrollY]);
