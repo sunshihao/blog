@@ -2,13 +2,13 @@ import BaiDuAnalytics from '@/components/BaiDuAnalytics';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
-import { sansFont } from '@/lib/font';
+// import { sansFont } from '@/lib/font';
 import { Viewport, type Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteMetadata.url),
@@ -43,11 +43,11 @@ export default function RootLayout({
 	return (
 		// <ViewTransitions>
 		<html
-			className={`${sansFont.variable} m-0 h-full p-0 font-sans antialiased`}
+			className={` m-0 h-full p-0 font-sans antialiased`}
 			lang={siteMetadata.locale}
 			suppressHydrationWarning
 		>
-			<body className={inter.className}>
+			<body>
 				<GoogleAnalytics />
 				<BaiDuAnalytics />
 				{/* @ts-ignore */}

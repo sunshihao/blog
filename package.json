@@ -55,6 +55,7 @@
 		"next-themes": "^0.3.0",
 		"next-view-transitions": "^0.3.0",
 		"node-cron": "^3.0.3",
+		"punycode": "^2.3.1",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-medium-image-zoom": "^5.2.8",
