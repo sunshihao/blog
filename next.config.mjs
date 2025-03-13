@@ -4,12 +4,13 @@ import generate from './scripts/generate-rss.js';
 const nextConfig = {
 	// 静态导出
 	output: 'export',
-	basePath: '/blog',
+	// basePath: '/blog',
+	distDir: 'docs',
 	reactStrictMode: true,
 	swcMinify: true,
-	// images: {
-	// 	domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
-	// },
+	images: {
+		domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
+	},
 	webpack: (config) => {
 		// if (isServer) {
 		// 	require('./scripts/generate-sitemap'); // eslint-disable-line
