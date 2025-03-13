@@ -68,7 +68,7 @@ export function Footer() {
 						>
 							<Image
 								unoptimized
-								src={'/docs/police.png'}
+								src={'/blog/police.png'}
 								width={18}
 								height={18}
 								alt="备案"
