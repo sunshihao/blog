@@ -7,7 +7,7 @@ const nextConfig = {
 	output: 'export',
 	// basePath: '/blog',
 	distDir: 'docs',
-	// assetPrefix: 'https://blog-omega-five-74.vercel.app', // cdn 设置
+	assetPrefix: 'https://blog-omega-five-74.vercel.app', // cdn 设置
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
