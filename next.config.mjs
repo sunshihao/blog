@@ -1,4 +1,5 @@
 import { withContentlayer } from 'next-contentlayer';
+// import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import generate from './scripts/generate-rss.js';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -6,6 +7,7 @@ const nextConfig = {
 	output: 'export',
 	// basePath: '/blog',
 	distDir: 'docs',
+	assetPrefix: 'https://blog-omega-five-74.vercel.app', // cdn 设置
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
