@@ -1,63 +1,621 @@
-<!DOCTYPE html><html class=" m-0 h-full p-0 font-sans antialiased" lang="zh-CN"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/docs/_next/static/css/8cd2eb158671e11e.css" data-precedence="next"/><link rel="stylesheet" href="/docs/_next/static/css/cc5160e2067b0cef.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/docs/_next/static/chunks/webpack-583a4211ac78a2fe.js"/><script src="/docs/_next/static/chunks/f064a1f5-a0f684639c5e404a.js" async=""></script><script src="/docs/_next/static/chunks/904-8193403601d33346.js" async=""></script><script src="/docs/_next/static/chunks/main-app-7d4b4602e3445646.js" async=""></script><script src="/docs/_next/static/chunks/779-ad4ead70309b9a20.js" async=""></script><script src="/docs/_next/static/chunks/739-1be71c4fce382004.js" async=""></script><script src="/docs/_next/static/chunks/138-7f27ef5cd2caf4b4.js" async=""></script><script src="/docs/_next/static/chunks/857-68a2fd358cb70760.js" async=""></script><script src="/docs/_next/static/chunks/594-71c3251836d38f7c.js" async=""></script><script src="/docs/_next/static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js" async=""></script><script src="/docs/_next/static/chunks/531-f976d425ce9a81a1.js" async=""></script><script src="/docs/_next/static/chunks/103-1875d9378f90876a.js" async=""></script><script src="/docs/_next/static/chunks/868-9c31f7c0009643d5.js" async=""></script><script src="/docs/_next/static/chunks/app/(app)/layout-66a850f3e6447c7d.js" async=""></script><script src="/docs/_next/static/chunks/245-4d9cc7d916e46c69.js" async=""></script><script src="/docs/_next/static/chunks/app/layout-d7953313cc6bdbf6.js" async=""></script><script src="/docs/_next/static/chunks/app/not-found-8b889a2f44e80cbe.js" async=""></script><link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=123" as="script"/><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000212"/><meta name="theme-color" media="(prefers-color-scheme: light)" content="#fafafa"/><title>前端程序员学习 Docker 的笔记 （二） | William Sun</title><meta name="description" content="如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"/><link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials"/><meta name="keywords" content="docker,笔记"/><meta name="baidu-site-verification" content="codeva-7AmpPWgzQY"/><meta name="google-site-verification" content="TTbfOvWmLj0icfk0BQNUZB3crwReji82Q_vRdnZFFAc"/><link rel="canonical" href="https://dhc.ink/posts/docker-learn-2"/><link rel="alternate" type="application/rss+xml" title="RSS 订阅" href="https://luckysnail.cn/rss"/><meta property="og:title" content="前端程序员学习 Docker 的笔记 （二）"/><meta property="og:description" content="如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:creator" content="@haozhan05554957"/><meta name="twitter:title" content="William Sunblog | 前端 | 开发者"/><meta name="twitter:description" content="我是William Sun，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运"/><meta name="twitter:image" content="https://luckysnail.cn/og.png"/><link rel="icon" href="/docs/favicon.ico" type="image/x-icon" sizes="32x32"/><link rel="icon" href="/docs/icon.jpg?021a5ddd40907a91" type="image/jpeg" sizes="256x256"/><link rel="apple-touch-icon" href="/docs/apple-icon.jpg?58f0c05bf91c4519" type="image/jpeg" sizes="1022x1023"/><script src="/docs/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js" noModule=""></script></head><body><script>!function(){try{var d=document.documentElement,c=d.classList;c.remove('light','dark');var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';c.add('dark')}else{d.style.colorScheme = 'light';c.add('light')}}else if(e){c.add(e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()</script><div class="z-[-1] absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div><div class="fixed inset-0 flex justify-center sm:px-8"><div class="flex w-full max-w-7xl lg:px-8"><div class="opacity-95 w-full bg-zinc-50/90 ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20"></div></div></div><div class="relative text-zinc-800 dark:text-zinc-200"><header class="pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col h-[var(--header-height,64px)]"><div class="top-0 z-10 h-16 pt-6" style="position:var(--header-position)"><div class="sm:px-8 top-[var(--header-top,theme(spacing.6))] w-full" style="position:var(--header-inner-position)"><div class="mx-auto max-w-7xl lg:px-8"><div class="relative px-4 sm:px-8 lg:px-12"><div class="mx-auto max-w-2xl lg:max-w-5xl"><div class="relative flex gap-4"><div class="flex flex-1" style="opacity:0;transform:translateY(15px)"><div><div class="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"><a aria-label="主页" class="pointer-events-auto" href="/docs"><img alt="" loading="lazy" width="256" height="256" decoding="async" data-nimg="1" class="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-9 w-9" style="color:transparent" src="/docs/_next/static/media/logo.d3f4655a.webp"/></a></div></div></div><div class="flex flex-1 justify-end md:justify-center"><button class="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-yellow-500/80 pointer-events-auto relative z-50 md:hidden" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-:R3abnqra:" data-state="closed">前往<svg viewBox="0 0 8 6" aria-hidden="true" class="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"><path d="M1.75 1.75 4 4.25l2.25-2.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><nav class="group rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10 [--spotlight-color:rgb(236_252_203_/_0.6)] dark:[--spotlight-color:rgb(217_249_157_/_0.07)] pointer-events-auto relative z-50 hidden md:block"><div class="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" style="background:radial-gradient(0px circle at 0px 0px, var(--spotlight-color) 0%, transparent 65%)"></div><ul class="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 "><li class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"><a target="_self" href="/docs">首页</a></li><li class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"><a target="_self" href="/docs/posts">博客</a></li><li class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"><a target="_self" href="/docs/about">关于我</a></li></ul></nav></div><div class="flex justify-end gap-3 md:flex-1" style="opacity:0;transform:translateY(-20px) scale(0.95)"><div class="pointer-events-auto"><!--$!--><template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template><!--/$--></div></div></div></div></div></div></div></div></header><main><!--$--><div class="sm:px-8 mt-10 lg:mt-16"><div class="mx-auto max-w-7xl lg:px-8"><div class="relative px-4 sm:px-8 lg:px-12 !px-0"><div class="mx-auto max-w-2xl lg:max-w-5xl"><div class="w-full md:flex md:justify-between xl:relative gap-1"><aside class="hidden w-[160px] shrink-0 lg:block"><div class="sticky top-2 pt-16"><div class="toc-container"><h2 class="text-lg font-semibold mb-4">目录</h2><ul class="js-toc group pointer-events-auto flex flex-col space-y-2 text-zinc-500" style="opacity:0"></ul></div></div></aside><div class="max-w-4xl md:flex-1 md:shrink-0 "><a class="group mb-8 flex h-10 w-10 items-center justify-center bg-white dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:hover:border-zinc-700 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20" aria-label="返回博客页面" href="/docs/posts"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400"><path d="M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a><article data-postid="posts/docker-learn-2.mdx" class="rich-text-viewer prose px-4"><div class="mb-8 text-center"><h1 class="text-3xl font-bold">前端程序员学习 Docker 的笔记 （二）</h1><div class="flex justify-center rounded-md  h-5 items-center space-x-4 text-sm"><time dateTime="2024-05-19T00:00:00.000Z" class="mb-1 text-xs text-gray-600">2024-05-19</time><div data-orientation="vertical" role="none" class="shrink-0 bg-border h-full w-[1px]"></div><span class="mb-1 text-xs text-gray-600 flex items-center"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2"><path d="M10.1912 12.5508C10.3071 12.1942 10.3071 11.8058 10.1912 11.4492C9.22165 8.46673 4.40272 8.00546 4.01443 4.48436C3.93458 3.76031 4.18955 3.04013 4.69671 2.55723C5.28193 2 6.62415 2 9.30861 2H14.6914C17.3759 2 18.7181 2 19.3033 2.55723C19.8104 3.04013 20.0654 3.76031 19.9856 4.48436C19.5973 8.00546 14.7784 8.46673 13.8088 11.4492C13.6929 11.8058 13.6929 12.1942 13.8088 12.5508C14.7784 15.5333 19.5973 15.9945 19.9856 19.5156C20.0654 20.2397 19.8104 20.9599 19.3033 21.4428C18.7181 22 17.3758 22 14.6914 22L9.3086 22C6.62415 22 5.28192 22 4.69671 21.4428C4.18955 20.9599 3.93458 20.2397 4.01442 19.5156C4.40272 15.9945 9.22164 15.5333 10.1912 12.5508Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> <!-- -->10<!-- --> 分钟</span></div><div class="flex w-full justify-center gap-2 mt-2"><span class="inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800">docker</span><span class="inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800">笔记</span></div><div class="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute left-4 top-4"><path d="M8 8H8.01M3.11768 7.65876L3.07447 8.47968C2.99172 10.0518 2.95035 10.8379 3.1001 11.5811C3.23281 12.2399 3.47524 12.8716 3.81725 13.45C4.20315 14.1026 4.75976 14.6593 5.87297 15.7725L8.29448 18.194C9.6106 19.5101 10.2687 20.1682 10.9743 20.5277C12.4003 21.2543 14.0881 21.2543 15.5142 20.5277C16.2198 20.1682 16.8778 19.5101 18.194 18.194C19.5101 16.8778 20.1682 16.2198 20.5277 15.5142C21.2543 14.0881 21.2543 12.4003 20.5277 10.9743C20.1682 10.2687 19.5101 9.6106 18.194 8.29448L15.7725 5.87298C14.6593 4.75976 14.1026 4.20315 13.45 3.81725C12.8716 3.47524 12.2399 3.23281 11.5811 3.1001C10.8379 2.95035 10.0518 2.99172 8.47968 3.07447L7.65876 3.11768C6.13396 3.19793 5.37156 3.23805 4.78079 3.55489C4.26041 3.83397 3.83397 4.26041 3.55489 4.78079C3.23805 5.37156 3.19793 6.13396 3.11768 7.65876ZM8.4895 7.98767C8.4895 8.26381 8.26564 8.48767 7.9895 8.48767C7.71336 8.48767 7.4895 8.26381 7.4895 7.98767C7.4895 7.71153 7.71336 7.48767 7.9895 7.48767C8.26564 7.48767 8.4895 7.71153 8.4895 7.98767Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><p class="text-gray-700 dark:text-gray-300">如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读</p></div></div><div class="js-toc-content"><p>大家好，我是阿星，上一个文章：<a href="https://www.yuque.com/asgas/web_system/th4kazgysrzuktxn?view=doc_embed">更适合前端的 Docker 教程（一）</a>，我分享了 Docker 基础，如何通过 Docker 容器化部署一个纯前端的项目，但是真实项目，肯定是离不开后端的，下面就以一个需要 nextjs + redis 技术的项目为例，来入门一下 <code>Docker Compose</code></p>
-<h2 id="本地启动项目"><a class="anchor" href="#本地启动项目">本地启动项目</a></h2>
-<p>我们先本地启动一下需要这些技术的项目，这里直接 git 拉取仓库就好：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token function">git</span> clone <span class="token parameter variable">-b</span> day1 git@github.com:mqyqingfeng/next-react-notes-demo.git
+<!doctype html>
+<html class="m-0 h-full p-0 font-sans antialiased" lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="/docs/prinext/static/css/8cd2eb158671e11e.css"
+			data-precedence="next"
+		/>
+		<link
+			rel="stylesheet"
+			href="/docs/prinext/static/css/cc5160e2067b0cef.css"
+			data-precedence="next"
+		/>
+		<link
+			rel="preload"
+			as="script"
+			fetchpriority="low"
+			href="/docs/prinext/static/chunks/webpack-583a4211ac78a2fe.js"
+		/>
+		<script
+			src="/docs/prinext/static/chunks/f064a1f5-a0f684639c5e404a.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/904-8193403601d33346.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/main-app-7d4b4602e3445646.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/779-ad4ead70309b9a20.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/739-1be71c4fce382004.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/138-7f27ef5cd2caf4b4.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/857-68a2fd358cb70760.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/594-71c3251836d38f7c.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/531-f976d425ce9a81a1.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/103-1875d9378f90876a.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/868-9c31f7c0009643d5.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/app/(app)/layout-66a850f3e6447c7d.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/245-4d9cc7d916e46c69.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/app/layout-d7953313cc6bdbf6.js"
+			async=""
+		></script>
+		<script
+			src="/docs/prinext/static/chunks/app/not-found-8b889a2f44e80cbe.js"
+			async=""
+		></script>
+		<link
+			rel="preload"
+			href="https://www.googletagmanager.com/gtag/js?id=123"
+			as="script"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: dark)"
+			content="#000212"
+		/>
+		<meta
+			name="theme-color"
+			media="(prefers-color-scheme: light)"
+			content="#fafafa"
+		/>
+		<title>前端程序员学习 Docker 的笔记 （二） | William Sun</title>
+		<meta
+			name="description"
+			content="如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"
+		/>
+		<link
+			rel="manifest"
+			href="/site.webmanifest"
+			crossorigin="use-credentials"
+		/>
+		<meta name="keywords" content="docker,笔记" />
+		<meta name="baidu-site-verification" content="codeva-7AmpPWgzQY" />
+		<meta
+			name="google-site-verification"
+			content="TTbfOvWmLj0icfk0BQNUZB3crwReji82Q_vRdnZFFAc"
+		/>
+		<link rel="canonical" href="https://dhc.ink/posts/docker-learn-2" />
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS 订阅"
+			href="https://luckysnail.cn/rss"
+		/>
+		<meta property="og:title" content="前端程序员学习 Docker 的笔记 （二）" />
+		<meta
+			property="og:description"
+			content="如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:creator" content="@haozhan05554957" />
+		<meta name="twitter:title" content="William Sunblog | 前端 | 开发者" />
+		<meta
+			name="twitter:description"
+			content="我是William Sun，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运"
+		/>
+		<meta name="twitter:image" content="https://luckysnail.cn/og.png" />
+		<link
+			rel="icon"
+			href="/docs/favicon.ico"
+			type="image/x-icon"
+			sizes="32x32"
+		/>
+		<link
+			rel="icon"
+			href="/docs/icon.jpg?021a5ddd40907a91"
+			type="image/jpeg"
+			sizes="256x256"
+		/>
+		<link
+			rel="apple-touch-icon"
+			href="/docs/apple-icon.jpg?58f0c05bf91c4519"
+			type="image/jpeg"
+			sizes="1022x1023"
+		/>
+		<script
+			src="/docs/prinext/static/chunks/polyfills-78c92fac7aa8fdd8.js"
+			nomodule=""
+		></script>
+	</head>
+	<body>
+		<script>
+			!(function () {
+				try {
+					var d = document.documentElement,
+						c = d.classList;
+					c.remove('light', 'dark');
+					var e = localStorage.getItem('theme');
+					if ('system' === e || (!e && true)) {
+						var t = '(prefers-color-scheme: dark)',
+							m = window.matchMedia(t);
+						if (m.media !== t || m.matches) {
+							d.style.colorScheme = 'dark';
+							c.add('dark');
+						} else {
+							d.style.colorScheme = 'light';
+							c.add('light');
+						}
+					} else if (e) {
+						c.add(e || '');
+					}
+					if (e === 'light' || e === 'dark') d.style.colorScheme = e;
+				} catch (e) {}
+			})();
+		</script>
+		<div
+			class="z-[-1] absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]"
+		></div>
+		<div class="fixed inset-0 flex justify-center sm:px-8">
+			<div class="flex w-full max-w-7xl lg:px-8">
+				<div
+					class="opacity-95 w-full bg-zinc-50/90 ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20"
+				></div>
+			</div>
+		</div>
+		<div class="relative text-zinc-800 dark:text-zinc-200">
+			<header
+				class="pointer-events-none relative z-50 mb-[var(--header-mb,0px)] flex flex-col h-[var(--header-height,64px)]"
+			>
+				<div
+					class="top-0 z-10 h-16 pt-6"
+					style="position: var(--header-position)"
+				>
+					<div
+						class="sm:px-8 top-[var(--header-top,theme(spacing.6))] w-full"
+						style="position: var(--header-inner-position)"
+					>
+						<div class="mx-auto max-w-7xl lg:px-8">
+							<div class="relative px-4 sm:px-8 lg:px-12">
+								<div class="mx-auto max-w-2xl lg:max-w-5xl">
+									<div class="relative flex gap-4">
+										<div
+											class="flex flex-1"
+											style="opacity: 0; transform: translateY(15px)"
+										>
+											<div>
+												<div
+													class="h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+												>
+													<a
+														aria-label="主页"
+														class="pointer-events-auto"
+														href="/docs"
+														><img
+															alt=""
+															loading="lazy"
+															width="256"
+															height="256"
+															decoding="async"
+															data-nimg="1"
+															class="rounded-full bg-zinc-100 object-cover dark:bg-zinc-800 h-9 w-9"
+															style="color: transparent"
+															src="/docs/prinext/static/media/logo.d3f4655a.webp"
+													/></a>
+												</div>
+											</div>
+										</div>
+										<div class="flex flex-1 justify-end md:justify-center">
+											<button
+												class="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-yellow-500/80 pointer-events-auto relative z-50 md:hidden"
+												type="button"
+												aria-haspopup="dialog"
+												aria-expanded="false"
+												aria-controls="radix-:R3abnqra:"
+												data-state="closed"
+											>
+												前往<svg
+													viewBox="0 0 8 6"
+													aria-hidden="true"
+													class="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400"
+												>
+													<path
+														d="M1.75 1.75 4 4.25l2.25-2.5"
+														fill="none"
+														stroke-width="1.5"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													></path>
+												</svg>
+											</button>
+											<nav
+												class="group rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10 [--spotlight-color:rgb(236_252_203_/_0.6)] dark:[--spotlight-color:rgb(217_249_157_/_0.07)] pointer-events-auto relative z-50 hidden md:block"
+											>
+												<div
+													class="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+													aria-hidden="true"
+													style="
+														background: radial-gradient(
+															0px circle at 0px 0px,
+															var(--spotlight-color) 0%,
+															transparent 65%
+														);
+													"
+												></div>
+												<ul
+													class="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200"
+												>
+													<li
+														class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"
+													>
+														<a target="_self" href="/docs">首页</a>
+													</li>
+													<li
+														class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"
+													>
+														<a target="_self" href="/docs/posts">博客</a>
+													</li>
+													<li
+														class="relative block whitespace-nowrap px-3 py-2 transition hover:text-violet-500 dark:hover:text-violet-400"
+													>
+														<a target="_self" href="/docs/about">关于我</a>
+													</li>
+												</ul>
+											</nav>
+										</div>
+										<div
+											class="flex justify-end gap-3 md:flex-1"
+											style="
+												opacity: 0;
+												transform: translateY(-20px) scale(0.95);
+											"
+										>
+											<div class="pointer-events-auto">
+												<!--$!--><template
+													data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"
+												></template
+												><!--/$-->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+			<main>
+				<!--$-->
+				<div class="sm:px-8 mt-10 lg:mt-16">
+					<div class="mx-auto max-w-7xl lg:px-8">
+						<div class="relative px-4 sm:px-8 lg:px-12 !px-0">
+							<div class="mx-auto max-w-2xl lg:max-w-5xl">
+								<div
+									class="w-full md:flex md:justify-between xl:relative gap-1"
+								>
+									<aside class="hidden w-[160px] shrink-0 lg:block">
+										<div class="sticky top-2 pt-16">
+											<div class="toc-container">
+												<h2 class="text-lg font-semibold mb-4">目录</h2>
+												<ul
+													class="js-toc group pointer-events-auto flex flex-col space-y-2 text-zinc-500"
+													style="opacity: 0"
+												></ul>
+											</div>
+										</div>
+									</aside>
+									<div class="max-w-4xl md:flex-1 md:shrink-0">
+										<a
+											class="group mb-8 flex h-10 w-10 items-center justify-center bg-white dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:hover:border-zinc-700 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+											aria-label="返回博客页面"
+											href="/docs/posts"
+											><svg
+												width="1em"
+												height="1em"
+												viewBox="0 0 24 24"
+												fill="none"
+												xmlns="http://www.w3.org/2000/svg"
+												class="h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400"
+											>
+												<path
+													d="M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12"
+													stroke="currentColor"
+													stroke-width="2"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+												></path></svg
+										></a>
+										<article
+											data-postid="posts/docker-learn-2.mdx"
+											class="rich-text-viewer prose px-4"
+										>
+											<div class="mb-8 text-center">
+												<h1 class="text-3xl font-bold">
+													前端程序员学习 Docker 的笔记 （二）
+												</h1>
+												<div
+													class="flex justify-center rounded-md h-5 items-center space-x-4 text-sm"
+												>
+													<time
+														datetime="2024-05-19T00:00:00.000Z"
+														class="mb-1 text-xs text-gray-600"
+														>2024-05-19</time
+													>
+													<div
+														data-orientation="vertical"
+														role="none"
+														class="shrink-0 bg-border h-full w-[1px]"
+													></div>
+													<span
+														class="mb-1 text-xs text-gray-600 flex items-center"
+														><svg
+															width="1em"
+															height="1em"
+															viewBox="0 0 24 24"
+															fill="none"
+															xmlns="http://www.w3.org/2000/svg"
+															class="mr-2"
+														>
+															<path
+																d="M10.1912 12.5508C10.3071 12.1942 10.3071 11.8058 10.1912 11.4492C9.22165 8.46673 4.40272 8.00546 4.01443 4.48436C3.93458 3.76031 4.18955 3.04013 4.69671 2.55723C5.28193 2 6.62415 2 9.30861 2H14.6914C17.3759 2 18.7181 2 19.3033 2.55723C19.8104 3.04013 20.0654 3.76031 19.9856 4.48436C19.5973 8.00546 14.7784 8.46673 13.8088 11.4492C13.6929 11.8058 13.6929 12.1942 13.8088 12.5508C14.7784 15.5333 19.5973 15.9945 19.9856 19.5156C20.0654 20.2397 19.8104 20.9599 19.3033 21.4428C18.7181 22 17.3758 22 14.6914 22L9.3086 22C6.62415 22 5.28192 22 4.69671 21.4428C4.18955 20.9599 3.93458 20.2397 4.01442 19.5156C4.40272 15.9945 9.22164 15.5333 10.1912 12.5508Z"
+																stroke="currentColor"
+																stroke-width="2"
+																stroke-linecap="round"
+																stroke-linejoin="round"
+															></path>
+														</svg>
+														<!-- -->10<!-- -->
+														分钟</span
+													>
+												</div>
+												<div class="flex w-full justify-center gap-2 mt-2">
+													<span
+														class="inline-flex items-center px-2 h-5 rounded-md text-xs bg-gray-300 text-gray-800"
+														>docker</span
+													><span
+														class="inline-flex items-center px-2 h-5 rounded-md text-xs bg-gray-300 text-gray-800"
+														>笔记</span
+													>
+												</div>
+												<div
+													class="bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4"
+												>
+													<svg
+														width="1em"
+														height="1em"
+														viewBox="0 0 24 24"
+														fill="none"
+														xmlns="http://www.w3.org/2000/svg"
+														class="absolute left-4 top-4"
+													>
+														<path
+															d="M8 8H8.01M3.11768 7.65876L3.07447 8.47968C2.99172 10.0518 2.95035 10.8379 3.1001 11.5811C3.23281 12.2399 3.47524 12.8716 3.81725 13.45C4.20315 14.1026 4.75976 14.6593 5.87297 15.7725L8.29448 18.194C9.6106 19.5101 10.2687 20.1682 10.9743 20.5277C12.4003 21.2543 14.0881 21.2543 15.5142 20.5277C16.2198 20.1682 16.8778 19.5101 18.194 18.194C19.5101 16.8778 20.1682 16.2198 20.5277 15.5142C21.2543 14.0881 21.2543 12.4003 20.5277 10.9743C20.1682 10.2687 19.5101 9.6106 18.194 8.29448L15.7725 5.87298C14.6593 4.75976 14.1026 4.20315 13.45 3.81725C12.8716 3.47524 12.2399 3.23281 11.5811 3.1001C10.8379 2.95035 10.0518 2.99172 8.47968 3.07447L7.65876 3.11768C6.13396 3.19793 5.37156 3.23805 4.78079 3.55489C4.26041 3.83397 3.83397 4.26041 3.55489 4.78079C3.23805 5.37156 3.19793 6.13396 3.11768 7.65876ZM8.4895 7.98767C8.4895 8.26381 8.26564 8.48767 7.9895 8.48767C7.71336 8.48767 7.4895 8.26381 7.4895 7.98767C7.4895 7.71153 7.71336 7.48767 7.9895 7.48767C8.26564 7.48767 8.4895 7.71153 8.4895 7.98767Z"
+															stroke="currentColor"
+															stroke-width="2"
+															stroke-linecap="round"
+															stroke-linejoin="round"
+														></path>
+													</svg>
+													<p class="text-gray-700 dark:text-gray-300">
+														如何使用 Docker Compose 来部署一个包含 Next.js 和
+														Redis
+														的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用
+														Docker 容器化部署服务。接着介绍了 Docker Compose
+														的概念和使用方法,通过编写 docker-compose.yml
+														文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了
+														Docker 在前端项目中的应用,适合想要学习 Docker
+														的前端开发者阅读
+													</p>
+												</div>
+											</div>
+											<div class="js-toc-content">
+												<p>
+													大家好，我是阿星，上一个文章：<a
+														href="https://www.yuque.com/asgas/web_system/th4kazgysrzuktxn?view=doc_embed"
+														>更适合前端的 Docker 教程（一）</a
+													>，我分享了 Docker 基础，如何通过 Docker
+													容器化部署一个纯前端的项目，但是真实项目，肯定是离不开后端的，下面就以一个需要
+													nextjs + redis 技术的项目为例，来入门一下
+													<code>Docker Compose</code>
+												</p>
+												<h2 id="本地启动项目">
+													<a class="anchor" href="#本地启动项目"
+														>本地启动项目</a
+													>
+												</h2>
+												<p>
+													我们先本地启动一下需要这些技术的项目，这里直接 git
+													拉取仓库就好：
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token function">git</span> clone <span class="token parameter variable">-b</span> day1 git@github.com:mqyqingfeng/next-react-notes-demo.git
 </span></code></pre>
-<p>本地运行</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token builtin class-name">cd</span> next-react-notes-demo <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> i <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> run dev
+												<p>本地运行</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token builtin class-name">cd</span> next-react-notes-demo <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> i <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> run dev
 </span></code></pre>
-<p>由于这个项目需要 Redis 服务，我们新开一个命令行运行：<code>redis-server</code>,如果没有安装 redis，需要先安装一下 Redis。</p>
-<p></p>
-<h2 id="容器化部署"><a class="anchor" href="#容器化部署">容器化部署</a></h2>
-<p>使用上个文章的知识，我们现在把 Redis 和 Next.js 项目 容器化部署</p>
-<ol>
-<li>拉取 Redis 镜像：<code>docker pull redis</code></li>
-<li>关闭本地命令行启动的 Redis ，使用 Docker 启动 Redis：<code>docker run -p 6379:6379 redis redis-server</code> 关闭本地的Redis 后，我们的项目刷新是会报错的： <!-- -->使用 Docker 启动 Redis 后，就恢复了</li>
-<li>我们完成了 Redis 容器化，我们现在把 Next.js 项目也新开一个容器进行部署，但是每个容器都是一个单独的隔离空间。这时候<strong>即将容器化部署的 Next.js 服务就访问不到我们的 Redis 服务</strong>。那么我们就需要将两个容器服务连接起来，Docker 可以将容器加入<a href="%E9%80%9A%E4%B9%89">自定义的 Docker 网络</a>的方式来连接多个容器。</li>
-</ol>
-<blockquote>
-<p>Docker 支持自定义网络，这里我们使用桥接网络来连接多个容器，容器间就可以通信了！</p>
-</blockquote>
-<ol start="4">
-<li>创建一个 自定义 Docker 网络：<code>docker network create -d bridge react-notes</code></li>
-</ol>
-<ul>
-<li>-d bridge ：参数指定 Docker 网络类型，有 bridge、overlay。</li>
-<li>react-notes 为我们的自定义网络的名字</li>
-</ul>
-<p>5）暂停或者删除之前开启的 Redis 容器，运行一个新的 Redis 容器并连接到新建的 react-notes 网络：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token function">docker</span> run <span class="token parameter variable">-p</span> <span class="token number">6379</span>:6379 <span class="token parameter variable">--network</span> react-notes redis redis-server
+												<p>
+													由于这个项目需要 Redis
+													服务，我们新开一个命令行运行：<code>redis-server</code>,如果没有安装
+													redis，需要先安装一下 Redis。
+												</p>
+												<p></p>
+												<h2 id="容器化部署">
+													<a class="anchor" href="#容器化部署">容器化部署</a>
+												</h2>
+												<p>
+													使用上个文章的知识，我们现在把 Redis 和 Next.js 项目
+													容器化部署
+												</p>
+												<ol>
+													<li>
+														拉取 Redis 镜像：<code>docker pull redis</code>
+													</li>
+													<li>
+														关闭本地命令行启动的 Redis ，使用 Docker 启动
+														Redis：<code
+															>docker run -p 6379:6379 redis redis-server</code
+														>
+														关闭本地的Redis 后，我们的项目刷新是会报错的：
+														<!-- -->使用 Docker 启动 Redis 后，就恢复了
+													</li>
+													<li>
+														我们完成了 Redis 容器化，我们现在把 Next.js
+														项目也新开一个容器进行部署，但是每个容器都是一个单独的隔离空间。这时候<strong
+															>即将容器化部署的 Next.js 服务就访问不到我们的
+															Redis 服务</strong
+														>。那么我们就需要将两个容器服务连接起来，Docker
+														可以将容器加入<a href="%E9%80%9A%E4%B9%89"
+															>自定义的 Docker 网络</a
+														>的方式来连接多个容器。
+													</li>
+												</ol>
+												<blockquote>
+													<p>
+														Docker
+														支持自定义网络，这里我们使用桥接网络来连接多个容器，容器间就可以通信了！
+													</p>
+												</blockquote>
+												<ol start="4">
+													<li>
+														创建一个 自定义 Docker 网络：<code
+															>docker network create -d bridge react-notes</code
+														>
+													</li>
+												</ol>
+												<ul>
+													<li>
+														-d bridge ：参数指定 Docker 网络类型，有
+														bridge、overlay。
+													</li>
+													<li>react-notes 为我们的自定义网络的名字</li>
+												</ul>
+												<p>
+													5）暂停或者删除之前开启的 Redis 容器，运行一个新的
+													Redis 容器并连接到新建的 react-notes 网络：
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token function">docker</span> run <span class="token parameter variable">-p</span> <span class="token number">6379</span>:6379 <span class="token parameter variable">--network</span> react-notes redis redis-server
 </span></code></pre>
-<p>6）查找 redis 容器的 IP 地址：<code>docker network inspect react-notes</code>得到 IPv4Address 的 host 将其设置为 lib/redis.js 的 Redis host</p>
-<p></p>
-<p>7） 为 Next.js 项目创建 Dockerfile，上篇文章讲了每行命令的含义</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">FROM node:18-alpine
+												<p>
+													6）查找 redis 容器的 IP 地址：<code
+														>docker network inspect react-notes</code
+													>得到 IPv4Address 的 host 将其设置为 lib/redis.js 的
+													Redis host
+												</p>
+												<p></p>
+												<p>
+													7） 为 Next.js 项目创建
+													Dockerfile，上篇文章讲了每行命令的含义
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line">FROM node:18-alpine
 </span><span class="code-line">WORKDIR /app
 </span><span class="code-line">COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
 </span><span class="code-line">RUN <span class="token function">npm</span> <span class="token function">install</span> <span class="token parameter variable">--registry</span><span class="token operator">=</span>https://registry.npmmirror.com
 </span><span class="code-line">CMD  <span class="token function">npm</span> run build <span class="token operator">&amp;&amp;</span> <span class="token function">npm</span> start
 </span><span class="code-line">EXPOSE <span class="token number">3000</span>
 </span></code></pre>
-<p>8）有了 Dockerfile ，我们就可以为项目打包镜像。执行：<code>docker image build -t next-react-notes-demo:0.0.1 .</code>创建镜像</p>
-<ol start="9">
-<li>运行打包好的镜像，生成一个实例：<code>docker run -p 4000:3000 --network react-notes next-react-notes-demo:0.0.1</code> 本地访问 <a href="http://localhost:4000">http://localhost:4000</a> 我们应该可以看到页面，但是我们这样设置网络，设置每个容器，是不是很麻烦？没错我们可以使用** Docker Compose 来帮我们管理多个容器**</li>
-</ol>
-<h2 id="docker-compose"><a class="anchor" href="#docker-compose">Docker Compose</a></h2>
-<blockquote>
-<p>Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过编写一个 docker-compose.yml 文件，你可以在其中定义所有服务、网络和卷，然后使用一个命令就能启动和管理这些服务。</p>
-</blockquote>
-<p>三个核心概念：</p>
-<ul>
-<li>服务：也就是容器，例如上面的前端网页服务和 Redis 服务</li>
-<li>网络：Docker Compose 会创建一个默认网络让所有服务互相连接，你也可以定义自定义网络</li>
-<li>卷：用于在服务（容器）之间共享和持久化数据。可以在开头创建数据卷，给服务使用</li>
-</ul>
-<p>先查看是否安装了 Docker Compose，如果是安装 Docker 客户端，是会默认安装上的</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token function">docker-compose</span> <span class="token parameter variable">--version</span>
+												<p>
+													8）有了 Dockerfile
+													，我们就可以为项目打包镜像。执行：<code
+														>docker image build -t next-react-notes-demo:0.0.1
+														.</code
+													>创建镜像
+												</p>
+												<ol start="9">
+													<li>
+														运行打包好的镜像，生成一个实例：<code
+															>docker run -p 4000:3000 --network react-notes
+															next-react-notes-demo:0.0.1</code
+														>
+														本地访问
+														<a href="http://localhost:4000"
+															>http://localhost:4000</a
+														>
+														我们应该可以看到页面，但是我们这样设置网络，设置每个容器，是不是很麻烦？没错我们可以使用**
+														Docker Compose 来帮我们管理多个容器**
+													</li>
+												</ol>
+												<h2 id="docker-compose">
+													<a class="anchor" href="#docker-compose"
+														>Docker Compose</a
+													>
+												</h2>
+												<blockquote>
+													<p>
+														Docker Compose 是一个用于定义和运行多容器 Docker
+														应用的工具。通过编写一个 docker-compose.yml
+														文件，你可以在其中定义所有服务、网络和卷，然后使用一个命令就能启动和管理这些服务。
+													</p>
+												</blockquote>
+												<p>三个核心概念：</p>
+												<ul>
+													<li>
+														服务：也就是容器，例如上面的前端网页服务和 Redis
+														服务
+													</li>
+													<li>
+														网络：Docker Compose
+														会创建一个默认网络让所有服务互相连接，你也可以定义自定义网络
+													</li>
+													<li>
+														卷：用于在服务（容器）之间共享和持久化数据。可以在开头创建数据卷，给服务使用
+													</li>
+												</ul>
+												<p>
+													先查看是否安装了 Docker Compose，如果是安装 Docker
+													客户端，是会默认安装上的
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token function">docker-compose</span> <span class="token parameter variable">--version</span>
 </span><span class="code-line"><span class="token comment"># 应该能看到：Docker Compose version v2.27.0-desktop.2 这样的返回</span>
 </span></code></pre>
-<p>我们编写 docker-compose.yml 文件（模板文件的各种指令含义可以参考 <a href="https://yeasy.gitbook.io/docker_practice/compose/compose_file%EF%BC%89%EF%BC%9A">https://yeasy.gitbook.io/docker_practice/compose/compose_file）：</a></p>
-<pre class="language-yml"><code class="language-yml code-highlight"><span class="code-line"><span class="token comment"># 使用 Docker Compose 文件格式版本 3.8。这版本支持新的功能和属性，同时确保与 Docker 引擎的兼容性。</span>
+												<p>
+													我们编写 docker-compose.yml
+													文件（模板文件的各种指令含义可以参考
+													<a
+														href="https://yeasy.gitbook.io/docker_practice/compose/compose_file%EF%BC%89%EF%BC%9A"
+														>https://yeasy.gitbook.io/docker_practice/compose/compose_file）：</a
+													>
+												</p>
+												<pre
+													class="language-yml"
+												><code class="language-yml code-highlight"><span class="code-line"><span class="token comment"># 使用 Docker Compose 文件格式版本 3.8。这版本支持新的功能和属性，同时确保与 Docker 引擎的兼容性。</span>
 </span><span class="code-line"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">&#x27;3.8&#x27;</span>
 </span><span class="code-line"><span class="token comment"># 定义了应用的所有服务，每个服务对应一个容器。</span>
 </span><span class="code-line"><span class="token key atrule">services</span><span class="token punctuation">:</span>
@@ -79,50 +637,118 @@
 </span><span class="code-line">     <span class="token comment"># nextapp 服务依赖 redis 服务。这意味着在启动 nextapp 服务之前，Docker Compose 会先启动 redis 服务。    depends_on:</span>
 </span><span class="code-line">      <span class="token punctuation">-</span> redis
 </span></code></pre>
-<p>我为每行添加了注释，使用的时候注释记得删除掉，不然会有问题，我们还需要之前编写的 Dockerfile ,我们还需要修改 redis.js</p>
-<pre class="language-js"><code class="language-js code-highlight"><span class="code-line"><span class="token keyword">const</span> redis <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Redis</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+												<p>
+													我为每行添加了注释，使用的时候注释记得删除掉，不然会有问题，我们还需要之前编写的
+													Dockerfile ,我们还需要修改 redis.js
+												</p>
+												<pre
+													class="language-js"
+												><code class="language-js code-highlight"><span class="code-line"><span class="token keyword">const</span> redis <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Redis</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
 </span><span class="code-line">	<span class="token literal-property property">host</span><span class="token operator">:</span> <span class="token string">&#x27;redis&#x27;</span>
 </span><span class="code-line"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span></code></pre>
-<p>我们这时候命令行运行 Docker Compose 脚本：<code>docker-compose up</code> docker-compose up 会尝试自动完成包括</p>
-<ul>
-<li>构建镜像</li>
-<li>（重新）创建服务</li>
-<li>启动服务</li>
-<li>关联服务相关容器的一系列操作</li>
-</ul>
-<p>现在我们的项目应该启动了，依然是：<a href="http://localhost:4000%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E7%9C%8B%E5%88%B0%EF%BC%9A">http://localhost:4000，我们会看到：</a> <!-- --> <strong>之前我们做的事情，现在只需要一行命令就都帮我们搞定了</strong> 真好，加入每次部署使用 Docker Compose 节省时间是 1 分钟（应该肯定不止吧！)，那帮所有使用 Docker 的人节省的时间那得是多少呀！这就是技术的魅力，省下来的时间玩游戏多香呀！ 现在还有一个问题，就是 Redis 中的数据都在容器中，如果容器销毁，产生的数据也都随之消失，那如果是线上，这肯定不行的呀，数据才是最重要的，得要把容器的数据同步备份到主机中，即使容器销毁，数据也还在，那就需要数据卷 VOLUME 了，让我们继续往下看</p>
-<h2 id="数据卷"><a class="anchor" href="#数据卷">数据卷</a></h2>
-<blockquote>
-<p>数据卷（Volumes）是 Docker 提供的一种用于在容器和主机之间共享数据的机制。数据卷可以独立于容器的生命周期存在，这意味着即使容器删除了，数据卷中的数据也不会丢失。它的特点：</p>
-<ol>
-<li><strong>持久性</strong>：数据卷的数据会一直保留，直到明确删除，即使容器删除，数据仍然存在。</li>
-<li><strong>共享和重用</strong>：数据卷可以在多个容器之间共享和重用。</li>
-<li><strong>备份和恢复</strong>：可以轻松地对数据卷进行备份和恢复操作。</li>
-<li><strong>高效</strong>：数据卷的性能优于直接在容器内存储数据。</li>
-</ol>
-</blockquote>
-<p>上面部署的项目，Redis 的数据是没有存储到主机的，我们验证一下：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看 redis 容器的 container id</span>
+												<p>
+													我们这时候命令行运行 Docker Compose 脚本：<code
+														>docker-compose up</code
+													>
+													docker-compose up 会尝试自动完成包括
+												</p>
+												<ul>
+													<li>构建镜像</li>
+													<li>（重新）创建服务</li>
+													<li>启动服务</li>
+													<li>关联服务相关容器的一系列操作</li>
+												</ul>
+												<p>
+													现在我们的项目应该启动了，依然是：<a
+														href="http://localhost:4000%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E7%9C%8B%E5%88%B0%EF%BC%9A"
+														>http://localhost:4000，我们会看到：</a
+													>
+													<!-- -->
+													<strong
+														>之前我们做的事情，现在只需要一行命令就都帮我们搞定了</strong
+													>
+													真好，加入每次部署使用 Docker Compose 节省时间是 1
+													分钟（应该肯定不止吧！)，那帮所有使用 Docker
+													的人节省的时间那得是多少呀！这就是技术的魅力，省下来的时间玩游戏多香呀！
+													现在还有一个问题，就是 Redis
+													中的数据都在容器中，如果容器销毁，产生的数据也都随之消失，那如果是线上，这肯定不行的呀，数据才是最重要的，得要把容器的数据同步备份到主机中，即使容器销毁，数据也还在，那就需要数据卷
+													VOLUME 了，让我们继续往下看
+												</p>
+												<h2 id="数据卷">
+													<a class="anchor" href="#数据卷">数据卷</a>
+												</h2>
+												<blockquote>
+													<p>
+														数据卷（Volumes）是 Docker
+														提供的一种用于在容器和主机之间共享数据的机制。数据卷可以独立于容器的生命周期存在，这意味着即使容器删除了，数据卷中的数据也不会丢失。它的特点：
+													</p>
+													<ol>
+														<li>
+															<strong>持久性</strong
+															>：数据卷的数据会一直保留，直到明确删除，即使容器删除，数据仍然存在。
+														</li>
+														<li>
+															<strong>共享和重用</strong
+															>：数据卷可以在多个容器之间共享和重用。
+														</li>
+														<li>
+															<strong>备份和恢复</strong
+															>：可以轻松地对数据卷进行备份和恢复操作。
+														</li>
+														<li>
+															<strong>高效</strong
+															>：数据卷的性能优于直接在容器内存储数据。
+														</li>
+													</ol>
+												</blockquote>
+												<p>
+													上面部署的项目，Redis
+													的数据是没有存储到主机的，我们验证一下：
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看 redis 容器的 container id</span>
 </span><span class="code-line"><span class="token function">docker</span> container <span class="token function">ls</span>
 </span><span class="code-line"><span class="token comment"># 进入想要进入的容器 （这里是进入 Redis 容器）</span>
 </span><span class="code-line"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> 6ddf48e06645 <span class="token function">bash</span>
 </span></code></pre>
-<p>终端效果： <!-- --> 我们执行一些 Redis 命令，来删除一条数据</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">redis-cli
+												<p>
+													终端效果：
+													<!-- -->
+													我们执行一些 Redis 命令，来删除一条数据
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line">redis-cli
 </span><span class="code-line">keys *
 </span><span class="code-line">hgetAll notes
 </span><span class="code-line">hdel notes <span class="token number">1702459182837</span>
 </span><span class="code-line">hgetAll notes
 </span></code></pre>
-<p></p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看 Next.js 项目的 container id</span>
+												<p></p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看 Next.js 项目的 container id</span>
 </span><span class="code-line"><span class="token function">docker</span> container <span class="token function">ls</span>
 </span><span class="code-line"><span class="token comment"># 重启 Next.js 容器</span>
 </span><span class="code-line"><span class="token function">docker</span> container restart 74776b12c032
 </span></code></pre>
-<p>我们能看到： <!-- --> 这时候，如果我们把所有容器都删除（Redis 容器也删除了），重新运行： 先执行：<code>docker-compose down</code>，再执行<code>docker-compose up</code> <!-- --> 我们会发现数据又恢复到了三条，那我现在希望我删除能够一直生效，就需要使用到 数据卷（volumes)的功能，它会将数据存在主机文件系统的某个区域，现在我们在项目的根目录下建立一个名为 redis 的文件夹，修改 docker-compose.yml如下：</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">version: <span class="token string">&#x27;3.8&#x27;</span>
+												<p>
+													我们能看到：
+													<!-- -->
+													这时候，如果我们把所有容器都删除（Redis
+													容器也删除了），重新运行： 先执行：<code
+														>docker-compose down</code
+													>，再执行<code>docker-compose up</code>
+													<!-- -->
+													我们会发现数据又恢复到了三条，那我现在希望我删除能够一直生效，就需要使用到
+													数据卷（volumes)的功能，它会将数据存在主机文件系统的某个区域，现在我们在项目的根目录下建立一个名为
+													redis 的文件夹，修改 docker-compose.yml如下：
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line">version: <span class="token string">&#x27;3.8&#x27;</span>
 </span><span class="code-line">services:
 </span><span class="code-line">
 </span><span class="code-line">  redis:
@@ -140,8 +766,16 @@
 </span><span class="code-line">    depends_on:
 </span><span class="code-line">      - redis
 </span></code></pre>
-<p>./redis:/data 是通过 : 进行分割，左边是主机的地址，右边是 容器的地址，我们会发现很多地方都是这样，左边是宿主机的信息，右边是容器的。 我们配置这个后，容器中的数据就会同步到主机，也就实现了<strong>数据持久化</strong>。 我们删除掉之前的镜像，再重新构建的镜像，因为数据做了持久化，再重复一遍刚才的操作再次打开地址的时候，数据如果是两条，那么数据卷就生效，我们动手试一下吧！</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看镜像</span>
+												<p>
+													./redis:/data 是通过 :
+													进行分割，左边是主机的地址，右边是
+													容器的地址，我们会发现很多地方都是这样，左边是宿主机的信息，右边是容器的。
+													我们配置这个后，容器中的数据就会同步到主机，也就实现了<strong>数据持久化</strong>。
+													我们删除掉之前的镜像，再重新构建的镜像，因为数据做了持久化，再重复一遍刚才的操作再次打开地址的时候，数据如果是两条，那么数据卷就生效，我们动手试一下吧！
+												</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line"><span class="token comment"># 查看镜像</span>
 </span><span class="code-line"><span class="token function">docker</span> image <span class="token function">ls</span>
 </span><span class="code-line"><span class="token comment"># 删除镜像</span>
 </span><span class="code-line"><span class="token function">docker</span> rmi next-react-demo-nextapp
@@ -150,26 +784,54 @@
 </span><span class="code-line"><span class="token comment"># 重新执行 docker compose</span>
 </span><span class="code-line"><span class="token function">docker-compose</span> up
 </span></code></pre>
-<p>
-去删数据：
-<!-- -->
-重新启动 nextapp 容器，然后刷新 <a href="http://localhost:4000">http://localhost:4000</a>
-<!-- -->
-我们删除关闭所有容器，然后重启。会看到数据依然是两条。那数据持久化就完成啦！ 如果细心的小伙伴，可以看到我们主机的 Redis 目录下 多了一个 文件
-<!-- -->
-这个文件是二进制文件，正是 Redis 数据的全量备份。运行 <code>docker-compose up</code> 的时候，redis 又会读取加载这个文件，也就实现了数据持久化。 dump.rdb 这个文件就是 Redis 的持久化机制的体现。Redis 的持久化机制有两种，</p>
-<ul>
-<li>一种是 RDB（Redis Database），RDB 是一次快照，也是默认值</li>
-<li>一种是 AOF（Append Only File）。开启 Redis 容器时的 --appendonly 参数开启那就是 AOF。</li>
-</ul>
-<h3 id="数据卷的其他命令"><a class="anchor" href="#数据卷的其他命令">数据卷的其他命令</a></h3>
-<ul>
-<li>创建：<code>docker volume create my-vol</code></li>
-<li>查看：<code>docker volume ls</code></li>
-<li>查看数据卷对应主机位置：<code>docker volume inspect my-vol</code></li>
-</ul>
-<p>在 docker-compose.yml 创建数据卷</p>
-<pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line">version: <span class="token string">&#x27;3.8&#x27;</span>
+												<p>
+													去删数据：
+													<!-- -->
+													重新启动 nextapp 容器，然后刷新
+													<a href="http://localhost:4000"
+														>http://localhost:4000</a
+													>
+													<!-- -->
+													我们删除关闭所有容器，然后重启。会看到数据依然是两条。那数据持久化就完成啦！
+													如果细心的小伙伴，可以看到我们主机的 Redis 目录下
+													多了一个 文件
+													<!-- -->
+													这个文件是二进制文件，正是 Redis 数据的全量备份。运行
+													<code>docker-compose up</code> 的时候，redis
+													又会读取加载这个文件，也就实现了数据持久化。 dump.rdb
+													这个文件就是 Redis 的持久化机制的体现。Redis
+													的持久化机制有两种，
+												</p>
+												<ul>
+													<li>
+														一种是 RDB（Redis Database），RDB
+														是一次快照，也是默认值
+													</li>
+													<li>
+														一种是 AOF（Append Only File）。开启 Redis 容器时的
+														--appendonly 参数开启那就是 AOF。
+													</li>
+												</ul>
+												<h3 id="数据卷的其他命令">
+													<a class="anchor" href="#数据卷的其他命令"
+														>数据卷的其他命令</a
+													>
+												</h3>
+												<ul>
+													<li>
+														创建：<code>docker volume create my-vol</code>
+													</li>
+													<li>查看：<code>docker volume ls</code></li>
+													<li>
+														查看数据卷对应主机位置：<code
+															>docker volume inspect my-vol</code
+														>
+													</li>
+												</ul>
+												<p>在 docker-compose.yml 创建数据卷</p>
+												<pre
+													class="language-bash"
+												><code class="language-bash code-highlight"><span class="code-line">version: <span class="token string">&#x27;3.8&#x27;</span>
 </span><span class="code-line"><span class="token comment"># 创建名为 redis-data 数据卷</span>
 </span><span class="code-line">volumes:
 </span><span class="code-line">  redis-data:
@@ -192,10 +854,195 @@
 </span><span class="code-line">    depends_on:
 </span><span class="code-line">      - redis
 </span></code></pre>
-<p>到这里，本节就结束了，但是这次部署，依然有两个问题？</p>
-<ol>
-<li>打包后的 next.js 镜像很大, 我们需要优化</li>
-<li>目前依然只能本地访问，我们部署是为了让所有人都可以访问，但是没有做到。</li>
-</ol>
-<p>下一节，我们深度使用 Docker，解决这两个问题，到这里，我发现 Docker 命令还是很多的，如果不是经常使用，根本就记不住（ps：虽然可以使用 Docker desktop 快捷操作）。如果忘记命令，这里推荐查阅这个中文文档，非常大而全的手册：<a href="https://yeasy.gitbook.io/docker_practice%EF%BC%8C%E5%BE%88%E5%BF%AB%E8%83%BD%E6%90%9C%E7%B4%A2%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81">https://yeasy.gitbook.io/docker_practice，很快能搜索到想要的代码</a>
-</p></div></article><div class="flex px-4 justify-between mt-8"><a class="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2" href="/docs/posts/redis-learn-1">前端程序员学习 Redis</a><a class="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2" href="/docs/posts/docker-learn-1">前端程序员学习 Docker 的笔记 （...</a></div></div></div></div></div></div></div><!--/$--></main><!--$--><footer class="mt-32"><div class="sm:px-8"><div class="mx-auto max-w-7xl lg:px-8"><div class="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40"><div class="relative px-4 sm:px-8 lg:px-12"><div class="mx-auto max-w-2xl lg:max-w-5xl"><div class="flex flex-col items-center justify-between gap-6 sm:flex-row"><p class="text-sm text-zinc-500/80 dark:text-zinc-400/80">© <!-- -->2025<!-- --> <!-- -->William Sun<!-- --> 网站已开源：<a class="inline-flex place-items-baseline items-baseline gap-0.5 pr-0.5 text-[0.95em] leading-none font-semibold text-zinc-800 hover:underline dark:text-zinc-100" rel="noopener noreferrer" target="_blank" href="https://github.com/coderPerseus/blog"><span class="mr-px inline-flex translate-y-0.5 dark:invert"><img alt="" aria-hidden="true" loading="lazy" width="16" height="16" decoding="async" data-nimg="1" class="inline h-4 w-4 rounded" style="color:transparent" src="/docs/_next/static/media/github.ee3e4451.png"/></span>William Sun<svg width="0.95em" height="0.95em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="inline-block translate-y-0.5" aria-hidden="true"><path d="M20 13.5001C20 14.8946 20 15.5919 19.8618 16.1673C19.4229 17.9956 17.9955 19.423 16.1672 19.8619C15.5918 20.0001 14.8945 20.0001 13.5 20.0001H12C9.19974 20.0001 7.79961 20.0001 6.73005 19.4551C5.78924 18.9758 5.02433 18.2109 4.54497 17.2701C4 16.2005 4 14.8004 4 12.0001V11.5001C4 9.17035 4 8.0055 4.3806 7.08664C4.88807 5.8615 5.86144 4.88813 7.08658 4.38066C7.86344 4.05888 8.81614 4.00915 10.5 4.00146M19.7597 9.45455C20.0221 7.8217 20.0697 6.16984 19.9019 4.54138C19.8898 4.42328 19.838 4.31854 19.7597 4.24027M19.7597 4.24027C19.6815 4.16201 19.5767 4.11023 19.4586 4.09806C17.8302 3.93025 16.1783 3.97792 14.5455 4.24027M19.7597 4.24027L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a></p><nav class="flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200"><a class="transition hover:text-violet-500 dark:hover:text-violet-400" href="/docs">首页</a><a class="transition hover:text-violet-500 dark:hover:text-violet-400" href="/docs/posts">博客</a><a class="transition hover:text-violet-500 dark:hover:text-violet-400" href="/docs/about">关于我</a></nav></div></div></div><div class="relative px-4 sm:px-8 lg:px-12 mt-6"><div class="mx-auto max-w-2xl lg:max-w-5xl"><div class="flex flex-col items-center justify-start gap-2 sm:flex-row">欢迎 👏🏻 你的访问</div></div></div><div class="flex justify-center p-6 flex-col sm:flex-row"><a target="_blank" class="text-blue-600 flex justify-center items-center" href="https://beian.miit.gov.cn/"><img alt="备案" loading="lazy" width="18" height="18" decoding="async" data-nimg="1" class="mr-1 " style="color:transparent" src="/docs/police.png"/>辽公网安备21021202000334号</a><a target="_blank" class="text-blue-600 pl-6 flex justify-center items-center" href="https://beian.miit.gov.cn/">辽ICP备2021012379号-1</a></div></div></div></div></footer><!--/$--></div><script src="/docs/_next/static/chunks/webpack-583a4211ac78a2fe.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0]);self.__next_f.push([2,null])</script><script>self.__next_f.push([1,"1:HL[\"/docs/_next/static/css/8cd2eb158671e11e.css\",\"style\"]\n2:HL[\"/docs/_next/static/css/cc5160e2067b0cef.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"3:I[1439,[],\"\"]\n5:I[7401,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"594\",\"static/chunks/594-71c3251836d38f7c.js\",\"878\",\"static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js\"],\"default\"]\n6:I[2219,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"594\",\"static/chunks/594-71c3251836d38f7c.js\",\"878\",\"static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js\"],\"\"]\n7:I[6814,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"594\",\"static/chunks/594-71c3251836d38f7c.js\",\"878\",\"static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js\"],\"Separator\"]\n8:I[8501,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"594\",\"static/chunks/594-71c3251836d38f7c.js\",\"878\",\"static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js\"],\"default\"]\n9:I[1473,[],\"\"]\nb:I[9658,[],\"\"]\nc:I[3205,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"531\",\"static/chunks/531-f976d425ce9a81a1.js\",\"103\",\"static/chunks/103-1875d9378f90876a.js\",\"868\",\"static/chunks/868-9c31f7c0009643d5.js\",\"814\",\"static/chunks/app/(app)/layout-66a850f3e6447c7d.js\"],\"GlobalBg\"]\nd:I[7726,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"531\",\"static/chunks/531-f976d425ce9a81a1.js\",\"103\",\"static/chunks/103-1875d9378f90876a.js\",\"868\",\"static/chunks/868-9c31f7c0009643d5.js\",\"814\",\"static/chunks/app/(app)/layout-66a850f3e6447c7d.js\"],\"Head"])</script><script>self.__next_f.push([1,"er\"]\ne:\"$Sreact.suspense\"\nf:I[4662,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"531\",\"static/chunks/531-f976d425ce9a81a1.js\",\"103\",\"static/chunks/103-1875d9378f90876a.js\",\"868\",\"static/chunks/868-9c31f7c0009643d5.js\",\"814\",\"static/chunks/app/(app)/layout-66a850f3e6447c7d.js\"],\"PeekabooLink\"]\n10:I[4543,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"138\",\"static/chunks/138-7f27ef5cd2caf4b4.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"594\",\"static/chunks/594-71c3251836d38f7c.js\",\"878\",\"static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js\"],\"Image\"]\n11:I[2962,[\"245\",\"static/chunks/245-4d9cc7d916e46c69.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"185\",\"static/chunks/app/layout-d7953313cc6bdbf6.js\"],\"default\"]\n12:I[7808,[\"245\",\"static/chunks/245-4d9cc7d916e46c69.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"185\",\"static/chunks/app/layout-d7953313cc6bdbf6.js\"],\"default\"]\n13:I[5433,[\"245\",\"static/chunks/245-4d9cc7d916e46c69.js\",\"857\",\"static/chunks/857-68a2fd358cb70760.js\",\"185\",\"static/chunks/app/layout-d7953313cc6bdbf6.js\"],\"ThemeProvider\"]\n14:I[3970,[\"779\",\"static/chunks/779-ad4ead70309b9a20.js\",\"739\",\"static/chunks/739-1be71c4fce382004.js\",\"160\",\"static/chunks/app/not-found-8b889a2f44e80cbe.js\"],\"default\"]\n16:I[2716,[],\"\"]\na:[\"id\",\"docker-learn-2\",\"d\"]\n17:[]\n"])</script><script>self.__next_f.push([1,"0:[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/docs/_next/static/css/8cd2eb158671e11e.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]],[\"$\",\"$L3\",null,{\"buildId\":\"weVExY6-jENQW9lG_RHEX\",\"assetPrefix\":\"/docs\",\"initialCanonicalUrl\":\"/posts/docker-learn-2\",\"initialTree\":[\"\",{\"children\":[\"(app)\",{\"children\":[\"posts\",{\"children\":[[\"id\",\"docker-learn-2\",\"d\"],{\"children\":[\"__PAGE__?{\\\"id\\\":\\\"docker-learn-2\\\"}\",{}]}]}]}]},\"$undefined\",\"$undefined\",true],\"initialSeedData\":[\"\",{\"children\":[\"(app)\",{\"children\":[\"posts\",{\"children\":[[\"id\",\"docker-learn-2\",\"d\"],{\"children\":[\"__PAGE__\",{},[[\"$L4\",[\"$\",\"div\",null,{\"className\":\"sm:px-8 mt-10 lg:mt-16\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-7xl lg:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"relative px-4 sm:px-8 lg:px-12 !px-0\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-2xl lg:max-w-5xl\",\"children\":[\"$\",\"div\",null,{\"className\":\"w-full md:flex md:justify-between xl:relative gap-1\",\"children\":[[\"$\",\"aside\",null,{\"className\":\"hidden w-[160px] shrink-0 lg:block\",\"children\":[\"$\",\"div\",null,{\"className\":\"sticky top-2 pt-16\",\"children\":[\"$\",\"$L5\",null,{}]}]}],[\"$\",\"div\",null,{\"className\":\"max-w-4xl md:flex-1 md:shrink-0 \",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/posts\",\"className\":\"group mb-8 flex h-10 w-10 items-center justify-center bg-white dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:hover:border-zinc-700 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20\",\"aria-label\":\"返回博客页面\",\"children\":[\"$\",\"svg\",null,{\"width\":\"1em\",\"height\":\"1em\",\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"className\":\"h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400\",\"children\":[\"$\",\"path\",null,{\"d\":\"M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12\",\"stroke\":\"currentColor\",\"strokeWidth\":\"2\",\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\"}]}]}],[\"$\",\"article\",null,{\"data-postid\":\"posts/docker-learn-2.mdx\",\"className\":\"rich-text-viewer prose px-4\",\"children\":[[\"$\",\"div\",null,{\"className\":\"mb-8 text-center\",\"children\":[\"$undefined\",[\"$\",\"h1\",null,{\"className\":\"text-3xl font-bold\",\"children\":\"前端程序员学习 Docker 的笔记 （二）\"}],[\"$\",\"div\",null,{\"className\":\"flex justify-center rounded-md  h-5 items-center space-x-4 text-sm\",\"children\":[[\"$\",\"time\",null,{\"dateTime\":\"2024-05-19T00:00:00.000Z\",\"className\":\"mb-1 text-xs text-gray-600\",\"children\":\"2024-05-19\"}],[\"$\",\"$L7\",null,{\"orientation\":\"vertical\"}],[\"$\",\"span\",null,{\"className\":\"mb-1 text-xs text-gray-600 flex items-center\",\"children\":[[\"$\",\"svg\",null,{\"width\":\"1em\",\"height\":\"1em\",\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"className\":\"mr-2\",\"children\":[\"$\",\"path\",null,{\"d\":\"M10.1912 12.5508C10.3071 12.1942 10.3071 11.8058 10.1912 11.4492C9.22165 8.46673 4.40272 8.00546 4.01443 4.48436C3.93458 3.76031 4.18955 3.04013 4.69671 2.55723C5.28193 2 6.62415 2 9.30861 2H14.6914C17.3759 2 18.7181 2 19.3033 2.55723C19.8104 3.04013 20.0654 3.76031 19.9856 4.48436C19.5973 8.00546 14.7784 8.46673 13.8088 11.4492C13.6929 11.8058 13.6929 12.1942 13.8088 12.5508C14.7784 15.5333 19.5973 15.9945 19.9856 19.5156C20.0654 20.2397 19.8104 20.9599 19.3033 21.4428C18.7181 22 17.3758 22 14.6914 22L9.3086 22C6.62415 22 5.28192 22 4.69671 21.4428C4.18955 20.9599 3.93458 20.2397 4.01442 19.5156C4.40272 15.9945 9.22164 15.5333 10.1912 12.5508Z\",\"stroke\":\"currentColor\",\"strokeWidth\":\"2\",\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\"}]}],\" \",10,\" 分钟\"]}]]}],[\"$\",\"div\",null,{\"className\":\"flex w-full justify-center gap-2 mt-2\",\"children\":[[\"$\",\"span\",null,{\"className\":\"inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800\",\"children\":\"docker\"}],[\"$\",\"span\",null,{\"className\":\"inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800\",\"children\":\"笔记\"}]]}],[\"$\",\"div\",null,{\"className\":\"bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4\",\"children\":[[\"$\",\"svg\",null,{\"width\":\"1em\",\"height\":\"1em\",\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"className\":\"absolute left-4 top-4\",\"children\":[\"$\",\"path\",null,{\"d\":\"M8 8H8.01M3.11768 7.65876L3.07447 8.47968C2.99172 10.0518 2.95035 10.8379 3.1001 11.5811C3.23281 12.2399 3.47524 12.8716 3.81725 13.45C4.20315 14.1026 4.75976 14.6593 5.87297 15.7725L8.29448 18.194C9.6106 19.5101 10.2687 20.1682 10.9743 20.5277C12.4003 21.2543 14.0881 21.2543 15.5142 20.5277C16.2198 20.1682 16.8778 19.5101 18.194 18.194C19.5101 16.8778 20.1682 16.2198 20.5277 15.5142C21.2543 14.0881 21.2543 12.4003 20.5277 10.9743C20.1682 10.2687 19.5101 9.6106 18.194 8.29448L15.7725 5.87298C14.6593 4.75976 14.1026 4.20315 13.45 3.81725C12.8716 3.47524 12.2399 3.23281 11.5811 3.1001C10.8379 2.95035 10.0518 2.99172 8.47968 3.07447L7.65876 3.11768C6.13396 3.19793 5.37156 3.23805 4.78079 3.55489C4.26041 3.83397 3.83397 4.26041 3.55489 4.78079C3.23805 5.37156 3.19793 6.13396 3.11768 7.65876ZM8.4895 7.98767C8.4895 8.26381 8.26564 8.48767 7.9895 8.48767C7.71336 8.48767 7.4895 8.26381 7.4895 7.98767C7.4895 7.71153 7.71336 7.48767 7.9895 7.48767C8.26564 7.48767 8.4895 7.71153 8.4895 7.98767Z\",\"stroke\":\"currentColor\",\"strokeWidth\":\"2\",\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\"}]}],[\"$\",\"p\",null,{\"className\":\"text-gray-700 dark:text-gray-300\",\"children\":\"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读\"}]]}]]}],[\"$\",\"div\",null,{\"className\":\"js-toc-content\",\"children\":[[\"$\",\"p\",null,{\"children\":[\"大家好，我是阿星，上一个文章：\",[\"$\",\"a\",null,{\"href\":\"https://www.yuque.com/asgas/web_system/th4kazgysrzuktxn?view=doc_embed\",\"children\":\"更适合前端的 Docker 教程（一）\"}],\"，我分享了 Docker 基础，如何通过 Docker 容器化部署一个纯前端的项目，但是真实项目，肯定是离不开后端的，下面就以一个需要 nextjs + redis 技术的项目为例，来入门一下 \",[\"$\",\"code\",null,{\"children\":\"Docker Compose\"}]]}],\"\\n\",[\"$\",\"h2\",null,{\"id\":\"本地启动项目\",\"children\":[\"$\",\"a\",null,{\"className\":\"anchor\",\"href\":\"#本地启动项目\",\"children\":\"本地启动项目\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"我们先本地启动一下需要这些技术的项目，这里直接 git 拉取仓库就好：\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"git\"}],\" clone \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"-b\"}],\" day1 git@github.com:mqyqingfeng/next-react-notes-demo.git\\n\"]}]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"本地运行\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\"cd\"}],\" next-react-notes-demo \",[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\"\u0026\u0026\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"npm\"}],\" i \",[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\"\u0026\u0026\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"npm\"}],\" run dev\\n\"]}]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"由于这个项目需要 Redis 服务，我们新开一个命令行运行：\",[\"$\",\"code\",null,{\"children\":\"redis-server\"}],\",如果没有安装 redis，需要先安装一下 Redis。\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/b8b253c7c2224ddfbe8f5176993892cb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}]}],\"\\n\",[\"$\",\"h2\",null,{\"id\":\"容器化部署\",\"children\":[\"$\",\"a\",null,{\"className\":\"anchor\",\"href\":\"#容器化部署\",\"children\":\"容器化部署\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"使用上个文章的知识，我们现在把 Redis 和 Next.js 项目 容器化部署\"}],\"\\n\",[\"$\",\"ol\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"拉取 Redis 镜像：\",[\"$\",\"code\",null,{\"children\":\"docker pull redis\"}]]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"关闭本地命令行启动的 Redis ，使用 Docker 启动 Redis：\",[\"$\",\"code\",null,{\"children\":\"docker run -p 6379:6379 redis redis-server\"}],\" 关闭本地的Redis 后，我们的项目刷新是会报错的： \",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/9241bde347e74ddc84c25ffa1810554d~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\"使用 Docker 启动 Redis 后，就恢复了\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"我们完成了 Redis 容器化，我们现在把 Next.js 项目也新开一个容器进行部署，但是每个容器都是一个单独的隔离空间。这时候\",[\"$\",\"strong\",null,{\"children\":\"即将容器化部署的 Next.js 服务就访问不到我们的 Redis 服务\"}],\"。那么我们就需要将两个容器服务连接起来，Docker 可以将容器加入\",[\"$\",\"a\",null,{\"href\":\"%E9%80%9A%E4%B9%89\",\"children\":\"自定义的 Docker 网络\"}],\"的方式来连接多个容器。\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"blockquote\",null,{\"children\":[\"\\n\",[\"$\",\"p\",null,{\"children\":\"Docker 支持自定义网络，这里我们使用桥接网络来连接多个容器，容器间就可以通信了！\"}],\"\\n\"]}],\"\\n\",[\"$\",\"ol\",null,{\"start\":\"4\",\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"创建一个 自定义 Docker 网络：\",[\"$\",\"code\",null,{\"children\":\"docker network create -d bridge react-notes\"}]]}],\"\\n\"]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"-d bridge ：参数指定 Docker 网络类型，有 bridge、overlay。\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"react-notes 为我们的自定义网络的名字\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"5）暂停或者删除之前开启的 Redis 容器，运行一个新的 Redis 容器并连接到新建的 react-notes 网络：\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" run \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"-p\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token number\",\"children\":\"6379\"}],\":6379 \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"--network\"}],\" react-notes redis redis-server\\n\"]}]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"6）查找 redis 容器的 IP 地址：\",[\"$\",\"code\",null,{\"children\":\"docker network inspect react-notes\"}],\"得到 IPv4Address 的 host 将其设置为 lib/redis.js 的 Redis host\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/be8064969d0f4bc6a20695da99c63315~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"7） 为 Next.js 项目创建 Dockerfile，上篇文章讲了每行命令的含义\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"FROM node:18-alpine\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"WORKDIR /app\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"COPY \",[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\".\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\".\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"RUN \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"npm\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"install\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"--registry\"}],[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\"=\"}],\"https://registry.npmmirror.com\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"CMD  \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"npm\"}],\" run build \",[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\"\u0026\u0026\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"npm\"}],\" start\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"EXPOSE \",[\"$\",\"span\",null,{\"className\":\"token number\",\"children\":\"3000\"}],\"\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"8）有了 Dockerfile ，我们就可以为项目打包镜像。执行：\",[\"$\",\"code\",null,{\"children\":\"docker image build -t next-react-notes-demo:0.0.1 .\"}],\"创建镜像\"]}],\"\\n\",[\"$\",\"ol\",null,{\"start\":\"9\",\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"运行打包好的镜像，生成一个实例：\",[\"$\",\"code\",null,{\"children\":\"docker run -p 4000:3000 --network react-notes next-react-notes-demo:0.0.1\"}],\" 本地访问 \",[\"$\",\"a\",null,{\"href\":\"http://localhost:4000\",\"children\":\"http://localhost:4000\"}],\" 我们应该可以看到页面，但是我们这样设置网络，设置每个容器，是不是很麻烦？没错我们可以使用** Docker Compose 来帮我们管理多个容器**\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"h2\",null,{\"id\":\"docker-compose\",\"children\":[\"$\",\"a\",null,{\"className\":\"anchor\",\"href\":\"#docker-compose\",\"children\":\"Docker Compose\"}]}],\"\\n\",[\"$\",\"blockquote\",null,{\"children\":[\"\\n\",[\"$\",\"p\",null,{\"children\":\"Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过编写一个 docker-compose.yml 文件，你可以在其中定义所有服务、网络和卷，然后使用一个命令就能启动和管理这些服务。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"三个核心概念：\"}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"服务：也就是容器，例如上面的前端网页服务和 Redis 服务\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"网络：Docker Compose 会创建一个默认网络让所有服务互相连接，你也可以定义自定义网络\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"卷：用于在服务（容器）之间共享和持久化数据。可以在开头创建数据卷，给服务使用\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"先查看是否安装了 Docker Compose，如果是安装 Docker 客户端，是会默认安装上的\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker-compose\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"--version\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 应该能看到：Docker Compose version v2.27.0-desktop.2 这样的返回\"}],\"\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"我们编写 docker-compose.yml 文件（模板文件的各种指令含义可以参考 \",[\"$\",\"a\",null,{\"href\":\"https://yeasy.gitbook.io/docker_practice/compose/compose_file%EF%BC%89%EF%BC%9A\",\"children\":\"https://yeasy.gitbook.io/docker_practice/compose/compose_file）：\"}]]}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-yml\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-yml code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 使用 Docker Compose 文件格式版本 3.8。这版本支持新的功能和属性，同时确保与 Docker 引擎的兼容性。\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"version\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'3.8'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 定义了应用的所有服务，每个服务对应一个容器。\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"services\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 服务名称，可以任意字符串，这里是 Redis 服务\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"redis\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 指定镜像，从 Docker Hub 下载该镜像\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"image\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\" redis\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 将容器的 6379 端口映射到主机的 6379 端口。这使得在本地可以通过端口 6379 访问 Redis 服务。    ports:\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      \",[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"-\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'6379:6379'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 指定容器启动时执行的命令，这里是 redis-server，即启动 Redis 服务器\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"command\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\" redis\",[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"-\"}],\"server\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# nextjs 前端网页服务\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"nextapp\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 构建镜像时使用当前目录，nextapp 服务的镜像将根据当前目录中的 Dockerfile 构建。\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"build\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\" .\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 将容器的 3000 端口映射到主机的 4000 端口。\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    \",[\"$\",\"span\",null,{\"className\":\"token key atrule\",\"children\":\"ports\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\":\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"     \",[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"-\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'4000:3000'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"     \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# nextapp 服务依赖 redis 服务。这意味着在启动 nextapp 服务之前，Docker Compose 会先启动 redis 服务。    depends_on:\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      \",[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"-\"}],\" redis\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"我为每行添加了注释，使用的时候注释记得删除掉，不然会有问题，我们还需要之前编写的 Dockerfile ,我们还需要修改 redis.js\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-js\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-js code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token keyword\",\"children\":\"const\"}],\" redis \",[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\"=\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token keyword\",\"children\":\"new\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token class-name\",\"children\":\"Redis\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"(\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"{\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"\\t\",[\"$\",\"span\",null,{\"className\":\"token literal-property property\",\"children\":\"host\"}],[\"$\",\"span\",null,{\"className\":\"token operator\",\"children\":\":\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'redis'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\"}\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\")\"}],[\"$\",\"span\",null,{\"className\":\"token punctuation\",\"children\":\";\"}],\"\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"我们这时候命令行运行 Docker Compose 脚本：\",[\"$\",\"code\",null,{\"children\":\"docker-compose up\"}],\" docker-compose up 会尝试自动完成包括\"]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"构建镜像\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"（重新）创建服务\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"启动服务\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"关联服务相关容器的一系列操作\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"现在我们的项目应该启动了，依然是：\",[\"$\",\"a\",null,{\"href\":\"http://localhost:4000%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E7%9C%8B%E5%88%B0%EF%BC%9A\",\"children\":\"http://localhost:4000，我们会看到：\"}],\" \",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/5994d84dc8fb4a498ac5a3cec38f4bbb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\" \",[\"$\",\"strong\",null,{\"children\":\"之前我们做的事情，现在只需要一行命令就都帮我们搞定了\"}],\" 真好，加入每次部署使用 Docker Compose 节省时间是 1 分钟（应该肯定不止吧！)，那帮所有使用 Docker 的人节省的时间那得是多少呀！这就是技术的魅力，省下来的时间玩游戏多香呀！ 现在还有一个问题，就是 Redis 中的数据都在容器中，如果容器销毁，产生的数据也都随之消失，那如果是线上，这肯定不行的呀，数据才是最重要的，得要把容器的数据同步备份到主机中，即使容器销毁，数据也还在，那就需要数据卷 VOLUME 了，让我们继续往下看\"]}],\"\\n\",[\"$\",\"h2\",null,{\"id\":\"数据卷\",\"children\":[\"$\",\"a\",null,{\"className\":\"anchor\",\"href\":\"#数据卷\",\"children\":\"数据卷\"}]}],\"\\n\",[\"$\",\"blockquote\",null,{\"children\":[\"\\n\",[\"$\",\"p\",null,{\"children\":\"数据卷（Volumes）是 Docker 提供的一种用于在容器和主机之间共享数据的机制。数据卷可以独立于容器的生命周期存在，这意味着即使容器删除了，数据卷中的数据也不会丢失。它的特点：\"}],\"\\n\",[\"$\",\"ol\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"持久性\"}],\"：数据卷的数据会一直保留，直到明确删除，即使容器删除，数据仍然存在。\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"共享和重用\"}],\"：数据卷可以在多个容器之间共享和重用。\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"备份和恢复\"}],\"：可以轻松地对数据卷进行备份和恢复操作。\"]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[[\"$\",\"strong\",null,{\"children\":\"高效\"}],\"：数据卷的性能优于直接在容器内存储数据。\"]}],\"\\n\"]}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"上面部署的项目，Redis 的数据是没有存储到主机的，我们验证一下：\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 查看 redis 容器的 container id\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" container \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"ls\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 进入想要进入的容器 （这里是进入 Redis 容器）\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\"exec\"}],\" \",[\"$\",\"span\",null,{\"className\":\"token parameter variable\",\"children\":\"-it\"}],\" 6ddf48e06645 \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"bash\"}],\"\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"终端效果： \",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/05d9898a42034398a8b475f30a4ffe95~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\" 我们执行一些 Redis 命令，来删除一条数据\"]}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"redis-cli\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"keys *\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"hgetAll notes\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"hdel notes \",[\"$\",\"span\",null,{\"className\":\"token number\",\"children\":\"1702459182837\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"hgetAll notes\\n\"}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/dff8fe8fa662463793cc3382d6edb1c1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}]}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 查看 Next.js 项目的 container id\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" container \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"ls\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 重启 Next.js 容器\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" container restart 74776b12c032\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"我们能看到： \",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/4e016e207e7245aaaf37679535d954a8~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\" 这时候，如果我们把所有容器都删除（Redis 容器也删除了），重新运行： 先执行：\",[\"$\",\"code\",null,{\"children\":\"docker-compose down\"}],\"，再执行\",[\"$\",\"code\",null,{\"children\":\"docker-compose up\"}],\" \",[\"$\",\"$L8\",null,{\"src\":\"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9509f0eca224516ab1b8822241f14c4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1624\u0026h=334\u0026s=81668\u0026e=png\u0026b=1e1e1e\",\"alt\":\"image.png\"}],\" 我们会发现数据又恢复到了三条，那我现在希望我删除能够一直生效，就需要使用到 数据卷（volumes)的功能，它会将数据存在主机文件系统的某个区域，现在我们在项目的根目录下建立一个名为 redis 的文件夹，修改 docker-compose.yml如下：\"]}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"version: \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'3.8'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"services:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"  redis:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    image: redis\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    ports:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      - \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'6379:6379'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    command: redis-server\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    volumes:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"      - ./redis:/data\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"  nextapp:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    build: \",[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\".\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    ports:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      - \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'4000:3000'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    depends_on:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"      - redis\\n\"}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"./redis:/data 是通过 : 进行分割，左边是主机的地址，右边是 容器的地址，我们会发现很多地方都是这样，左边是宿主机的信息，右边是容器的。 我们配置这个后，容器中的数据就会同步到主机，也就实现了\",[\"$\",\"strong\",null,{\"children\":\"数据持久化\"}],\"。 我们删除掉之前的镜像，再重新构建的镜像，因为数据做了持久化，再重复一遍刚才的操作再次打开地址的时候，数据如果是两条，那么数据卷就生效，我们动手试一下吧！\"]}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 查看镜像\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" image \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"ls\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 删除镜像\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" rmi next-react-demo-nextapp\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 再次查看\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker\"}],\" image \",[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"ls\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 重新执行 docker compose\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token function\",\"children\":\"docker-compose\"}],\" up\\n\"]}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/c64988ef084b4f0e84d063568985313e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\"\\n去删数据：\\n\",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/059a0861871149048ace50dc8069a2ac~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\"\\n重新启动 nextapp 容器，然后刷新 \",[\"$\",\"a\",null,{\"href\":\"http://localhost:4000\",\"children\":\"http://localhost:4000\"}],\"\\n\",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/de27212eb83e48aaadb0647b36eb9d2f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\"\\n我们删除关闭所有容器，然后重启。会看到数据依然是两条。那数据持久化就完成啦！ 如果细心的小伙伴，可以看到我们主机的 Redis 目录下 多了一个 文件\\n\",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/7667efaff22f4117b1c4fe51680e298f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}],\"\\n这个文件是二进制文件，正是 Redis 数据的全量备份。运行 \",[\"$\",\"code\",null,{\"children\":\"docker-compose up\"}],\" 的时候，redis 又会读取加载这个文件，也就实现了数据持久化。 dump.rdb 这个文件就是 Redis 的持久化机制的体现。Redis 的持久化机制有两种，\"]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"一种是 RDB（Redis Database），RDB 是一次快照，也是默认值\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"一种是 AOF（Append Only File）。开启 Redis 容器时的 --appendonly 参数开启那就是 AOF。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"h3\",null,{\"id\":\"数据卷的其他命令\",\"children\":[\"$\",\"a\",null,{\"className\":\"anchor\",\"href\":\"#数据卷的其他命令\",\"children\":\"数据卷的其他命令\"}]}],\"\\n\",[\"$\",\"ul\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":[\"创建：\",[\"$\",\"code\",null,{\"children\":\"docker volume create my-vol\"}]]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"查看：\",[\"$\",\"code\",null,{\"children\":\"docker volume ls\"}]]}],\"\\n\",[\"$\",\"li\",null,{\"children\":[\"查看数据卷对应主机位置：\",[\"$\",\"code\",null,{\"children\":\"docker volume inspect my-vol\"}]]}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"在 docker-compose.yml 创建数据卷\"}],\"\\n\",[\"$\",\"pre\",null,{\"className\":\"language-bash\",\"children\":[\"$\",\"code\",null,{\"className\":\"language-bash code-highlight\",\"children\":[[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"version: \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'3.8'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 创建名为 redis-data 数据卷\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"volumes:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"  redis-data:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"services:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"  redis:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    image: redis\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    ports:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"      - \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'6379:6379'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    command: redis-server\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"  \",[\"$\",\"span\",null,{\"className\":\"token comment\",\"children\":\"# 挂载 到容器\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    volumes:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"      - redis-data:/data\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"  nextapp:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"    build: \",[\"$\",\"span\",null,{\"className\":\"token builtin class-name\",\"children\":\".\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    ports:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":[\"     - \",[\"$\",\"span\",null,{\"className\":\"token string\",\"children\":\"'4000:3000'\"}],\"\\n\"]}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"    depends_on:\\n\"}],[\"$\",\"span\",null,{\"className\":\"code-line\",\"children\":\"      - redis\\n\"}]]}]}],\"\\n\",[\"$\",\"p\",null,{\"children\":\"到这里，本节就结束了，但是这次部署，依然有两个问题？\"}],\"\\n\",[\"$\",\"ol\",null,{\"children\":[\"\\n\",[\"$\",\"li\",null,{\"children\":\"打包后的 next.js 镜像很大, 我们需要优化\"}],\"\\n\",[\"$\",\"li\",null,{\"children\":\"目前依然只能本地访问，我们部署是为了让所有人都可以访问，但是没有做到。\"}],\"\\n\"]}],\"\\n\",[\"$\",\"p\",null,{\"children\":[\"下一节，我们深度使用 Docker，解决这两个问题，到这里，我发现 Docker 命令还是很多的，如果不是经常使用，根本就记不住（ps：虽然可以使用 Docker desktop 快捷操作）。如果忘记命令，这里推荐查阅这个中文文档，非常大而全的手册：\",[\"$\",\"a\",null,{\"href\":\"https://yeasy.gitbook.io/docker_practice%EF%BC%8C%E5%BE%88%E5%BF%AB%E8%83%BD%E6%90%9C%E7%B4%A2%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81\",\"children\":\"https://yeasy.gitbook.io/docker_practice，很快能搜索到想要的代码\"}],\"\\n\",[\"$\",\"$L8\",null,{\"src\":\"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/3529e2b0a4a1490992deaeb2d404e66e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png\",\"alt\":\"image.png\"}]]}]]}]]}],[\"$\",\"div\",null,{\"className\":\"flex px-4 justify-between mt-8\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/posts/redis-learn-1\",\"className\":\"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2\",\"children\":\"前端程序员学习 Redis\"}],[\"$\",\"$L6\",null,{\"href\":\"/posts/docker-learn-1\",\"className\":\"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2\",\"children\":\"前端程序员学习 Docker 的笔记 （...\"}]]}]]}]]}]}]}]}]}]],null],null]},[\"$\",\"$L9\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"(app)\",\"children\",\"posts\",\"children\",\"$a\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lb\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"styles\":[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/docs/_next/static/css/cc5160e2067b0cef.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\"}]]}],[[\"$\",\"div\",null,{\"className\":\"sm:px-8 relative mt-16 min-h-screen lg:mt-32\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-7xl lg:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"relative px-4 sm:px-8 lg:px-12\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-2xl lg:max-w-5xl\",\"children\":[\"$\",\"div\",null,{\"className\":\"absolute inset-0 flex items-center justify-center\",\"children\":[\"$\",\"div\",null,{\"className\":\"animate-pulse text-5xl text-zinc-500/50\",\"children\":[\"$\",\"svg\",null,{\"width\":\"1em\",\"height\":\"1em\",\"viewBox\":\"0 0 24 24\",\"fill\":\"none\",\"xmlns\":\"http://www.w3.org/2000/svg\",\"children\":[\"$\",\"path\",null,{\"d\":\"M16.5609 7.43931C15.7777 5.41156 14.0301 4 12 4C9.96987 4 8.22234 5.41156 7.43913 7.43931M16.5609 7.43931C19.7904 8.10251 22 9.44804 22 11C22 13.2091 17.5228 15 12 15C6.47715 15 2 13.2091 2 11C2 9.44804 4.20962 8.10251 7.43913 7.43931M16.5609 7.43931C16.94 8.42085 17.0719 9.49351 16.9638 10.5391C15.5011 10.8323 13.8065 11 12 11C10.1935 11 8.49887 10.8323 7.03622 10.5391C6.92815 9.49351 7.06001 8.42085 7.43913 7.43931M4 17L3 19M12 18V21M20 17L21 19\",\"stroke\":\"currentColor\",\"strokeWidth\":\"2\",\"strokeLinecap\":\"round\",\"strokeLinejoin\":\"round\"}]}]}]}]}]}]}]}],[],[]]]},[\"$\",\"$L9\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"(app)\",\"children\",\"posts\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lb\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"styles\":null}],null]},[[[\"$\",\"$Lc\",null,{}],[\"$\",\"div\",null,{\"className\":\"fixed inset-0 flex justify-center sm:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex w-full max-w-7xl lg:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"opacity-95 w-full bg-zinc-50/90 ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20\"}]}]}],[\"$\",\"div\",null,{\"className\":\"relative text-zinc-800 dark:text-zinc-200\",\"children\":[[\"$\",\"$Ld\",null,{}],[\"$\",\"main\",null,{\"children\":[\"$\",\"$L9\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\",\"(app)\",\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lb\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":\"$undefined\",\"notFoundStyles\":\"$undefined\",\"styles\":null}]}],[\"$\",\"$e\",null,{\"children\":[\"$\",\"footer\",null,{\"className\":\"mt-32\",\"children\":[\"$\",\"div\",null,{\"className\":\"sm:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-7xl lg:px-8\",\"children\":[\"$\",\"div\",null,{\"className\":\"border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40\",\"children\":[[\"$\",\"div\",null,{\"className\":\"relative px-4 sm:px-8 lg:px-12\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-2xl lg:max-w-5xl\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex flex-col items-center justify-between gap-6 sm:flex-row\",\"children\":[[\"$\",\"p\",null,{\"className\":\"text-sm text-zinc-500/80 dark:text-zinc-400/80\",\"children\":[\"© \",2025,\" \",\"William Sun\",\" 网站已开源：\",[\"$\",\"$Lf\",null,{\"href\":\"https://github.com/coderPerseus/blog\",\"children\":\"William Sun\"}]]}],[\"$\",\"nav\",null,{\"className\":\"flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200\",\"children\":[[\"$\",\"$L6\",null,{\"href\":\"/\",\"className\":\"transition hover:text-violet-500 dark:hover:text-violet-400\",\"children\":\"首页\"}],[\"$\",\"$L6\",null,{\"href\":\"/posts\",\"className\":\"transition hover:text-violet-500 dark:hover:text-violet-400\",\"children\":\"博客\"}],[\"$\",\"$L6\",null,{\"href\":\"/about\",\"className\":\"transition hover:text-violet-500 dark:hover:text-violet-400\",\"children\":\"关于我\"}]]}]]}]}]}],[\"$\",\"div\",null,{\"className\":\"relative px-4 sm:px-8 lg:px-12 mt-6\",\"children\":[\"$\",\"div\",null,{\"className\":\"mx-auto max-w-2xl lg:max-w-5xl\",\"children\":[\"$\",\"div\",null,{\"className\":\"flex flex-col items-center justify-start gap-2 sm:flex-row\",\"children\":\"欢迎 👏🏻 你的访问\"}]}]}],[\"$\",\"div\",null,{\"className\":\"flex justify-center p-6 flex-col sm:flex-row\",\"children\":[[\"$\",\"$L6\",null,{\"target\":\"_blank\",\"href\":\"https://beian.miit.gov.cn/\",\"className\":\"text-blue-600 flex justify-center items-center\",\"children\":[[\"$\",\"$L10\",null,{\"unoptimized\":true,\"src\":\"/docs/police.png\",\"width\":18,\"height\":18,\"alt\":\"备案\",\"className\":\"mr-1 \"}],\"辽公网安备21021202000334号\"]}],[\"$\",\"$L6\",null,{\"target\":\"_blank\",\"href\":\"https://beian.miit.gov.cn/\",\"className\":\"text-blue-600 pl-6 flex justify-center items-center\",\"children\":\"辽ICP备2021012379号-1\"}]]}]]}]}]}]}]}]]}]],null],null]},[[\"$\",\"html\",null,{\"className\":\" m-0 h-full p-0 font-sans antialiased\",\"lang\":\"zh-CN\",\"suppressHydrationWarning\":true,\"children\":[\"$\",\"body\",null,{\"children\":[[\"$\",\"$L11\",null,{}],[\"$\",\"$L12\",null,{}],[\"$\",\"$L13\",null,{\"attribute\":\"class\",\"defaultTheme\":\"system\",\"enableSystem\":true,\"disableTransitionOnChange\":true,\"children\":[\"$\",\"$L9\",null,{\"parallelRouterKey\":\"children\",\"segmentPath\":[\"children\"],\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$Lb\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[\"$\",\"$L14\",null,{}],\"notFoundStyles\":[],\"styles\":null}]}]]}]}],null],null],\"couldBeIntercepted\":false,\"initialHead\":[false,\"$L15\"],\"globalErrorComponent\":\"$16\",\"missingSlots\":\"$W17\"}]]\n"])</script><script>self.__next_f.push([1,"15:[[\"$\",\"meta\",\"0\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}],[\"$\",\"meta\",\"1\",{\"name\":\"theme-color\",\"media\":\"(prefers-color-scheme: dark)\",\"content\":\"#000212\"}],[\"$\",\"meta\",\"2\",{\"name\":\"theme-color\",\"media\":\"(prefers-color-scheme: light)\",\"content\":\"#fafafa\"}],[\"$\",\"meta\",\"3\",{\"charSet\":\"utf-8\"}],[\"$\",\"title\",\"4\",{\"children\":\"前端程序员学习 Docker 的笔记 （二） | William Sun\"}],[\"$\",\"meta\",\"5\",{\"name\":\"description\",\"content\":\"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读\"}],[\"$\",\"link\",\"6\",{\"rel\":\"manifest\",\"href\":\"/site.webmanifest\",\"crossOrigin\":\"use-credentials\"}],[\"$\",\"meta\",\"7\",{\"name\":\"keywords\",\"content\":\"docker,笔记\"}],[\"$\",\"meta\",\"8\",{\"name\":\"baidu-site-verification\",\"content\":\"codeva-7AmpPWgzQY\"}],[\"$\",\"meta\",\"9\",{\"name\":\"google-site-verification\",\"content\":\"TTbfOvWmLj0icfk0BQNUZB3crwReji82Q_vRdnZFFAc\"}],[\"$\",\"link\",\"10\",{\"rel\":\"canonical\",\"href\":\"https://dhc.ink/posts/docker-learn-2\"}],[\"$\",\"link\",\"11\",{\"rel\":\"alternate\",\"type\":\"application/rss+xml\",\"title\":\"RSS 订阅\",\"href\":\"https://luckysnail.cn/rss\"}],[\"$\",\"meta\",\"12\",{\"property\":\"og:title\",\"content\":\"前端程序员学习 Docker 的笔记 （二）\"}],[\"$\",\"meta\",\"13\",{\"property\":\"og:description\",\"content\":\"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读\"}],[\"$\",\"meta\",\"14\",{\"name\":\"twitter:card\",\"content\":\"summary_large_image\"}],[\"$\",\"meta\",\"15\",{\"name\":\"twitter:creator\",\"content\":\"@haozhan05554957\"}],[\"$\",\"meta\",\"16\",{\"name\":\"twitter:title\",\"content\":\"William Sunblog | 前端 | 开发者\"}],[\"$\",\"meta\",\"17\",{\"name\":\"twitter:description\",\"content\":\"我是William Sun，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运\"}],[\"$\",\"meta\",\"18\",{\"name\":\"twitter:image\",\"content\":\"https://luckysnail.cn/og.png\"}],[\"$\",\"link\",\"19\",{\"rel\":\"icon\",\"href\":\"/docs/favicon.ico\",\"type\":\"image/x-icon\",\"sizes\":\"32x32\"}],[\"$\",\"link\",\"20\",{\"rel\":\"icon\",\"href\":\"/docs/icon.jpg?021a5ddd40907a91\",\"type\":\"image/jpeg\",\"sizes\":\"256x256\"}],[\"$\",\"link\",\"21\",{\"rel\":\"apple-touch-icon\",\"href\":\"/docs/apple-icon.jpg?58f0c05bf91c4519\",\"type\":\"image/jpeg\",\"sizes\":\"1022x1023\"}]]\n"])</script><script>self.__next_f.push([1,"4:null\n"])</script></body></html>
+												<p>
+													到这里，本节就结束了，但是这次部署，依然有两个问题？
+												</p>
+												<ol>
+													<li>打包后的 next.js 镜像很大, 我们需要优化</li>
+													<li>
+														目前依然只能本地访问，我们部署是为了让所有人都可以访问，但是没有做到。
+													</li>
+												</ol>
+												<p>
+													下一节，我们深度使用
+													Docker，解决这两个问题，到这里，我发现 Docker
+													命令还是很多的，如果不是经常使用，根本就记不住（ps：虽然可以使用
+													Docker desktop
+													快捷操作）。如果忘记命令，这里推荐查阅这个中文文档，非常大而全的手册：<a
+														href="https://yeasy.gitbook.io/docker_practice%EF%BC%8C%E5%BE%88%E5%BF%AB%E8%83%BD%E6%90%9C%E7%B4%A2%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81"
+														>https://yeasy.gitbook.io/docker_practice，很快能搜索到想要的代码</a
+													>
+												</p>
+											</div>
+										</article>
+										<div class="flex px-4 justify-between mt-8">
+											<a
+												class="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2"
+												href="/docs/posts/redis-learn-1"
+												>前端程序员学习 Redis</a
+											><a
+												class="inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2"
+												href="/docs/posts/docker-learn-1"
+												>前端程序员学习 Docker 的笔记 （...</a
+											>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--/$-->
+			</main>
+			<!--$-->
+			<footer class="mt-32">
+				<div class="sm:px-8">
+					<div class="mx-auto max-w-7xl lg:px-8">
+						<div
+							class="border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40"
+						>
+							<div class="relative px-4 sm:px-8 lg:px-12">
+								<div class="mx-auto max-w-2xl lg:max-w-5xl">
+									<div
+										class="flex flex-col items-center justify-between gap-6 sm:flex-row"
+									>
+										<p class="text-sm text-zinc-500/80 dark:text-zinc-400/80">
+											©
+											<!-- -->2025<!-- -->
+											<!-- -->William Sun<!-- --> 网站已开源：<a
+												class="inline-flex place-items-baseline items-baseline gap-0.5 pr-0.5 text-[0.95em] leading-none font-semibold text-zinc-800 hover:underline dark:text-zinc-100"
+												rel="noopener noreferrer"
+												target="_blank"
+												href="https://github.com/coderPerseus/blog"
+												><span
+													class="mr-px inline-flex translate-y-0.5 dark:invert"
+													><img
+														alt=""
+														aria-hidden="true"
+														loading="lazy"
+														width="16"
+														height="16"
+														decoding="async"
+														data-nimg="1"
+														class="inline h-4 w-4 rounded"
+														style="color: transparent"
+														src="/docs/prinext/static/media/github.ee3e4451.png" /></span
+												>William Sun<svg
+													width="0.95em"
+													height="0.95em"
+													viewBox="0 0 24 24"
+													fill="none"
+													xmlns="http://www.w3.org/2000/svg"
+													class="inline-block translate-y-0.5"
+													aria-hidden="true"
+												>
+													<path
+														d="M20 13.5001C20 14.8946 20 15.5919 19.8618 16.1673C19.4229 17.9956 17.9955 19.423 16.1672 19.8619C15.5918 20.0001 14.8945 20.0001 13.5 20.0001H12C9.19974 20.0001 7.79961 20.0001 6.73005 19.4551C5.78924 18.9758 5.02433 18.2109 4.54497 17.2701C4 16.2005 4 14.8004 4 12.0001V11.5001C4 9.17035 4 8.0055 4.3806 7.08664C4.88807 5.8615 5.86144 4.88813 7.08658 4.38066C7.86344 4.05888 8.81614 4.00915 10.5 4.00146M19.7597 9.45455C20.0221 7.8217 20.0697 6.16984 19.9019 4.54138C19.8898 4.42328 19.838 4.31854 19.7597 4.24027M19.7597 4.24027C19.6815 4.16201 19.5767 4.11023 19.4586 4.09806C17.8302 3.93025 16.1783 3.97792 14.5455 4.24027M19.7597 4.24027L10 14"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													></path></svg
+											></a>
+										</p>
+										<nav
+											class="flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200"
+										>
+											<a
+												class="transition hover:text-violet-500 dark:hover:text-violet-400"
+												href="/docs"
+												>首页</a
+											><a
+												class="transition hover:text-violet-500 dark:hover:text-violet-400"
+												href="/docs/posts"
+												>博客</a
+											><a
+												class="transition hover:text-violet-500 dark:hover:text-violet-400"
+												href="/docs/about"
+												>关于我</a
+											>
+										</nav>
+									</div>
+								</div>
+							</div>
+							<div class="relative px-4 sm:px-8 lg:px-12 mt-6">
+								<div class="mx-auto max-w-2xl lg:max-w-5xl">
+									<div
+										class="flex flex-col items-center justify-start gap-2 sm:flex-row"
+									>
+										欢迎 👏🏻 你的访问
+									</div>
+								</div>
+							</div>
+							<div class="flex justify-center p-6 flex-col sm:flex-row">
+								<a
+									target="_blank"
+									class="text-blue-600 flex justify-center items-center"
+									href="https://beian.miit.gov.cn/"
+									><img
+										alt="备案"
+										loading="lazy"
+										width="18"
+										height="18"
+										decoding="async"
+										data-nimg="1"
+										class="mr-1"
+										style="color: transparent"
+										src="/docs/police.png"
+									/>辽公网安备21021202000334号</a
+								><a
+									target="_blank"
+									class="text-blue-600 pl-6 flex justify-center items-center"
+									href="https://beian.miit.gov.cn/"
+									>辽ICP备2021012379号-1</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<!--/$-->
+		</div>
+		<script
+			src="/docs/prinext/static/chunks/webpack-583a4211ac78a2fe.js"
+			async=""
+		></script>
+		<script>
+			(self.__next_f = self.__next_f || []).push([0]);
+			self.__next_f.push([2, null]);
+		</script>
+		<script>
+			self.__next_f.push([
+				1,
+				'1:HL["/docs/prinext/static/css/8cd2eb158671e11e.css","style"]\n2:HL["/docs/prinext/static/css/cc5160e2067b0cef.css","style"]\n'
+			]);
+		</script>
+		<script>
+			self.__next_f.push([
+				1,
+				'3:I[1439,[],""]\n5:I[7401,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","857","static/chunks/857-68a2fd358cb70760.js","594","static/chunks/594-71c3251836d38f7c.js","878","static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"],"default"]\n6:I[2219,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","857","static/chunks/857-68a2fd358cb70760.js","594","static/chunks/594-71c3251836d38f7c.js","878","static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"],""]\n7:I[6814,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","857","static/chunks/857-68a2fd358cb70760.js","594","static/chunks/594-71c3251836d38f7c.js","878","static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"],"Separator"]\n8:I[8501,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","857","static/chunks/857-68a2fd358cb70760.js","594","static/chunks/594-71c3251836d38f7c.js","878","static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"],"default"]\n9:I[1473,[],""]\nb:I[9658,[],""]\nc:I[3205,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","531","static/chunks/531-f976d425ce9a81a1.js","103","static/chunks/103-1875d9378f90876a.js","868","static/chunks/868-9c31f7c0009643d5.js","814","static/chunks/app/(app)/layout-66a850f3e6447c7d.js"],"GlobalBg"]\nd:I[7726,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","531","static/chunks/531-f976d425ce9a81a1.js","103","static/chunks/103-1875d9378f90876a.js","868","static/chunks/868-9c31f7c0009643d5.js","814","static/chunks/app/(app)/layout-66a850f3e6447c7d.js"],"Head'
+			]);
+		</script>
+		<script>
+			self.__next_f.push([
+				1,
+				'er"]\ne:"$Sreact.suspense"\nf:I[4662,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","531","static/chunks/531-f976d425ce9a81a1.js","103","static/chunks/103-1875d9378f90876a.js","868","static/chunks/868-9c31f7c0009643d5.js","814","static/chunks/app/(app)/layout-66a850f3e6447c7d.js"],"PeekabooLink"]\n10:I[4543,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","138","static/chunks/138-7f27ef5cd2caf4b4.js","857","static/chunks/857-68a2fd358cb70760.js","594","static/chunks/594-71c3251836d38f7c.js","878","static/chunks/app/(app)/posts/%5Bid%5D/page-6bb6cd9ad97d098b.js"],"Image"]\n11:I[2962,["245","static/chunks/245-4d9cc7d916e46c69.js","857","static/chunks/857-68a2fd358cb70760.js","185","static/chunks/app/layout-d7953313cc6bdbf6.js"],"default"]\n12:I[7808,["245","static/chunks/245-4d9cc7d916e46c69.js","857","static/chunks/857-68a2fd358cb70760.js","185","static/chunks/app/layout-d7953313cc6bdbf6.js"],"default"]\n13:I[5433,["245","static/chunks/245-4d9cc7d916e46c69.js","857","static/chunks/857-68a2fd358cb70760.js","185","static/chunks/app/layout-d7953313cc6bdbf6.js"],"ThemeProvider"]\n14:I[3970,["779","static/chunks/779-ad4ead70309b9a20.js","739","static/chunks/739-1be71c4fce382004.js","160","static/chunks/app/not-found-8b889a2f44e80cbe.js"],"default"]\n16:I[2716,[],""]\na:["id","docker-learn-2","d"]\n17:[]\n'
+			]);
+		</script>
+		<script>
+			self.__next_f.push([
+				1,
+				'0:[[["$","link","0",{"rel":"stylesheet","href":"/docs/prinext/static/css/8cd2eb158671e11e.css","precedence":"next","crossOrigin":"$undefined"}]],["$","$L3",null,{"buildId":"weVExY6-jENQW9lG_RHEX","assetPrefix":"/docs","initialCanonicalUrl":"/posts/docker-learn-2","initialTree":["",{"children":["(app)",{"children":["posts",{"children":[["id","docker-learn-2","d"],{"children":["__PAGE__?{\\"id\\":\\"docker-learn-2\\"}",{}]}]}]}]},"$undefined","$undefined",true],"initialSeedData":["",{"children":["(app)",{"children":["posts",{"children":[["id","docker-learn-2","d"],{"children":["__PAGE__",{},[["$L4",["$","div",null,{"className":"sm:px-8 mt-10 lg:mt-16","children":["$","div",null,{"className":"mx-auto max-w-7xl lg:px-8","children":["$","div",null,{"className":"relative px-4 sm:px-8 lg:px-12 !px-0","children":["$","div",null,{"className":"mx-auto max-w-2xl lg:max-w-5xl","children":["$","div",null,{"className":"w-full md:flex md:justify-between xl:relative gap-1","children":[["$","aside",null,{"className":"hidden w-[160px] shrink-0 lg:block","children":["$","div",null,{"className":"sticky top-2 pt-16","children":["$","$L5",null,{}]}]}],["$","div",null,{"className":"max-w-4xl md:flex-1 md:shrink-0 ","children":[["$","$L6",null,{"href":"/posts","className":"group mb-8 flex h-10 w-10 items-center justify-center bg-white dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:hover:border-zinc-700 lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 group rounded-full bg-gradient-to-b from-zinc-50/50 to-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:from-zinc-900/50 dark:to-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20","aria-label":"返回博客页面","children":["$","svg",null,{"width":"1em","height":"1em","viewBox":"0 0 24 24","fill":"none","xmlns":"http://www.w3.org/2000/svg","className":"h-8 w-8 stroke-zinc-500 transition group-hover:stroke-zinc-700 dark:stroke-zinc-500 dark:group-hover:stroke-zinc-400","children":["$","path",null,{"d":"M8.03089 4C6.57669 5.05865 5.2706 6.29537 4.14485 7.67887C4.04828 7.79755 4 7.94044 4 8.08333M8.03089 12.1667C6.57669 11.108 5.2706 9.8713 4.14485 8.4878C4.04828 8.36912 4 8.22623 4 8.08333M4 8.08333H14.963C17.7448 8.08333 20 10.3033 20 13.0417C20 15.7801 17.7448 18 14.963 18H12","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}]}],["$","article",null,{"data-postid":"posts/docker-learn-2.mdx","className":"rich-text-viewer prose px-4","children":[["$","div",null,{"className":"mb-8 text-center","children":["$undefined",["$","h1",null,{"className":"text-3xl font-bold","children":"前端程序员学习 Docker 的笔记 （二）"}],["$","div",null,{"className":"flex justify-center rounded-md  h-5 items-center space-x-4 text-sm","children":[["$","time",null,{"dateTime":"2024-05-19T00:00:00.000Z","className":"mb-1 text-xs text-gray-600","children":"2024-05-19"}],["$","$L7",null,{"orientation":"vertical"}],["$","span",null,{"className":"mb-1 text-xs text-gray-600 flex items-center","children":[["$","svg",null,{"width":"1em","height":"1em","viewBox":"0 0 24 24","fill":"none","xmlns":"http://www.w3.org/2000/svg","className":"mr-2","children":["$","path",null,{"d":"M10.1912 12.5508C10.3071 12.1942 10.3071 11.8058 10.1912 11.4492C9.22165 8.46673 4.40272 8.00546 4.01443 4.48436C3.93458 3.76031 4.18955 3.04013 4.69671 2.55723C5.28193 2 6.62415 2 9.30861 2H14.6914C17.3759 2 18.7181 2 19.3033 2.55723C19.8104 3.04013 20.0654 3.76031 19.9856 4.48436C19.5973 8.00546 14.7784 8.46673 13.8088 11.4492C13.6929 11.8058 13.6929 12.1942 13.8088 12.5508C14.7784 15.5333 19.5973 15.9945 19.9856 19.5156C20.0654 20.2397 19.8104 20.9599 19.3033 21.4428C18.7181 22 17.3758 22 14.6914 22L9.3086 22C6.62415 22 5.28192 22 4.69671 21.4428C4.18955 20.9599 3.93458 20.2397 4.01442 19.5156C4.40272 15.9945 9.22164 15.5333 10.1912 12.5508Z","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}]," ",10," 分钟"]}]]}],["$","div",null,{"className":"flex w-full justify-center gap-2 mt-2","children":[["$","span",null,{"className":"inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800","children":"docker"}],["$","span",null,{"className":"inline-flex items-center px-2 h-5 rounded-md text-xs  bg-gray-300 text-gray-800","children":"笔记"}]]}],["$","div",null,{"className":"bg-gray-200 dark:bg-gray-600 relative p-4 rounded-md mt-4","children":[["$","svg",null,{"width":"1em","height":"1em","viewBox":"0 0 24 24","fill":"none","xmlns":"http://www.w3.org/2000/svg","className":"absolute left-4 top-4","children":["$","path",null,{"d":"M8 8H8.01M3.11768 7.65876L3.07447 8.47968C2.99172 10.0518 2.95035 10.8379 3.1001 11.5811C3.23281 12.2399 3.47524 12.8716 3.81725 13.45C4.20315 14.1026 4.75976 14.6593 5.87297 15.7725L8.29448 18.194C9.6106 19.5101 10.2687 20.1682 10.9743 20.5277C12.4003 21.2543 14.0881 21.2543 15.5142 20.5277C16.2198 20.1682 16.8778 19.5101 18.194 18.194C19.5101 16.8778 20.1682 16.2198 20.5277 15.5142C21.2543 14.0881 21.2543 12.4003 20.5277 10.9743C20.1682 10.2687 19.5101 9.6106 18.194 8.29448L15.7725 5.87298C14.6593 4.75976 14.1026 4.20315 13.45 3.81725C12.8716 3.47524 12.2399 3.23281 11.5811 3.1001C10.8379 2.95035 10.0518 2.99172 8.47968 3.07447L7.65876 3.11768C6.13396 3.19793 5.37156 3.23805 4.78079 3.55489C4.26041 3.83397 3.83397 4.26041 3.55489 4.78079C3.23805 5.37156 3.19793 6.13396 3.11768 7.65876ZM8.4895 7.98767C8.4895 8.26381 8.26564 8.48767 7.9895 8.48767C7.71336 8.48767 7.4895 8.26381 7.4895 7.98767C7.4895 7.71153 7.71336 7.48767 7.9895 7.48767C8.26564 7.48767 8.4895 7.71153 8.4895 7.98767Z","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}],["$","p",null,{"className":"text-gray-700 dark:text-gray-300","children":"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"}]]}]]}],["$","div",null,{"className":"js-toc-content","children":[["$","p",null,{"children":["大家好，我是阿星，上一个文章：",["$","a",null,{"href":"https://www.yuque.com/asgas/web_system/th4kazgysrzuktxn?view=doc_embed","children":"更适合前端的 Docker 教程（一）"}],"，我分享了 Docker 基础，如何通过 Docker 容器化部署一个纯前端的项目，但是真实项目，肯定是离不开后端的，下面就以一个需要 nextjs + redis 技术的项目为例，来入门一下 ",["$","code",null,{"children":"Docker Compose"}]]}],"\\n",["$","h2",null,{"id":"本地启动项目","children":["$","a",null,{"className":"anchor","href":"#本地启动项目","children":"本地启动项目"}]}],"\\n",["$","p",null,{"children":"我们先本地启动一下需要这些技术的项目，这里直接 git 拉取仓库就好："}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"git"}]," clone ",["$","span",null,{"className":"token parameter variable","children":"-b"}]," day1 git@github.com:mqyqingfeng/next-react-notes-demo.git\\n"]}]}]}],"\\n",["$","p",null,{"children":"本地运行"}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token builtin class-name","children":"cd"}]," next-react-notes-demo ",["$","span",null,{"className":"token operator","children":"\u0026\u0026"}]," ",["$","span",null,{"className":"token function","children":"npm"}]," i ",["$","span",null,{"className":"token operator","children":"\u0026\u0026"}]," ",["$","span",null,{"className":"token function","children":"npm"}]," run dev\\n"]}]}]}],"\\n",["$","p",null,{"children":["由于这个项目需要 Redis 服务，我们新开一个命令行运行：",["$","code",null,{"children":"redis-server"}],",如果没有安装 redis，需要先安装一下 Redis。"]}],"\\n",["$","p",null,{"children":["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/b8b253c7c2224ddfbe8f5176993892cb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]}],"\\n",["$","h2",null,{"id":"容器化部署","children":["$","a",null,{"className":"anchor","href":"#容器化部署","children":"容器化部署"}]}],"\\n",["$","p",null,{"children":"使用上个文章的知识，我们现在把 Redis 和 Next.js 项目 容器化部署"}],"\\n",["$","ol",null,{"children":["\\n",["$","li",null,{"children":["拉取 Redis 镜像：",["$","code",null,{"children":"docker pull redis"}]]}],"\\n",["$","li",null,{"children":["关闭本地命令行启动的 Redis ，使用 Docker 启动 Redis：",["$","code",null,{"children":"docker run -p 6379:6379 redis redis-server"}]," 关闭本地的Redis 后，我们的项目刷新是会报错的： ",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/9241bde347e74ddc84c25ffa1810554d~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}],"使用 Docker 启动 Redis 后，就恢复了"]}],"\\n",["$","li",null,{"children":["我们完成了 Redis 容器化，我们现在把 Next.js 项目也新开一个容器进行部署，但是每个容器都是一个单独的隔离空间。这时候",["$","strong",null,{"children":"即将容器化部署的 Next.js 服务就访问不到我们的 Redis 服务"}],"。那么我们就需要将两个容器服务连接起来，Docker 可以将容器加入",["$","a",null,{"href":"%E9%80%9A%E4%B9%89","children":"自定义的 Docker 网络"}],"的方式来连接多个容器。"]}],"\\n"]}],"\\n",["$","blockquote",null,{"children":["\\n",["$","p",null,{"children":"Docker 支持自定义网络，这里我们使用桥接网络来连接多个容器，容器间就可以通信了！"}],"\\n"]}],"\\n",["$","ol",null,{"start":"4","children":["\\n",["$","li",null,{"children":["创建一个 自定义 Docker 网络：",["$","code",null,{"children":"docker network create -d bridge react-notes"}]]}],"\\n"]}],"\\n",["$","ul",null,{"children":["\\n",["$","li",null,{"children":"-d bridge ：参数指定 Docker 网络类型，有 bridge、overlay。"}],"\\n",["$","li",null,{"children":"react-notes 为我们的自定义网络的名字"}],"\\n"]}],"\\n",["$","p",null,{"children":"5）暂停或者删除之前开启的 Redis 容器，运行一个新的 Redis 容器并连接到新建的 react-notes 网络："}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," run ",["$","span",null,{"className":"token parameter variable","children":"-p"}]," ",["$","span",null,{"className":"token number","children":"6379"}],":6379 ",["$","span",null,{"className":"token parameter variable","children":"--network"}]," react-notes redis redis-server\\n"]}]}]}],"\\n",["$","p",null,{"children":["6）查找 redis 容器的 IP 地址：",["$","code",null,{"children":"docker network inspect react-notes"}],"得到 IPv4Address 的 host 将其设置为 lib/redis.js 的 Redis host"]}],"\\n",["$","p",null,{"children":["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/be8064969d0f4bc6a20695da99c63315~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]}],"\\n",["$","p",null,{"children":"7） 为 Next.js 项目创建 Dockerfile，上篇文章讲了每行命令的含义"}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":"FROM node:18-alpine\\n"}],["$","span",null,{"className":"code-line","children":"WORKDIR /app\\n"}],["$","span",null,{"className":"code-line","children":["COPY ",["$","span",null,{"className":"token builtin class-name","children":"."}]," ",["$","span",null,{"className":"token builtin class-name","children":"."}],"\\n"]}],["$","span",null,{"className":"code-line","children":["RUN ",["$","span",null,{"className":"token function","children":"npm"}]," ",["$","span",null,{"className":"token function","children":"install"}]," ",["$","span",null,{"className":"token parameter variable","children":"--registry"}],["$","span",null,{"className":"token operator","children":"="}],"https://registry.npmmirror.com\\n"]}],["$","span",null,{"className":"code-line","children":["CMD  ",["$","span",null,{"className":"token function","children":"npm"}]," run build ",["$","span",null,{"className":"token operator","children":"\u0026\u0026"}]," ",["$","span",null,{"className":"token function","children":"npm"}]," start\\n"]}],["$","span",null,{"className":"code-line","children":["EXPOSE ",["$","span",null,{"className":"token number","children":"3000"}],"\\n"]}]]}]}],"\\n",["$","p",null,{"children":["8）有了 Dockerfile ，我们就可以为项目打包镜像。执行：",["$","code",null,{"children":"docker image build -t next-react-notes-demo:0.0.1 ."}],"创建镜像"]}],"\\n",["$","ol",null,{"start":"9","children":["\\n",["$","li",null,{"children":["运行打包好的镜像，生成一个实例：",["$","code",null,{"children":"docker run -p 4000:3000 --network react-notes next-react-notes-demo:0.0.1"}]," 本地访问 ",["$","a",null,{"href":"http://localhost:4000","children":"http://localhost:4000"}]," 我们应该可以看到页面，但是我们这样设置网络，设置每个容器，是不是很麻烦？没错我们可以使用** Docker Compose 来帮我们管理多个容器**"]}],"\\n"]}],"\\n",["$","h2",null,{"id":"docker-compose","children":["$","a",null,{"className":"anchor","href":"#docker-compose","children":"Docker Compose"}]}],"\\n",["$","blockquote",null,{"children":["\\n",["$","p",null,{"children":"Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过编写一个 docker-compose.yml 文件，你可以在其中定义所有服务、网络和卷，然后使用一个命令就能启动和管理这些服务。"}],"\\n"]}],"\\n",["$","p",null,{"children":"三个核心概念："}],"\\n",["$","ul",null,{"children":["\\n",["$","li",null,{"children":"服务：也就是容器，例如上面的前端网页服务和 Redis 服务"}],"\\n",["$","li",null,{"children":"网络：Docker Compose 会创建一个默认网络让所有服务互相连接，你也可以定义自定义网络"}],"\\n",["$","li",null,{"children":"卷：用于在服务（容器）之间共享和持久化数据。可以在开头创建数据卷，给服务使用"}],"\\n"]}],"\\n",["$","p",null,{"children":"先查看是否安装了 Docker Compose，如果是安装 Docker 客户端，是会默认安装上的"}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker-compose"}]," ",["$","span",null,{"className":"token parameter variable","children":"--version"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 应该能看到：Docker Compose version v2.27.0-desktop.2 这样的返回"}],"\\n"]}]]}]}],"\\n",["$","p",null,{"children":["我们编写 docker-compose.yml 文件（模板文件的各种指令含义可以参考 ",["$","a",null,{"href":"https://yeasy.gitbook.io/docker_practice/compose/compose_file%EF%BC%89%EF%BC%9A","children":"https://yeasy.gitbook.io/docker_practice/compose/compose_file）："}]]}],"\\n",["$","pre",null,{"className":"language-yml","children":["$","code",null,{"className":"language-yml code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 使用 Docker Compose 文件格式版本 3.8。这版本支持新的功能和属性，同时确保与 Docker 引擎的兼容性。"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token key atrule","children":"version"}],["$","span",null,{"className":"token punctuation","children":":"}]," ",["$","span",null,{"className":"token string","children":"\'3.8\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 定义了应用的所有服务，每个服务对应一个容器。"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token key atrule","children":"services"}],["$","span",null,{"className":"token punctuation","children":":"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 服务名称，可以任意字符串，这里是 Redis 服务"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token key atrule","children":"redis"}],["$","span",null,{"className":"token punctuation","children":":"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token comment","children":"# 指定镜像，从 Docker Hub 下载该镜像"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["    ",["$","span",null,{"className":"token key atrule","children":"image"}],["$","span",null,{"className":"token punctuation","children":":"}]," redis\\n"]}],["$","span",null,{"className":"code-line","children":["    ",["$","span",null,{"className":"token comment","children":"# 将容器的 6379 端口映射到主机的 6379 端口。这使得在本地可以通过端口 6379 访问 Redis 服务。    ports:"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["      ",["$","span",null,{"className":"token punctuation","children":"-"}]," ",["$","span",null,{"className":"token string","children":"\'6379:6379\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["      ",["$","span",null,{"className":"token comment","children":"# 指定容器启动时执行的命令，这里是 redis-server，即启动 Redis 服务器"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["    ",["$","span",null,{"className":"token key atrule","children":"command"}],["$","span",null,{"className":"token punctuation","children":":"}]," redis",["$","span",null,{"className":"token punctuation","children":"-"}],"server\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token comment","children":"# nextjs 前端网页服务"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token key atrule","children":"nextapp"}],["$","span",null,{"className":"token punctuation","children":":"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token comment","children":"# 构建镜像时使用当前目录，nextapp 服务的镜像将根据当前目录中的 Dockerfile 构建。"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token key atrule","children":"build"}],["$","span",null,{"className":"token punctuation","children":":"}]," .\\n"]}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token comment","children":"# 将容器的 3000 端口映射到主机的 4000 端口。"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["    ",["$","span",null,{"className":"token key atrule","children":"ports"}],["$","span",null,{"className":"token punctuation","children":":"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["     ",["$","span",null,{"className":"token punctuation","children":"-"}]," ",["$","span",null,{"className":"token string","children":"\'4000:3000\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["     ",["$","span",null,{"className":"token comment","children":"# nextapp 服务依赖 redis 服务。这意味着在启动 nextapp 服务之前，Docker Compose 会先启动 redis 服务。    depends_on:"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["      ",["$","span",null,{"className":"token punctuation","children":"-"}]," redis\\n"]}]]}]}],"\\n",["$","p",null,{"children":"我为每行添加了注释，使用的时候注释记得删除掉，不然会有问题，我们还需要之前编写的 Dockerfile ,我们还需要修改 redis.js"}],"\\n",["$","pre",null,{"className":"language-js","children":["$","code",null,{"className":"language-js code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token keyword","children":"const"}]," redis ",["$","span",null,{"className":"token operator","children":"="}]," ",["$","span",null,{"className":"token keyword","children":"new"}]," ",["$","span",null,{"className":"token class-name","children":"Redis"}],["$","span",null,{"className":"token punctuation","children":"("}],["$","span",null,{"className":"token punctuation","children":"{"}],"\\n"]}],["$","span",null,{"className":"code-line","children":["\\t",["$","span",null,{"className":"token literal-property property","children":"host"}],["$","span",null,{"className":"token operator","children":":"}]," ",["$","span",null,{"className":"token string","children":"\'redis\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token punctuation","children":"}"}],["$","span",null,{"className":"token punctuation","children":")"}],["$","span",null,{"className":"token punctuation","children":";"}],"\\n"]}]]}]}],"\\n",["$","p",null,{"children":["我们这时候命令行运行 Docker Compose 脚本：",["$","code",null,{"children":"docker-compose up"}]," docker-compose up 会尝试自动完成包括"]}],"\\n",["$","ul",null,{"children":["\\n",["$","li",null,{"children":"构建镜像"}],"\\n",["$","li",null,{"children":"（重新）创建服务"}],"\\n",["$","li",null,{"children":"启动服务"}],"\\n",["$","li",null,{"children":"关联服务相关容器的一系列操作"}],"\\n"]}],"\\n",["$","p",null,{"children":["现在我们的项目应该启动了，依然是：",["$","a",null,{"href":"http://localhost:4000%EF%BC%8C%E6%88%91%E4%BB%AC%E4%BC%9A%E7%9C%8B%E5%88%B0%EF%BC%9A","children":"http://localhost:4000，我们会看到："}]," ",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/5994d84dc8fb4a498ac5a3cec38f4bbb~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]," ",["$","strong",null,{"children":"之前我们做的事情，现在只需要一行命令就都帮我们搞定了"}]," 真好，加入每次部署使用 Docker Compose 节省时间是 1 分钟（应该肯定不止吧！)，那帮所有使用 Docker 的人节省的时间那得是多少呀！这就是技术的魅力，省下来的时间玩游戏多香呀！ 现在还有一个问题，就是 Redis 中的数据都在容器中，如果容器销毁，产生的数据也都随之消失，那如果是线上，这肯定不行的呀，数据才是最重要的，得要把容器的数据同步备份到主机中，即使容器销毁，数据也还在，那就需要数据卷 VOLUME 了，让我们继续往下看"]}],"\\n",["$","h2",null,{"id":"数据卷","children":["$","a",null,{"className":"anchor","href":"#数据卷","children":"数据卷"}]}],"\\n",["$","blockquote",null,{"children":["\\n",["$","p",null,{"children":"数据卷（Volumes）是 Docker 提供的一种用于在容器和主机之间共享数据的机制。数据卷可以独立于容器的生命周期存在，这意味着即使容器删除了，数据卷中的数据也不会丢失。它的特点："}],"\\n",["$","ol",null,{"children":["\\n",["$","li",null,{"children":[["$","strong",null,{"children":"持久性"}],"：数据卷的数据会一直保留，直到明确删除，即使容器删除，数据仍然存在。"]}],"\\n",["$","li",null,{"children":[["$","strong",null,{"children":"共享和重用"}],"：数据卷可以在多个容器之间共享和重用。"]}],"\\n",["$","li",null,{"children":[["$","strong",null,{"children":"备份和恢复"}],"：可以轻松地对数据卷进行备份和恢复操作。"]}],"\\n",["$","li",null,{"children":[["$","strong",null,{"children":"高效"}],"：数据卷的性能优于直接在容器内存储数据。"]}],"\\n"]}],"\\n"]}],"\\n",["$","p",null,{"children":"上面部署的项目，Redis 的数据是没有存储到主机的，我们验证一下："}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 查看 redis 容器的 container id"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," container ",["$","span",null,{"className":"token function","children":"ls"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 进入想要进入的容器 （这里是进入 Redis 容器）"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," ",["$","span",null,{"className":"token builtin class-name","children":"exec"}]," ",["$","span",null,{"className":"token parameter variable","children":"-it"}]," 6ddf48e06645 ",["$","span",null,{"className":"token function","children":"bash"}],"\\n"]}]]}]}],"\\n",["$","p",null,{"children":["终端效果： ",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/05d9898a42034398a8b475f30a4ffe95~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]," 我们执行一些 Redis 命令，来删除一条数据"]}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":"redis-cli\\n"}],["$","span",null,{"className":"code-line","children":"keys *\\n"}],["$","span",null,{"className":"code-line","children":"hgetAll notes\\n"}],["$","span",null,{"className":"code-line","children":["hdel notes ",["$","span",null,{"className":"token number","children":"1702459182837"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"hgetAll notes\\n"}]]}]}],"\\n",["$","p",null,{"children":["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/dff8fe8fa662463793cc3382d6edb1c1~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 查看 Next.js 项目的 container id"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," container ",["$","span",null,{"className":"token function","children":"ls"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 重启 Next.js 容器"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," container restart 74776b12c032\\n"]}]]}]}],"\\n",["$","p",null,{"children":["我们能看到： ",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/4e016e207e7245aaaf37679535d954a8~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]," 这时候，如果我们把所有容器都删除（Redis 容器也删除了），重新运行： 先执行：",["$","code",null,{"children":"docker-compose down"}],"，再执行",["$","code",null,{"children":"docker-compose up"}]," ",["$","$L8",null,{"src":"https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c9509f0eca224516ab1b8822241f14c4~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.image#?w=1624\u0026h=334\u0026s=81668\u0026e=png\u0026b=1e1e1e","alt":"image.png"}]," 我们会发现数据又恢复到了三条，那我现在希望我删除能够一直生效，就需要使用到 数据卷（volumes)的功能，它会将数据存在主机文件系统的某个区域，现在我们在项目的根目录下建立一个名为 redis 的文件夹，修改 docker-compose.yml如下："]}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":["version: ",["$","span",null,{"className":"token string","children":"\'3.8\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"services:\\n"}],["$","span",null,{"className":"code-line","children":"\\n"}],["$","span",null,{"className":"code-line","children":"  redis:\\n"}],["$","span",null,{"className":"code-line","children":"    image: redis\\n"}],["$","span",null,{"className":"code-line","children":"    ports:\\n"}],["$","span",null,{"className":"code-line","children":["      - ",["$","span",null,{"className":"token string","children":"\'6379:6379\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    command: redis-server\\n"}],["$","span",null,{"className":"code-line","children":"    volumes:\\n"}],["$","span",null,{"className":"code-line","children":"      - ./redis:/data\\n"}],["$","span",null,{"className":"code-line","children":"\\n"}],["$","span",null,{"className":"code-line","children":"  nextapp:\\n"}],["$","span",null,{"className":"code-line","children":["    build: ",["$","span",null,{"className":"token builtin class-name","children":"."}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    ports:\\n"}],["$","span",null,{"className":"code-line","children":["      - ",["$","span",null,{"className":"token string","children":"\'4000:3000\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    depends_on:\\n"}],["$","span",null,{"className":"code-line","children":"      - redis\\n"}]]}]}],"\\n",["$","p",null,{"children":["./redis:/data 是通过 : 进行分割，左边是主机的地址，右边是 容器的地址，我们会发现很多地方都是这样，左边是宿主机的信息，右边是容器的。 我们配置这个后，容器中的数据就会同步到主机，也就实现了",["$","strong",null,{"children":"数据持久化"}],"。 我们删除掉之前的镜像，再重新构建的镜像，因为数据做了持久化，再重复一遍刚才的操作再次打开地址的时候，数据如果是两条，那么数据卷就生效，我们动手试一下吧！"]}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 查看镜像"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," image ",["$","span",null,{"className":"token function","children":"ls"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 删除镜像"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," rmi next-react-demo-nextapp\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 再次查看"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker"}]," image ",["$","span",null,{"className":"token function","children":"ls"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 重新执行 docker compose"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token function","children":"docker-compose"}]," up\\n"]}]]}]}],"\\n",["$","p",null,{"children":[["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/c64988ef084b4f0e84d063568985313e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}],"\\n去删数据：\\n",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/059a0861871149048ace50dc8069a2ac~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}],"\\n重新启动 nextapp 容器，然后刷新 ",["$","a",null,{"href":"http://localhost:4000","children":"http://localhost:4000"}],"\\n",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/de27212eb83e48aaadb0647b36eb9d2f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}],"\\n我们删除关闭所有容器，然后重启。会看到数据依然是两条。那数据持久化就完成啦！ 如果细心的小伙伴，可以看到我们主机的 Redis 目录下 多了一个 文件\\n",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/7667efaff22f4117b1c4fe51680e298f~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}],"\\n这个文件是二进制文件，正是 Redis 数据的全量备份。运行 ",["$","code",null,{"children":"docker-compose up"}]," 的时候，redis 又会读取加载这个文件，也就实现了数据持久化。 dump.rdb 这个文件就是 Redis 的持久化机制的体现。Redis 的持久化机制有两种，"]}],"\\n",["$","ul",null,{"children":["\\n",["$","li",null,{"children":"一种是 RDB（Redis Database），RDB 是一次快照，也是默认值"}],"\\n",["$","li",null,{"children":"一种是 AOF（Append Only File）。开启 Redis 容器时的 --appendonly 参数开启那就是 AOF。"}],"\\n"]}],"\\n",["$","h3",null,{"id":"数据卷的其他命令","children":["$","a",null,{"className":"anchor","href":"#数据卷的其他命令","children":"数据卷的其他命令"}]}],"\\n",["$","ul",null,{"children":["\\n",["$","li",null,{"children":["创建：",["$","code",null,{"children":"docker volume create my-vol"}]]}],"\\n",["$","li",null,{"children":["查看：",["$","code",null,{"children":"docker volume ls"}]]}],"\\n",["$","li",null,{"children":["查看数据卷对应主机位置：",["$","code",null,{"children":"docker volume inspect my-vol"}]]}],"\\n"]}],"\\n",["$","p",null,{"children":"在 docker-compose.yml 创建数据卷"}],"\\n",["$","pre",null,{"className":"language-bash","children":["$","code",null,{"className":"language-bash code-highlight","children":[["$","span",null,{"className":"code-line","children":["version: ",["$","span",null,{"className":"token string","children":"\'3.8\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":[["$","span",null,{"className":"token comment","children":"# 创建名为 redis-data 数据卷"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"volumes:\\n"}],["$","span",null,{"className":"code-line","children":"  redis-data:\\n"}],["$","span",null,{"className":"code-line","children":"\\n"}],["$","span",null,{"className":"code-line","children":"services:\\n"}],["$","span",null,{"className":"code-line","children":"\\n"}],["$","span",null,{"className":"code-line","children":"  redis:\\n"}],["$","span",null,{"className":"code-line","children":"    image: redis\\n"}],["$","span",null,{"className":"code-line","children":"    ports:\\n"}],["$","span",null,{"className":"code-line","children":["      - ",["$","span",null,{"className":"token string","children":"\'6379:6379\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    command: redis-server\\n"}],["$","span",null,{"className":"code-line","children":["  ",["$","span",null,{"className":"token comment","children":"# 挂载 到容器"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    volumes:\\n"}],["$","span",null,{"className":"code-line","children":"      - redis-data:/data\\n"}],["$","span",null,{"className":"code-line","children":"\\n"}],["$","span",null,{"className":"code-line","children":"  nextapp:\\n"}],["$","span",null,{"className":"code-line","children":["    build: ",["$","span",null,{"className":"token builtin class-name","children":"."}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    ports:\\n"}],["$","span",null,{"className":"code-line","children":["     - ",["$","span",null,{"className":"token string","children":"\'4000:3000\'"}],"\\n"]}],["$","span",null,{"className":"code-line","children":"    depends_on:\\n"}],["$","span",null,{"className":"code-line","children":"      - redis\\n"}]]}]}],"\\n",["$","p",null,{"children":"到这里，本节就结束了，但是这次部署，依然有两个问题？"}],"\\n",["$","ol",null,{"children":["\\n",["$","li",null,{"children":"打包后的 next.js 镜像很大, 我们需要优化"}],"\\n",["$","li",null,{"children":"目前依然只能本地访问，我们部署是为了让所有人都可以访问，但是没有做到。"}],"\\n"]}],"\\n",["$","p",null,{"children":["下一节，我们深度使用 Docker，解决这两个问题，到这里，我发现 Docker 命令还是很多的，如果不是经常使用，根本就记不住（ps：虽然可以使用 Docker desktop 快捷操作）。如果忘记命令，这里推荐查阅这个中文文档，非常大而全的手册：",["$","a",null,{"href":"https://yeasy.gitbook.io/docker_practice%EF%BC%8C%E5%BE%88%E5%BF%AB%E8%83%BD%E6%90%9C%E7%B4%A2%E5%88%B0%E6%83%B3%E8%A6%81%E7%9A%84%E4%BB%A3%E7%A0%81","children":"https://yeasy.gitbook.io/docker_practice，很快能搜索到想要的代码"}],"\\n",["$","$L8",null,{"src":"https://blog-1304565468.cos.ap-shanghai.myqcloud.com/work/3529e2b0a4a1490992deaeb2d404e66e~tplv-k3u1fbpfcp-jj-mark:0:0:0:0:q75.png","alt":"image.png"}]]}]]}]]}],["$","div",null,{"className":"flex px-4 justify-between mt-8","children":[["$","$L6",null,{"href":"/posts/redis-learn-1","className":"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2","children":"前端程序员学习 Redis"}],["$","$L6",null,{"href":"/posts/docker-learn-1","className":"inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-violet-500 dark:text-violet-300 shadow-sm hover:bg-violet-200 dark:hover:bg-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-600 focus:ring-offset-2","children":"前端程序员学习 Docker 的笔记 （..."}]]}]]}]]}]}]}]}]}]],null],null]},["$","$L9",null,{"parallelRouterKey":"children","segmentPath":["children","(app)","children","posts","children","$a","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":[["$","link","0",{"rel":"stylesheet","href":"/docs/prinext/static/css/cc5160e2067b0cef.css","precedence":"next","crossOrigin":"$undefined"}]]}],[["$","div",null,{"className":"sm:px-8 relative mt-16 min-h-screen lg:mt-32","children":["$","div",null,{"className":"mx-auto max-w-7xl lg:px-8","children":["$","div",null,{"className":"relative px-4 sm:px-8 lg:px-12","children":["$","div",null,{"className":"mx-auto max-w-2xl lg:max-w-5xl","children":["$","div",null,{"className":"absolute inset-0 flex items-center justify-center","children":["$","div",null,{"className":"animate-pulse text-5xl text-zinc-500/50","children":["$","svg",null,{"width":"1em","height":"1em","viewBox":"0 0 24 24","fill":"none","xmlns":"http://www.w3.org/2000/svg","children":["$","path",null,{"d":"M16.5609 7.43931C15.7777 5.41156 14.0301 4 12 4C9.96987 4 8.22234 5.41156 7.43913 7.43931M16.5609 7.43931C19.7904 8.10251 22 9.44804 22 11C22 13.2091 17.5228 15 12 15C6.47715 15 2 13.2091 2 11C2 9.44804 4.20962 8.10251 7.43913 7.43931M16.5609 7.43931C16.94 8.42085 17.0719 9.49351 16.9638 10.5391C15.5011 10.8323 13.8065 11 12 11C10.1935 11 8.49887 10.8323 7.03622 10.5391C6.92815 9.49351 7.06001 8.42085 7.43913 7.43931M4 17L3 19M12 18V21M20 17L21 19","stroke":"currentColor","strokeWidth":"2","strokeLinecap":"round","strokeLinejoin":"round"}]}]}]}]}]}]}]}],[],[]]]},["$","$L9",null,{"parallelRouterKey":"children","segmentPath":["children","(app)","children","posts","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":null}],null]},[[["$","$Lc",null,{}],["$","div",null,{"className":"fixed inset-0 flex justify-center sm:px-8","children":["$","div",null,{"className":"flex w-full max-w-7xl lg:px-8","children":["$","div",null,{"className":"opacity-95 w-full bg-zinc-50/90 ring-1 ring-zinc-100 dark:bg-zinc-900/80 dark:ring-zinc-400/20"}]}]}],["$","div",null,{"className":"relative text-zinc-800 dark:text-zinc-200","children":[["$","$Ld",null,{}],["$","main",null,{"children":["$","$L9",null,{"parallelRouterKey":"children","segmentPath":["children","(app)","children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":null}]}],["$","$e",null,{"children":["$","footer",null,{"className":"mt-32","children":["$","div",null,{"className":"sm:px-8","children":["$","div",null,{"className":"mx-auto max-w-7xl lg:px-8","children":["$","div",null,{"className":"border-t border-zinc-100 pb-16 pt-10 dark:border-zinc-700/40","children":[["$","div",null,{"className":"relative px-4 sm:px-8 lg:px-12","children":["$","div",null,{"className":"mx-auto max-w-2xl lg:max-w-5xl","children":["$","div",null,{"className":"flex flex-col items-center justify-between gap-6 sm:flex-row","children":[["$","p",null,{"className":"text-sm text-zinc-500/80 dark:text-zinc-400/80","children":["© ",2025," ","William Sun"," 网站已开源：",["$","$Lf",null,{"href":"https://github.com/coderPerseus/blog","children":"William Sun"}]]}],["$","nav",null,{"className":"flex gap-6 text-sm font-medium text-zinc-800 dark:text-zinc-200","children":[["$","$L6",null,{"href":"/","className":"transition hover:text-violet-500 dark:hover:text-violet-400","children":"首页"}],["$","$L6",null,{"href":"/posts","className":"transition hover:text-violet-500 dark:hover:text-violet-400","children":"博客"}],["$","$L6",null,{"href":"/about","className":"transition hover:text-violet-500 dark:hover:text-violet-400","children":"关于我"}]]}]]}]}]}],["$","div",null,{"className":"relative px-4 sm:px-8 lg:px-12 mt-6","children":["$","div",null,{"className":"mx-auto max-w-2xl lg:max-w-5xl","children":["$","div",null,{"className":"flex flex-col items-center justify-start gap-2 sm:flex-row","children":"欢迎 👏🏻 你的访问"}]}]}],["$","div",null,{"className":"flex justify-center p-6 flex-col sm:flex-row","children":[["$","$L6",null,{"target":"_blank","href":"https://beian.miit.gov.cn/","className":"text-blue-600 flex justify-center items-center","children":[["$","$L10",null,{"unoptimized":true,"src":"/docs/police.png","width":18,"height":18,"alt":"备案","className":"mr-1 "}],"辽公网安备21021202000334号"]}],["$","$L6",null,{"target":"_blank","href":"https://beian.miit.gov.cn/","className":"text-blue-600 pl-6 flex justify-center items-center","children":"辽ICP备2021012379号-1"}]]}]]}]}]}]}]}]]}]],null],null]},[["$","html",null,{"className":" m-0 h-full p-0 font-sans antialiased","lang":"zh-CN","suppressHydrationWarning":true,"children":["$","body",null,{"children":[["$","$L11",null,{}],["$","$L12",null,{}],["$","$L13",null,{"attribute":"class","defaultTheme":"system","enableSystem":true,"disableTransitionOnChange":true,"children":["$","$L9",null,{"parallelRouterKey":"children","segmentPath":["children"],"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$Lb",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":["$","$L14",null,{}],"notFoundStyles":[],"styles":null}]}]]}]}],null],null],"couldBeIntercepted":false,"initialHead":[false,"$L15"],"globalErrorComponent":"$16","missingSlots":"$W17"}]]\n'
+			]);
+		</script>
+		<script>
+			self.__next_f.push([
+				1,
+				'15:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"name":"theme-color","media":"(prefers-color-scheme: dark)","content":"#000212"}],["$","meta","2",{"name":"theme-color","media":"(prefers-color-scheme: light)","content":"#fafafa"}],["$","meta","3",{"charSet":"utf-8"}],["$","title","4",{"children":"前端程序员学习 Docker 的笔记 （二） | William Sun"}],["$","meta","5",{"name":"description","content":"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"}],["$","link","6",{"rel":"manifest","href":"/site.webmanifest","crossOrigin":"use-credentials"}],["$","meta","7",{"name":"keywords","content":"docker,笔记"}],["$","meta","8",{"name":"baidu-site-verification","content":"codeva-7AmpPWgzQY"}],["$","meta","9",{"name":"google-site-verification","content":"TTbfOvWmLj0icfk0BQNUZB3crwReji82Q_vRdnZFFAc"}],["$","link","10",{"rel":"canonical","href":"https://dhc.ink/posts/docker-learn-2"}],["$","link","11",{"rel":"alternate","type":"application/rss+xml","title":"RSS 订阅","href":"https://luckysnail.cn/rss"}],["$","meta","12",{"property":"og:title","content":"前端程序员学习 Docker 的笔记 （二）"}],["$","meta","13",{"property":"og:description","content":"如何使用 Docker Compose 来部署一个包含 Next.js 和 Redis 的项目。文章首先演示了本地启动项目的步骤,然后讲解了如何使用 Docker 容器化部署服务。接着介绍了 Docker Compose 的概念和使用方法,通过编写 docker-compose.yml 文件来管理多个容器。最后,文章还讨论了数据卷的概念和使用,以实现数据持久化。整篇文章通过实际操作步骤,深入浅出地讲解了 Docker 在前端项目中的应用,适合想要学习 Docker 的前端开发者阅读"}],["$","meta","14",{"name":"twitter:card","content":"summary_large_image"}],["$","meta","15",{"name":"twitter:creator","content":"@haozhan05554957"}],["$","meta","16",{"name":"twitter:title","content":"William Sunblog | 前端 | 开发者"}],["$","meta","17",{"name":"twitter:description","content":"我是William Sun，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运"}],["$","meta","18",{"name":"twitter:image","content":"https://luckysnail.cn/og.png"}],["$","link","19",{"rel":"icon","href":"/docs/favicon.ico","type":"image/x-icon","sizes":"32x32"}],["$","link","20",{"rel":"icon","href":"/docs/icon.jpg?021a5ddd40907a91","type":"image/jpeg","sizes":"256x256"}],["$","link","21",{"rel":"apple-touch-icon","href":"/docs/apple-icon.jpg?58f0c05bf91c4519","type":"image/jpeg","sizes":"1022x1023"}]]\n'
+			]);
+		</script>
+		<script>
+			self.__next_f.push([1, '4:null\n']);
+		</script>
+	</body>
+</html>
