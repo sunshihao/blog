@@ -1,5 +1,4 @@
 import { withContentlayer } from 'next-contentlayer';
-// import { PHASE_DEVELOPMENT_SERVER } from 'next/constants';
 import generate from './scripts/generate-rss.js';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
