@@ -1,6 +1,6 @@
 'use client';
 
-import { SnailIcon, SparkleIcon } from '@/assets';
+import { SparkleIcon, SunnyIcon } from '@/assets';
 import { SocialLink } from '@/components/links/SocialLink';
 import siteMetadata from '@/config/site';
 import { motion } from 'framer-motion';
@@ -43,7 +43,7 @@ function OCD() {
 function Founder() {
 	return (
 		<span className="group inline-flex items-center">
-			<SnailIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
+			<SunnyIcon className="mr-1 inline-flex group-hover:fill-zinc-600/20 dark:group-hover:fill-zinc-200/20" />
 			<span>前端工程师</span>
 		</span>
 	);

@@ -2,14 +2,14 @@ import type { SiteConfig } from '@/types/siteConfig';
 
 const url = new URL(
 	process.env.NODE_ENV === 'production'
-		? 'https://luckysnail.cn/'
+		? 'https://blog.dhc.ink/'
 		: 'http://localhost:3000'
 );
 export const baseSiteConfig: SiteConfig = {
 	name: 'blog | 前端 | 开发者',
 	description:
-		'我是William Sun，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运',
-	url: url.href, //'https://luckysnail.cn/',
+		'我是William Sun，前端开发工程师。热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。',
+	url: url.href,
 	// 网站预览图
 	ogImage: url.origin + '/og.png',
 	metadataBase: '/',
@@ -24,28 +24,16 @@ export const baseSiteConfig: SiteConfig = {
 			text: 'github',
 			icon: 'GitHubIcon'
 		},
-		// {
-		// 	href: 'wx',
-		// 	text: '微信',
-		// 	isPicture: true,
-		// 	icon: 'WxIcon'
-		// },
-		// {
-		// 	href: 'wxPublic',
-		// 	text: '微信公众号',
-		// 	isPicture: true,
-		// 	icon: 'WxMediaIcon'
-		// },
 		{
 			href: '4sh945@gmail.com',
 			text: '邮箱',
 			icon: 'MailIcon'
-		},
-		{
-			href: 'https://x.com/haozhan05554957',
-			text: '推特（X）',
-			icon: 'XIcon'
 		}
+		// {
+		// 	href: '',
+		// 	text: '推特（X）',
+		// 	icon: 'XIcon'
+		// }
 	],
 	themeColors: [
 		{ media: '(prefers-color-scheme: dark)', color: '#000212' },
