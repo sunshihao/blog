@@ -11,7 +11,7 @@ export const baseSiteConfig: SiteConfig = {
 		'我是William Sun，前端开发工程师。热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。',
 	url: url.href,
 	// 网站预览图
-	ogImage: url.origin + '/og.png',
+	ogImage: url.origin + '/logo.png',
 	metadataBase: '/',
 	keywords: ['blog', '前端', '开发者', 'AI', '编程', '学习笔记', '程序员'],
 	authors: 'William Sun',
