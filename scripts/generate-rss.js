@@ -6,14 +6,11 @@ const matter = require('gray-matter');
 
 async function generate() {
 	const feed = new RSS({
-		title: '幸运的蜗牛',
-		description:
-			'我是幸运的蜗牛，一名充满热情的前端开发工程师。我热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。正如我的名字，我相信越努力，越幸运',
-		site_url: 'https://luckysnail.cn',
-		feed_url: 'https://luckysnail.cn/feed.xml'
+		title: '',
+		description: '我是William Sun，前端工程师。热衷于探索和体验最新技术',
+		site_url: 'https://blog.dhc.ink',
+		feed_url: 'https://blog.dhc.ink/feed.xml'
 	});
-
-	// const posts = await fs.readdir(path.join(__dirname, '..', 'data', 'blog'));
 
 	// 定义要读取的文件夹路径
 	const folders = [
@@ -38,7 +35,7 @@ async function generate() {
 
 			feed.item({
 				title: frontmatter.data.title,
-				url: 'https://luckysnail.cn/posts/' + file.replace(/\.mdx?/, ''),
+				url: 'https://blog.dhc.ink/posts/' + file.replace(/\.mdx?/, ''),
 				date: frontmatter.data.publishedAt,
 				description: frontmatter.data.summary
 			});
