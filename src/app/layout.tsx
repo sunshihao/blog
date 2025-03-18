@@ -3,8 +3,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
 
-import { NextIntlClientProvider } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
+import { getLocale } from 'next-intl/server';
 
 // import { sansFont } from '@/lib/font';
 import { Viewport, type Metadata } from 'next';
@@ -48,7 +47,7 @@ export default async function RootLayout({
 	// const messages = await getMessages();
 
 	const locale = await getLocale();
-	const messages = await getMessages();
+	// const messages = await getMessages();
 
 	return (
 		// <ViewTransitions>
@@ -61,16 +60,16 @@ export default async function RootLayout({
 				<GoogleAnalytics />
 				<BaiDuAnalytics />
 				{/* @ts-ignore */}
-				<NextIntlClientProvider messages={messages}>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						{children}
-					</ThemeProvider>
-				</NextIntlClientProvider>
+				{/* <NextIntlClientProvider messages={messages}> */}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
+				{/* </NextIntlClientProvider> */}
 			</body>
 		</html>
 		// </ViewTransitions>
