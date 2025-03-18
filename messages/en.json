@@ -3,5 +3,8 @@
 		"about": "About",
 		"dashboard": "Dashboard",
 		"blog": "Blog"
+	},
+	"NotFounnd": {
+		"msg": "来到了未知的位置 EN"
 	}
 }

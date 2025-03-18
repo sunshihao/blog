@@ -44,6 +44,9 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	// const locale = await getLocale();
+	// const messages = await getMessages();
+
 	const locale = await getLocale();
 	const messages = await getMessages();
 
@@ -55,10 +58,10 @@ export default async function RootLayout({
 			suppressHydrationWarning
 		>
 			<body>
+				<GoogleAnalytics />
+				<BaiDuAnalytics />
+				{/* @ts-ignore */}
 				<NextIntlClientProvider messages={messages}>
-					<GoogleAnalytics />
-					<BaiDuAnalytics />
-					{/* @ts-ignore */}
 					<ThemeProvider
 						attribute="class"
 						defaultTheme="system"
