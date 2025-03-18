@@ -1,5 +1,5 @@
 import { withContentlayer } from 'next-contentlayer';
-import generate from './scripts/generate-rss.js';
+// import generate from './scripts/generate-rss.js';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// 静态导出
@@ -17,7 +17,7 @@ const nextConfig = {
 		// 	require('./scripts/generate-sitemap'); // eslint-disable-line
 		// 	require('./scripts/generate-rss'); // eslint-disable-line
 		// }
-		generate();
+		// generate(); // rss
 		return config;
 	}
 };
