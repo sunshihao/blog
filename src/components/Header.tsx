@@ -21,6 +21,8 @@ import { Avatar } from './Avatar';
 import { Container } from './Container';
 import { NavigationBar } from './NavigationBar';
 // import { ThemeToggle } from './ThemeToggle';
+import LangSwitch from '@/components/LangSwitch';
+
 import dynamic from 'next/dynamic';
 
 const ThemeToggle = dynamic(() => import('./ThemeToggle'), {
@@ -272,8 +274,10 @@ export function Header() {
 								animate={{ opacity: 1, y: 0, scale: 1 }}
 							>
 								{/* <UserInfo /> */}
-								<div className="pointer-events-auto">
+								<div className="flex pointer-events-auto">
 									<ThemeToggle />
+
+									<LangSwitch />
 								</div>
 							</motion.div>
 							{/* 

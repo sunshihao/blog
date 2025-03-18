@@ -2,9 +2,9 @@
 
 import { type IconProps } from '@/assets';
 import * as iconList from '@/assets/index';
-import Douyin from '@/assets/media/douyin.webp';
-import Qq from '@/assets/media/qq.webp';
-import Wx from '@/assets/media/wx.webp';
+// import Douyin from '@/assets/media/douyin.webp';
+// import Qq from '@/assets/media/qq.webp';
+// import Wx from '@/assets/media/wx.webp';
 import WxPublic from '@/assets/media/wxPublic.webp';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
@@ -48,10 +48,10 @@ type Platform =
 	| '微信公众号';
 
 const picMap: Record<string, StaticImageData> = {
-	wx: Wx,
-	wxPublic: WxPublic,
-	douyin: Douyin,
-	qq: Qq
+	// wx: Wx,
+	wxPublic: WxPublic
+	// douyin: Douyin,
+	// qq: Qq
 };
 const PictureDialog = ({
 	platform,

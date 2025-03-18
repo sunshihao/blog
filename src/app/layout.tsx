@@ -2,6 +2,10 @@ import BaiDuAnalytics from '@/components/BaiDuAnalytics';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
+
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
+
 // import { sansFont } from '@/lib/font';
 import { Viewport, type Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
@@ -35,30 +39,35 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
 	themeColor: siteMetadata.themeColors
 };
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const locale = await getLocale();
+	const messages = await getMessages();
+
 	return (
 		// <ViewTransitions>
 		<html
 			className={` m-0 h-full p-0 font-sans antialiased`}
-			lang={siteMetadata.locale}
+			lang={locale}
 			suppressHydrationWarning
 		>
 			<body>
-				<GoogleAnalytics />
-				<BaiDuAnalytics />
-				{/* @ts-ignore */}
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					{children}
-				</ThemeProvider>
+				<NextIntlClientProvider messages={messages}>
+					<GoogleAnalytics />
+					<BaiDuAnalytics />
+					{/* @ts-ignore */}
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 		// </ViewTransitions>

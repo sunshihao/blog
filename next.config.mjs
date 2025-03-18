@@ -1,5 +1,9 @@
 import { withContentlayer } from 'next-contentlayer';
+import createNextIntlPlugin from 'next-intl/plugin';
 // import generate from './scripts/generate-rss.js';
+
+const withNextIntl = createNextIntlPlugin();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	// 静态导出
@@ -22,4 +26,4 @@ const nextConfig = {
 	}
 };
 
-export default withContentlayer(nextConfig);
+export default withNextIntl(withContentlayer(nextConfig));

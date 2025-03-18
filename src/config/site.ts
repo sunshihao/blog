@@ -7,8 +7,7 @@ const url = new URL(
 );
 export const baseSiteConfig: SiteConfig = {
 	name: 'blog | 前端 | 开发者',
-	description:
-		'我是William Sun，前端开发工程师。热衷于探索和体验最新技术，特别是人工智能（AI），并在日常工作中去使用它们，来提升我的工作效率。我的目标是积极参与开源社区，为开源项目贡献自己的力量。',
+	description: '我是William Sun，前端开发工程师。热衷于探索和体验最新技术',
 	url: url.href,
 	// 网站预览图
 	ogImage: url.origin + '/logo.png',
@@ -29,17 +28,12 @@ export const baseSiteConfig: SiteConfig = {
 			text: '邮箱',
 			icon: 'MailIcon'
 		}
-		// {
-		// 	href: '',
-		// 	text: '推特（X）',
-		// 	icon: 'XIcon'
-		// }
 	],
 	themeColors: [
 		{ media: '(prefers-color-scheme: dark)', color: '#000212' },
 		{ media: '(prefers-color-scheme: light)', color: '#fafafa' }
 	],
-	defaultNextTheme: 'dark', // next-theme option: system | dark | light
+	defaultNextTheme: 'light', // next-theme option: system | dark | light
 	icons: {
 		icon: '/favicon.ico',
 		shortcut: '/logo.png',
@@ -64,26 +58,26 @@ export const baseSiteConfig: SiteConfig = {
 	},
 	footerItems: [{ href: '/blog', text: '首页' }],
 	locale: 'zh-CN',
-	siteHostList: ['luckysnail.cn', 'lucky-snail.vercel.app']
+	siteHostList: ['blog.dhc.ink']
 };
 
 const siteMetadata: SiteConfig = {
-	...baseSiteConfig,
-	openGraph: {
-		type: 'website',
-		locale: baseSiteConfig.locale,
-		url: baseSiteConfig.url,
-		title: baseSiteConfig.authors + baseSiteConfig.name,
-		description: baseSiteConfig.description,
-		siteName: baseSiteConfig.name,
-		images: [`${baseSiteConfig.url}og.png`]
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: baseSiteConfig.authors + baseSiteConfig.name,
-		description: baseSiteConfig.description,
-		images: [`${baseSiteConfig.url}og.png`],
-		creator: '@haozhan05554957'
-	}
+	...baseSiteConfig
+	// openGraph: {
+	// 	type: 'website',
+	// 	locale: baseSiteConfig.locale,
+	// 	url: baseSiteConfig.url,
+	// 	title: baseSiteConfig.authors + baseSiteConfig.name,
+	// 	description: baseSiteConfig.description,
+	// 	siteName: baseSiteConfig.name,
+	// 	images: [`${baseSiteConfig.url}og.png`]
+	// },
+	// twitter: {
+	// 	card: 'summary_large_image',
+	// 	title: baseSiteConfig.authors + baseSiteConfig.name,
+	// 	description: baseSiteConfig.description,
+	// 	images: [`${baseSiteConfig.url}og.png`],
+	// 	creator: '@haozhan05554957'
+	// }
 };
 export default siteMetadata;
