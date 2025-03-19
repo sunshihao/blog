@@ -1,0 +1,86 @@
+---
+title: 存储访问框架(SAF - Android Storage Access Framework) 的使用
+date: 2025-03-19T05:23:23Z
+slug: post-10
+author: sunshihao：https://github.com/sunshihao
+tags: ["android"]
+---
+
+参考:
+[Android储访问框架](https://developer.android.com/guide/topics/providers/document-provider?hl=zh-cn)
+[常见 MIME 类型列表](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Guides/MIME_types/Common_types)
+
+背景:
+手机系统对于相册操作权限开放的比较好，但是对于非相册非图片的文件选取，则需要SAF进行辅助补充，微信的系统文件选择也使用了SAF。
+
+### 简述
+Android 4.4（API 级别 19）引入了存储访问框架 (SAF)。借助 SAF，用户可轻松浏览和打开各种文档、图片及其他文件，而不用管这些文件来自其首选文档存储提供程序中的哪一个。用户可通过易用的标准界面，跨所有应用和提供程序以统一的方式浏览文件并访问最近用过的文件。
+下图展示了一个标准的SAF文件界面:
+
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/d33a2aa0-6731-4340-877d-f86940412e88" width="200" />
+</p>
+
+### 应用
+
+Android Java代码展示打开SAF方式：
+
+```
+private int FILE_SELECT_REQUEST_CODE = 110; 
+Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
+intent.addCategory(Intent.CATEGORY_DEFAULT); // 仅打开有读取权限文件
+intent.setType("*/*"); // 不限制打开文件类型
+intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true); // 只打开本地文件
+startActivityForResult(Intent.createChooser(intent, "文件选择"), FILE_SELECT_REQUEST_CODE);
+```
+
+#### 1.打开方式
+
+使用时，打开SAF有几种不同的表现方式:
+
+- ACTION_GET_CONTENT: 允许用户从任何可以处理意图中指定的MIME类型的应用程序中选择一个文件
+- ACTION_PICK: 允许用户从一个已知的数据源中选择一张或多张图片
+- ACTION_OPEN_DOCUMENT: 允许用户选择单个文档，或者创建新文档
+- ACTION_OPEN_DOCUMENT_TREE: 允许用户选择整个目录，并且应用程序可以处理该目录内的所有文档
+
+注: ACTION_GET_CONTENT打开时展开的侧边导航栏中会有三方应用的快捷方式，但是在个别的手机上此快捷方式可能会有BUG,所以建议使用ACTION_OPEN_DOCUMENT打开方式屏蔽侧边栏到账中的三方快捷方式。
+
+ACTION_PICK，ACTION_OPEN_DOCUMENT_TREE均为选择调用三方的打开方式而不是SAF文件系统。
+
+#### 2.限制文件MIME类型
+
+```
+Uri uri1 = Uri.parse("content://com.android.externalstorage.documents/document/primary%3A"); // 指定文件目录
+Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+intent.addCategory(Intent.CATEGORY_DEFAULT);
+intent.setType("*/*");
+// 指定访问目录g格式
+String[] mimeTypes = {"image/*", "application/pdf", "application/msword"};
+intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uri1);
+startActivityForResult(Intent.createChooser(intent, "文件选择"), FILE_SELECT_REQUEST_CODE);
+```
+在示例中我们指定了仅 图片、pdf和doc格式文件可以选择，其中也示例了使用Uri指定打开文件目录的方式，具体MIME类型与文件格式对照表可以在网上搜索。
+
+#### 3.选择文件后回调
+
+```
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+  // super.onActivityResult(requestCode, resultCode, data);
+  if (requestCode == FILE_SELECT_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+    Uri fileUri = data.getData();
+    Log.i("Res--", fileUri.toString());
+  }
+}
+```
+以上为应答后接收文件路径方式。
+
+### 总结
+
+在Android的文件上传相对较为冷门，因为Android的文件目录结构不明朗简单导致在使用过程中文件查找较为麻烦，不如直接操作图库的方式便利。
+
+而SAF作为一种Android很早之前提供的文件访问形式，在使用上很便利且功能强大，但是遗憾的是未找到SAF界面UI自定义方式。
+
+---
+此文自动发布于：<a href="https://github.com/sunshihao/sunshihao.github.io/issues/10" target="_blank">github issues</a>
