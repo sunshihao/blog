@@ -2,12 +2,12 @@
 
 import NotFound from '@/assets/unDraw/404.svg';
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+// import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function NotFoundPage() {
-	const t = useTranslations('NotFounnd');
+	// const t = useTranslations('NotFounnd');
 
 	return (
 		<main className="h-screen">
@@ -30,7 +30,7 @@ export default function NotFoundPage() {
 						className="mb-12"
 					/>
 					<span className="text-violet-500 dark:text-violet-300">
-						{t('msg')}
+						来到了未知的位置
 					</span>
 				</motion.h1>
 				<Link

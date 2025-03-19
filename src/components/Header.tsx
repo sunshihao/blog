@@ -21,7 +21,7 @@ import { Avatar } from './Avatar';
 import { Container } from './Container';
 import { NavigationBar } from './NavigationBar';
 // import { ThemeToggle } from './ThemeToggle';
-import LangSwitch from '@/components/LangSwitch';
+// import LangSwitch from '@/components/LangSwitch';
 
 import dynamic from 'next/dynamic';
 
@@ -277,7 +277,7 @@ export function Header() {
 								<div className="flex pointer-events-auto">
 									<ThemeToggle />
 
-									<LangSwitch />
+									{/* <LangSwitch /> */}
 								</div>
 							</motion.div>
 							{/* 

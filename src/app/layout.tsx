@@ -3,7 +3,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
 
-import { getLocale } from 'next-intl/server';
+// import { getLocale } from 'next-intl/server';
 
 // import { sansFont } from '@/lib/font';
 import { Viewport, type Metadata } from 'next';
@@ -46,14 +46,14 @@ export default async function RootLayout({
 	// const locale = await getLocale();
 	// const messages = await getMessages();
 
-	const locale = await getLocale();
+	// const locale = await getLocale();
 	// const messages = await getMessages();
 
 	return (
 		// <ViewTransitions>
 		<html
 			className={` m-0 h-full p-0 font-sans antialiased`}
-			lang={locale}
+			lang={siteMetadata.locale}
 			suppressHydrationWarning
 		>
 			<body>
