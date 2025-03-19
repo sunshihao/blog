@@ -1,0 +1,265 @@
+---
+title: 乾坤微前端 - 初窥
+date: 2025-03-19T05:53:40Z
+slug: post-12
+author: sunshihao：https://github.com/sunshihao
+tags: ["vue"]
+---
+
+参考:
+[乾坤官网](https://qiankun.umijs.org/zh/guide)
+
+### 前置知识介绍
+#### 1.微前端
+微前端是一种多个团队通过独立发布功能的方式来共同构建现代化 web 应用的技术手段及方法策略。
+微前端架构具备以下几个核心价值：
+
+- 技术栈无关: 主框架不限制接入应用的技术栈，微应用具备完全自主权。
+
+- 独立开发、独立部署: 微应用仓库独立，前后端可独立开发，部署完成后主框架自动完成同步更新。
+
+ps: 但是乾坤还是有侵入性,需要在微应用添加对应的生命周期。
+
+- 增量升级: 在面对各种复杂场景时，我们通常很难对一个已经存在的系统做全量的技术栈升级或重构，而微前端是一种非常好的实施渐进式重构的手段和策略。
+
+- 独立运行时: 每个微应用之间状态隔离，运行时状态不共享。
+#### 2.乾坤(qiankun)
+qiankun 是一个基于 single-spa 的微前端实现库，旨在帮助大家能更简单、无痛的构建一个生产可用微前端架构系统。
+
+### 应用
+应用分为主应用和微应用，主应用需要安装qiankun的包，而微应用不需要。
+
+####  - 主应用
+
+1. 安装qiankun
+```
+$ yarn add qiankun # 或者 npm i qiankun -S
+```
+2. 在主应用中注册微应用
+```
+import { registerMicroApps, start } from 'qiankun';
+
+registerMicroApps([
+  {
+    name: 'react app', // app name registered
+    entry: '//localhost:7100',
+    container: '#yourContainer',
+    activeRule: '/yourActiveRule',
+  },
+  {
+    name: 'vue app',
+    entry: { scripts: ['//localhost:7100/main.js'] },
+    container: '#yourContainer2',
+    activeRule: '/yourActiveRule2',
+  },
+]);
+
+start();
+```
+当微应用信息注册完之后，一旦浏览器的 url 发生变化，便会自动触发 qiankun 的匹配逻辑，所有 activeRule 规则匹配上的微应用就会被插入到指定的 container 中，同时依次调用微应用暴露出的生命周期钩子。
+
+实践中我们需要将微应用的跳转关联到路由中以达到基本使用，所以对上面的情况进行如下修改(以官网Vue示例):
+
+在Vue的main.ts中注册微应用
+```
+import './assets/main.css'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { registerMicroApps } from 'qiankun'
+import App from './App.vue'
+import router from './router'
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+registerMicroApps([
+    {
+        name: 'app-vue-qk',
+        entry: '//localhost:8090', // 独立
+        // entry: '/app-vue/', // 整合
+        container: '#child',
+        activeRule: '/app-vue-qk',
+        props: {
+            routers: router,
+        }
+    }
+]);
+
+app.mount('#app')import './assets/main.css'
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import { registerMicroApps } from 'qiankun'
+import App from './App.vue'
+import router from './router'
+const app = createApp(App)
+
+app.use(createPinia())
+app.use(router)
+
+registerMicroApps([
+    {
+        name: 'app-vue-qk',
+        entry: '//localhost:8090', // 独立
+        // entry: '/app-vue/', // 整合
+        container: '#child',
+        activeRule: '/app-vue-qk',
+        props: {
+            routers: router,
+        }
+    }
+]);
+
+app.mount('#app')
+```
+
+创建一个qiankun.vue的页面
+```
+<template>
+  <div id="child" class="about"></div>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { start } from 'qiankun'
+
+onMounted(() => {
+  // 启动 qiankun
+  start({
+    sandbox: {
+      experimentalStyleIsolation: true // 样式隔离
+    }
+  })
+})
+</script><template>
+  <div id="child" class="about"></div>
+</template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { start } from 'qiankun'
+
+onMounted(() => {
+  // 启动 qiankun
+  start({
+    sandbox: {
+      experimentalStyleIsolation: true // 样式隔离
+    }
+  })
+})
+</script>
+```
+在vue-router路由中添加
+
+```
+{
+    path: "/app-vue-qk/:abc*", 
+    name: 'app-vue-qk',
+    component: () => import("../views/qiankun.vue")
+}
+```
+ps: 注意在不同版本的vue-router中写法会有所不同!
+
+以上我们完成了主应用的初始化。
+
+### - 微应用
+微应用官方示例为vue2，这里我们也使用vue2，微应用不需要额外安装任何其他依赖即可接入 qiankun 主应用。
+
+1. 在 src 目录新增 public-path.js
+```
+if (window.__POWERED_BY_QIANKUN__) {
+  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+}
+```
+
+2.入口文件 main.js 修改
+
+为了避免根 id #app 与其他的 DOM 冲突，需要限制查找范围。
+```
+import './public-path';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import App from './app.vue';
+import routes from './router';
+import './css/base.css'
+
+Vue.use(VueRouter);
+
+Vue.config.productionTip = false;
+
+let router = null;
+let instance = null;
+function render(props = {}) {
+  const { container } = props;
+
+  router = new VueRouter({
+    base: window.__POWERED_BY_QIANKUN__ ? '/app-vue-qk/' : '/',
+    mode: 'history',
+    routes: routes.routes,
+  });
+
+  instance = new Vue({
+    router,
+    render: (h) => h(App),
+  }).$mount(container ? container.querySelector('#app') : '#app');
+}
+
+// 独立运行时
+if (!window.__POWERED_BY_QIANKUN__) {
+  render();
+}
+
+export async function bootstrap() {
+  console.log('[vue] vue app bootstraped');
+}
+export async function mount(props) {
+  console.log('[vue] props from main framework', props);
+  render(props);
+}
+export async function unmount() {
+  instance.$destroy();
+  instance.$el.innerHTML = '';
+  instance = null;
+  router = null;
+}
+```
+
+3.打包配置修改（vue.config.js）
+```
+const name = "app-vue-qk";
+module.exports = {
+  devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*', // 运行时允许跨域
+    },
+  },
+  configureWebpack: {
+    output: {
+      library: `${name}-[name]`,
+      libraryTarget: 'umd', // 把微应用打包成 umd 库格式
+      jsonpFunction: `webpackJsonp_${name}`, // webpack 5 需要把 jsonpFunction 替换成 chunkLoadingGlobal
+    },
+  },
+};
+```
+以上配置好微应用后即可启动主应用和微应用进行验证。
+
+ps: [Github实践样例](https://github.com/sunshihao/qiankunDemo)
+
+### 部署方式
+
+主要分为同服务器部署和非服务器部署详情可见官网说明。
+
+[官网部署说明](https://qiankun.umijs.org/zh/cookbook#%E5%9C%BA%E6%99%AF-1%E4%B8%BB%E5%BA%94%E7%94%A8%E5%92%8C%E5%BE%AE%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2%E5%88%B0%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8C%E4%B8%80%E4%B8%AA-ip-%E5%92%8C%E7%AB%AF%E5%8F%A3)
+
+### 总结
+乾坤实践后达到了基本应用，一些细节的设置在官网上没有明确的说明，耗费了一些时间。
+
+思考待完善
+- [ ] 微应用跳转微应用
+- [ ] 微应用跳转主应用
+- [ ] 相应的自动化部署发布
+
+
+---
+此文自动发布于：<a href="https://github.com/sunshihao/sunshihao.github.io/issues/12" target="_blank">github issues</a>
