@@ -2,6 +2,7 @@ import BaiDuAnalytics from '@/components/BaiDuAnalytics';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import siteMetadata from '@/config/site';
 import { constructSiteUrl } from '@/lib';
+import Script from 'next/script';
 
 // import { getLocale } from 'next-intl/server';
 
@@ -56,6 +57,7 @@ export default async function RootLayout({
 			lang={siteMetadata.locale}
 			suppressHydrationWarning
 		>
+			<Script src="https://code.jquery.com/jquery-3.7.1.js" />
 			<body>
 				<GoogleAnalytics />
 				<BaiDuAnalytics />

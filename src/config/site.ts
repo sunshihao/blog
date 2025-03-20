@@ -7,7 +7,7 @@ const url = new URL(
 );
 export const baseSiteConfig: SiteConfig = {
 	name: 'blog | 前端 | 开发者',
-	description: '我是William Sun，前端开发工程师。热衷于探索和体验最新技术',
+	description: '我是William Sun，前端开发工程师。',
 	url: url.href,
 	// 网站预览图
 	ogImage: url.origin + '/logo.png',
@@ -42,6 +42,7 @@ export const baseSiteConfig: SiteConfig = {
 	navigationItems: [
 		{ href: '/', text: '首页' },
 		{ href: '/posts', text: '博客' },
+		// { href: '/lpn', text: '星际之光' },
 		{ href: '/about', text: '关于我' }
 	],
 	moreItems: {

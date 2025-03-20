@@ -14,7 +14,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: ['blog-1304565468.cos.ap-shanghai.myqcloud.com', 'github.com']
+		domains: ['github.com', 'dhc.ink']
 	},
 	webpack: (config) => {
 		// if (isServer) {
