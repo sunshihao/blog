@@ -8,9 +8,10 @@ const url = new URL(
 export const baseSiteConfig: SiteConfig = {
 	name: 'blog | 前端 | 开发者',
 	description: '我是William Sun，前端开发工程师。',
+	tagline: '独立之精神，自由之思想。',
 	url: url.href,
 	// 网站预览图
-	ogImage: url.origin + '/logo.png',
+	ogImage: url.origin + '/og.png',
 	metadataBase: '/',
 	keywords: ['blog', '前端', '开发者', 'AI', '编程', '学习笔记', '程序员'],
 	authors: 'William Sun',

@@ -29,6 +29,7 @@ export type SiteConfig = {
 	name: string;
 	authorsCN: string;
 	description: string;
+	tagline: string;
 	url: string;
 	email: string;
 	siteHostList: string[];

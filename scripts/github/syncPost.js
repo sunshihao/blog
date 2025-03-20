@@ -42,7 +42,7 @@ tags: ${JSON.stringify(labels.map((item) => item.name))}
 ${closeImgTag(body.replace(/<br \/>/g, '\n'))}
 
 ---
-此文自动发布于：<a href="${html_url}" target="_blank">github issues</a>
+此文发布于：<a href="${html_url}" target="_blank">github issues</a>
 `;
 }
 
