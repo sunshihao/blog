@@ -6,13 +6,16 @@ author: sunshihao：https://github.com/sunshihao
 tags: ["shell","linux"]
 ---
 
+前提:
+可访问github
+
 在服务器(ubuntu)上切换node版本，选用了nvm作为node版本管理工具,步骤如下:
 
 1.服务器执行安装命令
 ```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 ```
-ps: 请自行查询最新版本号, 进行替换, 新版本号可能导致安装失败！
+ps:  [最新版本号](https://github.com/nvm-sh/nvm/releases)
 
 2.安装完成后，关闭当前终端窗口并重新打开一个新的终端窗口
 3.运行以下命令来验证nvm是否安装成功
@@ -42,7 +45,9 @@ ps：在Mac中可能设置之后，再打开新终端还是旧的node/npm版本�
 ```
 nvm alias default 22.12.0
 ```
-
+### Q&A
+#### Q: 无法访问 raw.githubusercontent.com 
+A: mac在host文件中配置 raw.githubusercontent.com
 
 
 ---
