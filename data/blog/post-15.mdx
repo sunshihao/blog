@@ -1,0 +1,583 @@
+---
+title: 工程代码转换
+date: 2025-03-28T01:17:40Z
+slug: post-15
+author: sunshihao：https://github.com/sunshihao
+tags: ["vue","front-end"]
+---
+
+ps:在Vue3和2工程中,由于组件封装和Vue版本的差异,导致我们在定义类似功能的组件时,会导致原有界面需要重新,不能快速的迁移旧页面,而以下即是一个方案,使用中间件组件过滤连接对应的参数.
+
+
+### vue2与vue3的在书写方面的差异性
+
+- 相关插槽的写法变化
+- $on 在vue3中废止
+
+### 过渡组件定义
+```
+// 定义转换套件 mpage.vue
+<script lang="jsx">
+  import useDataSource from '@/hooks/useDataSource.js'
+  import { onMounted, shallowRef } from 'vue'
+  const props = {
+    isPage: {
+      type: Boolean,
+      default: false
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    defaultTabName: {
+      type: String,
+      default: ''
+    },
+    titleIco: {
+      type: [String, Boolean],
+      default: false
+    },
+    isSearch: {
+      type: Boolean,
+      default: false
+    },
+    isAdd: {
+      type: Boolean,
+      default: false
+    },
+    isClear: {
+      type: Boolean,
+      default: false
+    },
+    clearAction: {
+      type: String,
+      default: ''
+    },
+    isEdit: {
+      type: Boolean,
+      default: false
+    },
+    forms: {
+      type: [Boolean, Array],
+      default: false
+    },
+    actions: {
+      type: Array,
+      default: () => []
+    },
+    actionSort: {
+      type: Array,
+      default: () => []
+    },
+    addAction: {
+      type: String,
+      default: ''
+    },
+
+    formColumn: {
+      type: Number,
+      default: 4
+    },
+    formModel: {
+      type: [Boolean, Object],
+      default: false
+    },
+    tables: {
+      type: [Boolean, Object, Array],
+      // ex: {
+      //   name: 'table',
+      //   columns: [],
+      //   data: 'tabledata'
+      // },
+      // ex: [
+      //   {
+      //     name: 'table',
+      //     title:'头信息'
+      //     label:''
+      //     columns: [],
+      //     data: 'tabledata'
+      //   },
+      //   {
+      //     name: 'linetable',
+      //      title:'行信息'
+      //     columns: [],
+      //     data: 'tabledata'
+      //   }
+      // ],
+      default: false
+    },
+    tableActions: {
+      type: Array,
+      default: () => []
+    },
+    orderData: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    loading: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    },
+    createLoad: {
+      type: Boolean,
+      default: false
+    },
+    labelWidth: {
+      type: [Boolean, String],
+      default: '80px'
+    },
+    formDisabled: {
+      type: Boolean,
+      default: false
+    }
+  }
+  const seqCol = [
+    {
+      type: 'seq',
+      fixed: 'left'
+    }
+  ]
+  export default defineComponent({
+    name: 'mpage',
+    props,
+    setup(propData, { slots, expose }) {
+      const { dataSource, dataSourceDispatch } = useDataSource({})
+      const formItems = shallowRef([])
+      onMounted(() => {
+        formItems.value = propData.forms
+          .filter((item) => item)
+          .map((item) => {
+            let type = item.type
+
+            if (item.option) {
+              if (item.option.type && item.option.type.includes('range')) {
+                type = item.option.type
+              }
+              if (item.option.list && typeof item.option.list === 'string') {
+                dataSourceDispatch({
+                  [item.prop]: {
+                    type: 'lov',
+                    params: {
+                      code: item.option.list
+                    },
+                    useId: item.useId
+                  }
+                })
+              }
+            }
+
+            return {
+              label: item.label,
+              prop: item.prop,
+              type,
+              options: {
+                list: () => dataSource[item.prop] || []
+              }
+            }
+          })
+      })
+
+      const actions = computed(() => {
+        return propData.actions.map((item) => {
+          if (!item.operation) {
+            return {
+              text: item.text,
+              click() {
+                if (item.click) {
+                  return item.click()
+                }
+              }
+            }
+          }
+          return {
+            text: item.text
+          }
+        })
+      })
+
+      const tableConfig = computed(() =>
+        propData.tables.map((item) => {
+          return {
+            title: item.label,
+            tabKey: item.name,
+            columns: seqCol.concat(
+              item.columns.map((item) => {
+                return {
+                  title: item.label,
+                  field: item.prop,
+                  params: {
+                    form: item.form
+                  }
+                }
+              })
+            ),
+            data: item.data
+          }
+        })
+      )
+      expose({ // 对外暴露
+        reloadPageData() {}
+      })
+      return () => (
+        // 对应新组件
+        <c-grid
+          {...{
+            options: {
+              query: propData.isSearch,
+              formConfig: {
+                split: 4,
+                items: formItems
+              },
+              actions: unref(actions),
+              tableConfig: unref(tableConfig)
+            },
+            pageData: propData.formModel,
+            title: propData.title
+          }}>
+        </c-grid>
+      )
+    }
+  })
+</script>
+<style lang="scss"></style>
+```
+
+```
+// index.vue 旧组件 应用
+<template>
+  // 将vue2的组件cpage 改为了 mpage
+  <mpage  
+    isSearch
+    isClear
+    labelWidth="110px"
+    ref="cpage"
+    :formModel="queryParam"
+    :loading="pageLoading"
+    :title="$t('action.search')"
+    :forms="[
+      {
+        label: $t('page.DomesticOrOverseas'),
+        prop: 'isOversea',
+        type: 'select',
+        option: {
+          useId: false,
+          list: 'Domestic/Oversea'
+        }
+      },
+      {
+        label: $t('page.Product family'),
+        prop: 'productFamily',
+        type: 'select',
+        option: {
+          useId: false,
+          list: 'Family_Code'
+        }
+      },
+      {
+        prop: 'versions',
+        label: () => $t('page.powerVersion'),
+        type: 'select',
+        option: {
+          list: 'POWER VERSION',
+          useId: false
+        }
+      },
+      {
+        label: $t('page.month'),
+        prop: 'month',
+        type: 'date',
+        option: {
+          type: 'monthrange',
+          valueFormat: 'yyyyMM',
+          format: 'yyyyMM'
+        }
+      }
+    ]"
+    :actions="[
+      {
+        text: $t('cp.results generated'),
+        click: handleResult
+      },
+      {
+        text: '测算版结果生成',
+        click: handleResult2
+      },
+      {
+        text: '保存版本',
+        loading: pageLoading.btn,
+        click: handleSaveVersion
+      },
+      {
+        text: '同步报价',
+        loading: pageLoading.btn,
+        click: handleResult
+      },
+      {
+        text: '同步预算',
+        loading: pageLoading.btn,
+        click: handleResult
+      },
+      {
+        operation: 'exports',
+        api: {},
+        options: {
+          params: queryParam,
+          column: tableCol
+        }
+      }
+    ]"
+    :tables="[
+      {
+        label: '明细查询',
+        name: 'info',
+        tableAction: false,
+        tableActionWidth: 120,
+        createLoad: true,
+        columns: tableCol,
+        data: handSearchData
+      }
+    ]"
+  >
+    <template v-slot:table_action_info="nowTableData, table">
+      <c-s-table :table="table" title="table"></c-s-table>
+    </template>
+  </mpage>
+</template>
+<script>
+  import mpage from './mpage.vue'
+  export default {
+    name: '功率预测计算',
+    components: {
+      mpage
+    },
+    data() {
+      return {
+        pageLoading: {
+          page: false,
+          btn: false,
+          results: false
+        },
+        visible: false,
+        rowData: {},
+        model: {
+          editions: undefined
+        },
+        monthIndex: 0,
+        monthQIndex: 0,
+        colData: [],
+        queryParam: {},
+        tableTab: 'info'
+      }
+    },
+    computed: {
+      tableCol() {
+        const self = this
+        return [
+          {
+            label: () => self.$t('page.DomesticOrOverseas'),
+            prop: 'isOverseaName',
+            minWidth: 100,
+            needFilter: true
+          },
+          {
+            label: () => self.$t('page.Product family'),
+            prop: 'productFamilyName',
+            minWidth: 100,
+            needFilter: true
+          },
+          {
+            prop: 'resemblanceProductFamily',
+            label: () => self.$t('cp.Same power product family'),
+            minWidth: 100,
+            needFilter: true,
+            form: {
+              type: 'input'
+            }
+          },
+          {
+            prop: 'status',
+            label: '产品族状态',
+            minWidth: 100,
+            needFilter: true,
+            form: {
+              type: 'input'
+            }
+          },
+          {
+            prop: 'versionsName',
+            label: () => self.$t('page.powerVersion'),
+            minWidth: 100,
+            needFilter: true
+          },
+          {
+            label: () => self.$t('page.Somehow the outfit'),
+            prop: 'installTypeName',
+            minWidth: 100,
+            needFilter: true
+          },
+          {
+            label: () => '档位',
+            prop: 'tapPosition',
+            minWidth: 100,
+            needFilter: true
+          }
+        ].concat(this.colData)
+        // .concat([
+        //   {
+        //     label: self.$t('焊带'),
+        //     prop: 'itemAttribute1',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('前玻璃'),
+        //     prop: 'itemAttribute2',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('lrf'),
+        //     prop: 'itemAttribute3',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('eva'),
+        //     prop: 'itemAttribute4',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('后玻璃'),
+        //     prop: 'itemAttribute5',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('反光汇流条'),
+        //     prop: 'itemAttribute6',
+        //     minWidth: 100
+        //   },
+        //   {
+        //     label: self.$t('汇流条厚度'),
+        //     prop: 'itemAttribute7',
+        //     minWidth: 100
+        //   }
+        // ])
+      },
+      forms() {
+        return [
+          {
+            label: () => '版本',
+            prop: 'edition',
+            type: 'input',
+            rules: {
+              required: true,
+              message: () => '请输入版本'
+            }
+          }
+        ]
+      }
+    },
+    methods: {
+      handSearchData(params) {
+        this.colData = []
+        const month = {}
+
+        if (this.queryParam.month) {
+          month.beginMonth = this.queryParam.month[0]
+          month.endMonth = this.queryParam.month[1]
+        }
+
+        this.queryParam.summaryType = 'PERCENT_RELEASE'
+
+        return this.$service.lov.page({
+          data: Object.assign({}, params, this.queryParam)
+        })
+      },
+      handleResult() {
+        const month = {}
+
+        if (this.queryParam.month) {
+          month.beginMonth = this.queryParam.month[0]
+          month.endMonth = this.queryParam.month[1]
+        }
+
+        return this.$service.lov
+          .page({
+            data: Object.assign({}, this.queryParam)
+          })
+          .then((result) => {
+            if (result.msg === 'success') {
+              this.pageLoading.results = false
+              this.$message.success('生成结果成功')
+              this.$refs.cpage.reloadPageData()
+            } else {
+              this.pageLoading.results = false
+              this.$message.error(result.msg)
+            }
+
+            return
+          })
+      },
+      handleResult2() {
+        const month = {}
+
+        if (this.queryParam.month) {
+          month.beginMonth = this.queryParam.month[0]
+          month.endMonth = this.queryParam.month[1]
+        }
+
+        return this.$service.aps.powerPrediction.report.powerResultLong
+          .calculation({
+            ...this.queryParam,
+            ...month,
+            dataVersion: '测算版'
+          })
+          .then((result) => {
+            if (result.msg === 'success') {
+              this.pageLoading.results = false
+              this.$message.success('生成结果成功')
+              this.$refs.cpage.reloadPageData()
+            } else {
+              this.pageLoading.results = false
+              this.$message.error(result.msg)
+            }
+
+            return
+          })
+      },
+      // 保存版本
+      handleSaveVersion() {
+        this.visible = true
+      },
+      handleConfirm() {
+        this.$service.aps.powerPrediction.report.powerResultLong.saveEdition(this.model).then((result) => {
+          if (result.msg === 'success') {
+            this.$message.success('生成结果成功')
+            this.$refs.cpage.reloadPageData()
+            this.visible = false
+          } else {
+            this.$message.error(result.msg)
+          }
+        })
+      }
+    }
+  }
+</script>
+```
+
+### 对比Vue3和vue2的差异
+
+
+区别 | vue3 | vue2
+-- | -- | --
+性能 | 使用Proxy来实现数据劫持，删除了一些api($on,$once,$off) fiter等，优化了Block tree,solt,diff 算法等 | 使用object.defineProperty来劫持数据的setter和getter方法，对象改变需要借助api去深度监听
+api方面 | CompositionAPI 将模块相关代码统一放在一个地方处理，不需要在多个options里查找 | OptionsAPI 在options里写data,methods,created等描述组件对象，多个逻辑可能在不不同地方，代码内聚性低
+hook函数增加代码复用性 | vue3可以通过hook函数 将一部分独立的逻辑抽离出去，并且也是响应式的 | vue2使用mixins进行代码逻辑共享，mixins也是由一大堆options组成，如果有多个mixins则可能造成命名冲突等问题
+代码写法方面 | vue3支持在template中写多个根，vue2只能有一个 | 当内部有异步函数，需要使用到await的时候，可以直接使用，不需要在setup前面加async
+
+[补充说明(掘金)](https://juejin.cn/post/7067413380922867725)
+
+
+---
+此文发布于：<a href="https://github.com/sunshihao/sunshihao.github.io/issues/15" target="_blank">github issues</a>
